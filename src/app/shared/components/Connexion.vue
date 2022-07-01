@@ -25,11 +25,11 @@
           </div>
           <div class="form-group bottom-form">
             <button type="button" class="btn btn-block create-account">
-              {{ register ? "Creer un compte" : "Se connecter" }}
+              {{ register ? "Soumettre" : "Se connecter" }}
             </button>
             <div class="mt-4">
               <button class="tab-1" type="button" @click="register = !register">
-                {{ register ? "Vous n'avez pas de compte?" : "Créez un compte" }}
+                {{ register ? "Vous avez déjà de compte?" : "Créez un compte" }}
               </button>
             </div>
           </div>
@@ -83,14 +83,13 @@ export default {
 
 .registration-form .form-icon {
   text-align: center;
-  background-color: #5891ff;
+  background-color: #1E1450;
   border-radius: 50%;
   font-size: 40px;
   color: white;
   width: 100px;
   height: 100px;
-  margin: auto;
-  margin-bottom: 50px;
+  margin: auto auto 50px;
   line-height: 100px;
 }
 
@@ -105,7 +104,7 @@ export default {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
-  background-color: #5791ff;
+  background-color: #1E1450;
   border: none;
   color: white;
   margin-top: 20px;
@@ -121,7 +120,8 @@ export default {
   border-bottom-right-radius: 30px;
   color: #9fadca;
   border-top: 1px solid #dee9ff;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
+  overflow: auto;
 }
 
 .registration-form .social-icons {
@@ -132,7 +132,7 @@ export default {
 .registration-form .social-icons a {
   font-size: 23px;
   margin: 0 3px;
-  color: #5691ff;
+  color: #1E1450;
   border: 1px solid;
   border-radius: 50%;
   width: 45px;

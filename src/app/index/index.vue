@@ -5,7 +5,7 @@
     <Services/>
     <Features/>
     <Team/>
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
+    <a href="#" class="btn btn-lg dp-color btn-lg-square rounded-circle back-to-top"><i
         class="bi bi-arrow-up"></i></a>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid bg-primary overflow-hidden my-5 px-lg-0">
+  <div class="container-fluid dp-color overflow-hidden my-5 px-lg-0">
     <div class="container feature px-lg-0">
       <div class="row g-0 mx-lg-0">
         <div class="col-lg-6 feature-text py-5 wow fadeIn" data-wow-delay="0.1s">

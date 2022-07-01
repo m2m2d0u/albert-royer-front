@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import IndexPage from './index/index'
 import ServicePage from './services/services'
+import Quiz from "@/app/quiz";
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
         path: '/services',
         name: 'Services',
         component: ServicePage
+    },
+    {
+        path: '/quiz',
+        name: 'Quiz',
+        component: Quiz
     }
     /*  {
         path: '/about',
