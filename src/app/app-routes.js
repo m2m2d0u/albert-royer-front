@@ -18,7 +18,7 @@ const routes = [
         component: ServicePage
     },
     {
-        path: '/quiz',
+        path: '/quiz/:id',
         name: 'Quiz',
         component: Quiz
     }

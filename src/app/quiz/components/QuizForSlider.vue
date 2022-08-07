@@ -11,7 +11,7 @@
         <v-col cols="10">
           <v-row class="mt-3 mb-3" no-gutters>
             <v-col v-for="(numb, i) of value.data" :key="i">
-              <h4>{{ numb.sup }}</h4>
+              <span class="text-h6 text-md-h6 text-sm-caption">{{ numb.sup }}</span>
             </v-col>
           </v-row>
           <v-row no-gutters>
@@ -21,21 +21,21 @@
           </v-row>
           <v-row class="mt-1" no-gutters>
             <v-col v-for="(numb, i) of value.data" :key="i">
-              <h4>{{ numb.inf }}</h4>
+              <span class="text-h6 text-md-h6 text-sm-caption">{{ numb.inf }}</span>
             </v-col>
           </v-row>
         </v-col>
         <v-col cols="2" class="d-flex justify-content-between flex-column">
           <v-row no-gutters>
             <v-col class="d-flex align-center pl-3">
-              <span class="text-h5 mr-4 span-color">Toi:</span>
-              <span class="text-h6">{{ getTheSupBorne(value.data) }}</span>
+              <span class="text-h4 text-md-h5 text-xl-h4 text-sm-caption mr-4 span-color">Toi:</span>
+              <span class="text-h5 text-md-h6 text-sm-caption">{{ getTheSupBorne(value.data) }}</span>
             </v-col>
           </v-row>
           <v-row no-gutters>
             <v-col class="d-flex align-center pl-3">
-              <span class="text-h5 mr-4 span-color">Autre:</span>
-              <span class="text-h6">{{ getTheInfBorne(value.data) }}</span>
+              <span class="text-h5 text-md-h5 text-xl-h4 text-sm-caption mr-4 span-color">Autre:</span>
+              <span class="text-h5 text-md-h6 text-sm-caption">{{ getTheInfBorne(value.data) }}</span>
             </v-col>
           </v-row>
         </v-col>
