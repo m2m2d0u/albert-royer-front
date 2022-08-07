@@ -2,12 +2,12 @@
   <div>
     <ul>
       <li v-for="(quiz, indexQuiz) in data" :key="indexQuiz" class="mt-10">
-        <v-row class="mb-6" no-gutters>
+        <v-row class="mb-6 text-md-h5 text-xl-h5 text-sm-caption" no-gutters>
           <h2>Question {{ indexQuiz + 1 }}</h2>
         </v-row>
         <v-row>
           <v-col v-for="n in 1" :key="n">
-            <div>
+            <div class="text-md-h6 text-xl-h6 text-sm-caption">
               {{ quiz.text }}
             </div>
             <div class="image-content" v-show="quiz.images">

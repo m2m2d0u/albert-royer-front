@@ -8,11 +8,9 @@
         <!--        First quiz concerning the question for slider-->
         <md-step id="first" md-label="Premier test" md-description="Obligatoire" :md-editable="true"
                  :md-done.sync="first">
-          <QuizForSlider :data="firstQuiz"/>
+          <quiz-for-slider :data="firstQuiz"/>
           <div class="next-button">
-            <!--              <div></div>-->
-            <md-button class="md-raised md-primary change-page" @click="setDone('first', 'second')">Suivant
-            </md-button>
+            <md-button class="md-raised md-primary change-page" @click="setDone('first', 'second')">Suivant</md-button>
           </div>
         </md-step>
         <!--        Second quiz, when we purpose some picture and the recipient take some response by different choice-->
@@ -21,25 +19,7 @@
                  :md-done.sync="second">
           <quiz-select-response-for-image :data="secondQuiz"/>
           <div class="next-button">
-            <md-button class="md-raised md-primary change-page" @click="setDone('second', 'third')">Suivant</md-button>
-          </div>
-          <!--          <md-button class="md-raised md-primary" @click="setError()">Set error!</md-button>-->
-        </md-step>
-        <!--Third quiz, we give to the recipient two different pictures and the response depend for his choice-->
-        <md-step id="third" md-label="Troisième test" md-description="Obligatoire" :md-editable="true"
-                 :md-done.sync="third">
-          <quiz-for-depending-image :data="thirdQuiz" :choice="showChoice"
-                                    @openDialogForConfirm="openDialogForConfirm"/>
-          <Confirmation :active="openDialog" @resultOfConfirmation="resultOfConfirmation"/>
-          <div class="next-button">
-            <md-button class="md-raised md-primary change-page" @click="setDone('third', 'fourth')">Suivant</md-button>
-          </div>
-        </md-step>
-        <md-step id="fourth" md-label="Quatrième test" md-description="Obligatoire" :md-editable="true"
-                 :md-done.sync="fourth">
-          <quiz-image-color :data="fourthQuiz"/>
-          <div class="next-button">
-            <md-button class="md-raised md-primary change-page" @click="setDone('fourth')">Terminer</md-button>
+            <md-button class="md-raised md-primary change-page" @click="setDone('second')">Terminer</md-button>
           </div>
         </md-step>
       </md-steppers>
@@ -49,22 +29,14 @@
 </template>
 
 <script>
-// import VueGallery from 'vue-gallery';
-import Confirmation from "@/app/shared/components/Confirmation";
 import QuizForSlider from "@/app/quiz/components/QuizForSlider";
 import QuizSelectResponseForImage from "@/app/quiz/components/QuizSelectResponseForImage";
-import QuizForDependingImage from "@/app/quiz/components/QuizForDependingImage";
-import QuizImageColor from "@/app/quiz/components/QuizImageColor";
 
 export default {
-  name: "index",
+  name: "Subtest1",
   components: {
-    // 'gallery': VueGallery
-    Confirmation,
     QuizForSlider,
     QuizSelectResponseForImage,
-    QuizForDependingImage,
-    QuizImageColor
   },
   data: function () {
     return {
@@ -159,8 +131,9 @@ export default {
           }
         ]
       },
-      secondQuiz: [
-        {
+      // eslint-disable-next-line no-unused-vars
+      secondQuiz: Array.apply(null, Array(37)).map(function (_, i) {
+        return {
           text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
@@ -173,40 +146,9 @@ export default {
           ],
           type: 'one',
           index: null,
-          images: require("@/assets/img/image-1.png"),
-        }
-      ],
-      thirdQuiz: {
-        images: [
-          {value: require('@/assets/img/choice-1.png'), choice: null, index: 'first'},
-          {value: require('@/assets/img/choice-2.png'), choice: null, index: 'second'},
-        ],
-        first: [
-          {
-            text: "Premiere image",
-          }
-        ],
-        second: [
-          {
-            text: "Deuxième image",
-          }
-        ]
-      },
-      fourthQuiz: [
-        {
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          response: [
-            {title: "VRAI", value: false},
-            {title: "FAUX", value: false},
-          ],
-          type: 'one',
-          index: null,
-          images: require("@/assets/img/color-image.jpg"),
-        }
-      ],
+          images: require(`@/assets/img/emotional/cap-${i + 1}.png`),
+        };
+      }),
     };
   },
   methods: {

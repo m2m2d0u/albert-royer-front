@@ -11,15 +11,22 @@
       </v-row>
     </v-row>
     <v-row>
-      <ul>
-        <li v-for="(quiz, indexQuiz) in questions" :key="indexQuiz" class="mt-10" v-show="!choice">
-          <v-row class="mb-6" no-gutters>
-            <h2>Question {{ indexQuiz + 1 }}</h2>
-          </v-row>
-          <v-row class="mb-6" no-gutters>
-            <h5>{{ quiz.text }}</h5>
-          </v-row>
-        </li>
+      <ul v-show="!choice">
+        <v-container class="d-flex justify-center">
+          <img :src="imageChoice"
+               style="width: 700px; height: 40vh; border: black 1px solid" alt="">
+        </v-container>
+        <v-container>
+          <li v-for="(quiz, indexQuiz) in questions" :key="indexQuiz" class="mt-10">
+            <v-row class="mb-6" no-gutters>
+              <h2>Question {{ indexQuiz + 1 }}</h2>
+            </v-row>
+            <v-row class="mb-6" no-gutters>
+              <h5>{{ quiz.text }}</h5>
+            </v-row>
+          </li>
+        </v-container>
+
       </ul>
     </v-row>
   </div>
@@ -35,7 +42,8 @@ export default {
   data: function () {
     return {
       showQuestion: false,
-      questions: []
+      questions: [],
+      imageChoice: null,
     }
   },
   methods: {
@@ -46,6 +54,7 @@ export default {
         if (image.choice !== null) {
           this.showQuestion = true;
           this.questions = this.data[image.choice];
+          this.imageChoice = image.value;
         }
       }
 

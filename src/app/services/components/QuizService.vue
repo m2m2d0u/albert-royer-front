@@ -9,7 +9,7 @@
       <p class="mb-4">{{ description }}</p>
       <a class="btn">
         <i class="fa fa-plus text-primary me-3"></i>
-        <router-link :to="{name:'Quiz', params:{id:name}}">Lire plus</router-link>
+        <router-link :to="{name:router, params:{id:link}}">Lire plus</router-link>
       </a>
     </v-container>
   </v-container>
@@ -22,6 +22,7 @@ export default {
     name: String,
     icon: String,
     link: String,
+    router: String,
     description: String
   }
 }

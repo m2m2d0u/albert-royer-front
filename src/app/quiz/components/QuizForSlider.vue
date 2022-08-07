@@ -1,12 +1,12 @@
 <template>
   <v-container>
-    <v-container class="content-slider" v-for="(value, index) in data" :key="index">
+    <v-container class="slider-text">
+      {{ data.text }}
+    </v-container>
+    <v-container class="content-slider" v-for="(value, index) in data.data" :key="index">
       <v-row class="mb-6" no-gutters>
         <h2>Question {{ index + 1 }}</h2>
       </v-row>
-      <v-container class="slider-text">
-        {{ value.text }}
-      </v-container>
       <v-row no-gutters>
         <v-col cols="10">
           <v-row class="mt-3 mb-3" no-gutters>
@@ -53,7 +53,7 @@ export default {
   },
   name: "QuizForSlider",
   props: {
-    data: Array,
+    data: Object,
   },
   data: function () {
     return {
@@ -97,7 +97,8 @@ export default {
 }
 
 .slider-text {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .span-color {

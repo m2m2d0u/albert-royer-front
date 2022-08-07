@@ -8,11 +8,9 @@
         <!--        First quiz concerning the question for slider-->
         <md-step id="first" md-label="Premier test" md-description="Obligatoire" :md-editable="true"
                  :md-done.sync="first">
-          <QuizForSlider :data="firstQuiz"/>
+          <quiz-for-slider :data="firstQuiz"/>
           <div class="next-button">
-            <!--              <div></div>-->
-            <md-button class="md-raised md-primary change-page" @click="setDone('first', 'second')">Suivant
-            </md-button>
+            <md-button class="md-raised md-primary change-page" @click="setDone('first', 'second')">Suivant</md-button>
           </div>
         </md-step>
         <!--        Second quiz, when we purpose some picture and the recipient take some response by different choice-->
@@ -23,7 +21,6 @@
           <div class="next-button">
             <md-button class="md-raised md-primary change-page" @click="setDone('second', 'third')">Suivant</md-button>
           </div>
-          <!--          <md-button class="md-raised md-primary" @click="setError()">Set error!</md-button>-->
         </md-step>
         <!--Third quiz, we give to the recipient two different pictures and the response depend for his choice-->
         <md-step id="third" md-label="Troisième test" md-description="Obligatoire" :md-editable="true"
@@ -32,15 +29,9 @@
                                     @openDialogForConfirm="openDialogForConfirm"/>
           <Confirmation :active="openDialog" @resultOfConfirmation="resultOfConfirmation"/>
           <div class="next-button">
-            <md-button class="md-raised md-primary change-page" @click="setDone('third', 'fourth')">Suivant</md-button>
+            <md-button class="md-raised md-primary change-page" @click="setDone('third')">Terminer</md-button>
           </div>
-        </md-step>
-        <md-step id="fourth" md-label="Quatrième test" md-description="Obligatoire" :md-editable="true"
-                 :md-done.sync="fourth">
-          <quiz-image-color :data="fourthQuiz"/>
-          <div class="next-button">
-            <md-button class="md-raised md-primary change-page" @click="setDone('fourth')">Terminer</md-button>
-          </div>
+
         </md-step>
       </md-steppers>
     </div>
@@ -49,22 +40,18 @@
 </template>
 
 <script>
-// import VueGallery from 'vue-gallery';
-import Confirmation from "@/app/shared/components/Confirmation";
 import QuizForSlider from "@/app/quiz/components/QuizForSlider";
 import QuizSelectResponseForImage from "@/app/quiz/components/QuizSelectResponseForImage";
 import QuizForDependingImage from "@/app/quiz/components/QuizForDependingImage";
-import QuizImageColor from "@/app/quiz/components/QuizImageColor";
+import Confirmation from "@/app/shared/components/Confirmation";
 
 export default {
-  name: "index",
+  name: "Subtest2",
   components: {
-    // 'gallery': VueGallery
-    Confirmation,
     QuizForSlider,
+    Confirmation,
     QuizSelectResponseForImage,
-    QuizForDependingImage,
-    QuizImageColor
+    QuizForDependingImage
   },
   data: function () {
     return {
@@ -156,11 +143,129 @@ export default {
               {isActive: false, index: 7, sup: 56, inf: 94},
               {isActive: false, index: 8, sup: 50, inf: 100},
             ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 50},
+              {isActive: false, index: 1, sup: 96, inf: 56},
+              {isActive: false, index: 2, sup: 93, inf: 63},
+              {isActive: false, index: 3, sup: 89, inf: 69},
+              {isActive: false, index: 4, sup: 85, inf: 75},
+              {isActive: false, index: 5, sup: 81, inf: 81},
+              {isActive: false, index: 6, sup: 78, inf: 88},
+              {isActive: false, index: 7, sup: 74, inf: 94},
+              {isActive: false, index: 8, sup: 70, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 90, inf: 100},
+              {isActive: false, index: 1, sup: 91, inf: 99},
+              {isActive: false, index: 2, sup: 93, inf: 98},
+              {isActive: false, index: 3, sup: 94, inf: 96},
+              {isActive: false, index: 4, sup: 95, inf: 95},
+              {isActive: false, index: 5, sup: 96, inf: 94},
+              {isActive: false, index: 6, sup: 98, inf: 93},
+              {isActive: false, index: 7, sup: 99, inf: 91},
+              {isActive: false, index: 8, sup: 100, inf: 90},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 94, inf: 74},
+              {isActive: false, index: 2, sup: 88, inf: 78},
+              {isActive: false, index: 3, sup: 81, inf: 81},
+              {isActive: false, index: 4, sup: 75, inf: 85},
+              {isActive: false, index: 5, sup: 69, inf: 89},
+              {isActive: false, index: 6, sup: 63, inf: 93},
+              {isActive: false, index: 7, sup: 56, inf: 96},
+              {isActive: false, index: 8, sup: 50, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 99, inf: 74},
+              {isActive: false, index: 2, sup: 98, inf: 78},
+              {isActive: false, index: 3, sup: 96, inf: 81},
+              {isActive: false, index: 4, sup: 95, inf: 85},
+              {isActive: false, index: 5, sup: 94, inf: 89},
+              {isActive: false, index: 6, sup: 93, inf: 93},
+              {isActive: false, index: 7, sup: 91, inf: 96},
+              {isActive: false, index: 8, sup: 90, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 70, inf: 100},
+              {isActive: false, index: 1, sup: 74, inf: 96},
+              {isActive: false, index: 2, sup: 78, inf: 93},
+              {isActive: false, index: 3, sup: 81, inf: 89},
+              {isActive: false, index: 4, sup: 85, inf: 85},
+              {isActive: false, index: 5, sup: 89, inf: 81},
+              {isActive: false, index: 6, sup: 93, inf: 78},
+              {isActive: false, index: 7, sup: 96, inf: 74},
+              {isActive: false, index: 8, sup: 100, inf: 70},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 50, inf: 100},
+              {isActive: false, index: 1, sup: 56, inf: 99},
+              {isActive: false, index: 2, sup: 63, inf: 98},
+              {isActive: false, index: 3, sup: 69, inf: 96},
+              {isActive: false, index: 4, sup: 75, inf: 95},
+              {isActive: false, index: 5, sup: 81, inf: 94},
+              {isActive: false, index: 6, sup: 88, inf: 93},
+              {isActive: false, index: 7, sup: 94, inf: 91},
+              {isActive: false, index: 8, sup: 100, inf: 90},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 50, inf: 100},
+              {isActive: false, index: 1, sup: 56, inf: 94},
+              {isActive: false, index: 2, sup: 63, inf: 88},
+              {isActive: false, index: 3, sup: 69, inf: 81},
+              {isActive: false, index: 4, sup: 75, inf: 75},
+              {isActive: false, index: 5, sup: 81, inf: 69},
+              {isActive: false, index: 6, sup: 88, inf: 63},
+              {isActive: false, index: 7, sup: 94, inf: 56},
+              {isActive: false, index: 8, sup: 100, inf: 50},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 90},
+              {isActive: false, index: 1, sup: 96, inf: 91},
+              {isActive: false, index: 2, sup: 93, inf: 93},
+              {isActive: false, index: 3, sup: 89, inf: 94},
+              {isActive: false, index: 4, sup: 85, inf: 95},
+              {isActive: false, index: 5, sup: 81, inf: 96},
+              {isActive: false, index: 6, sup: 78, inf: 98},
+              {isActive: false, index: 7, sup: 74, inf: 99},
+              {isActive: false, index: 8, sup: 70, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 90, inf: 100},
+              {isActive: false, index: 1, sup: 91, inf: 94},
+              {isActive: false, index: 2, sup: 93, inf: 88},
+              {isActive: false, index: 3, sup: 94, inf: 81},
+              {isActive: false, index: 4, sup: 95, inf: 75},
+              {isActive: false, index: 5, sup: 96, inf: 69},
+              {isActive: false, index: 6, sup: 98, inf: 63},
+              {isActive: false, index: 7, sup: 99, inf: 56},
+              {isActive: false, index: 8, sup: 100, inf: 50},
+            ]
           }
         ]
       },
-      secondQuiz: [
-        {
+      // eslint-disable-next-line no-unused-vars
+      secondQuiz: Array.apply(null, Array(37)).map(function (_, i) {
+        return {
           text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
@@ -173,9 +278,9 @@ export default {
           ],
           type: 'one',
           index: null,
-          images: require("@/assets/img/image-1.png"),
-        }
-      ],
+          images: require(`@/assets/img/emotional/cap-${i + 1}.png`),
+        };
+      }),
       thirdQuiz: {
         images: [
           {value: require('@/assets/img/choice-1.png'), choice: null, index: 'first'},
@@ -192,21 +297,6 @@ export default {
           }
         ]
       },
-      fourthQuiz: [
-        {
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-          response: [
-            {title: "VRAI", value: false},
-            {title: "FAUX", value: false},
-          ],
-          type: 'one',
-          index: null,
-          images: require("@/assets/img/color-image.jpg"),
-        }
-      ],
     };
   },
   methods: {

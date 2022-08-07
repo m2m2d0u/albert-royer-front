@@ -1,38 +1,38 @@
 <template>
   <v-container>
     <ul>
-      <li v-for="(quiz, indexQuiz) in data" :key="indexQuiz" class="mt-10">
-        <v-row class="mb-6" no-gutters>
-          <h2>Question {{ indexQuiz + 1 }}</h2>
-        </v-row>
-        <v-row>
-          <v-col v-for="n in 1" :key="n">
-            <div>
-              {{ quiz.text }}
-            </div>
-            <div class="image-content" v-show="quiz.images">
-              <img
-                  v-img
-                  :src="quiz.images"
-                  class="image"
-                  :style="{ backgroundImage: 'url(' + quiz.images + ')', width: '700px', height: '40vh' }"/>
-            </div>
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col v-for="n in data[0].response.length" :key="n">
-            <v-card
-                class="pa-2 text-center d-flex justify-center align-center text-xl-h6 text-sm-caption font-weight-regular"
-                height="80">
-              <button class="flex" style="height: 100%;"
-                      :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
-                      @click="chooseResponse(n, indexQuiz)">
-                {{ quiz.response[n - 1].title }}
-              </button>
-            </v-card>
-          </v-col>
-        </v-row>
-      </li>
+      <v-container class="text-h3 text-md-h4">
+        {{ data.text }}
+      </v-container>
+      <v-container>
+        <li v-for="(quiz, indexQuiz) in data.values" :key="indexQuiz" class="mt-10">
+          <v-row class="mb-6" no-gutters>
+            <h2>Question {{ indexQuiz + 1 }}</h2>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-container class="text-h2 text-md-h2 text-h4 text-center mt-3 mb-3"
+                           :style="{color: quiz.question.color}">
+                {{ quiz.question.text }}
+              </v-container>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col v-for="n in data.values[0].response.length" :key="n">
+              <v-card
+                  class="pa-2 text-center d-flex justify-center align-center text-xl-h6 text-sm-caption font-weight-regular"
+                  height="80">
+                <!--                <button class="flex" style="height: 100%;"
+                                        :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
+                                        @click="chooseResponse(n, indexQuiz)">
+                                  {{ quiz.response[n - 1].title }}
+                                </button>-->
+                Test
+              </v-card>
+            </v-col>
+          </v-row>
+        </li>
+      </v-container>
     </ul>
   </v-container>
 </template>
@@ -40,8 +40,8 @@
 <script>
 export default {
   name: "QuizImageColor",
-  props:{
-    data: Array
+  props: {
+    data: Object
   },
   methods: {
     chooseResponse(n, index) {
@@ -59,9 +59,10 @@ export default {
 </script>
 
 <style scoped>
-ul{
+ul {
   list-style: none;
 }
+
 .image-content {
   display: flex;
   justify-content: center;

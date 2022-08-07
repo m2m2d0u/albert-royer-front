@@ -22,15 +22,21 @@
           <h1>Health Care Solutions</h1>
         </v-container>
         <v-container class="row g-4">
-          <quiz-service name="Neurology"
+          <quiz-service name="Sous-test 1"
+                        link="subtest1"
+                        router="Quiz1"
                         icon="fa fa-brain"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
-          <quiz-service name="Cardiology"
+                        description="Les contributeurs et la ligne de front"/>
+          <quiz-service name="Sous-test 2"
+                        link="subtest2"
+                        router="Quiz2"
                         icon="fa fa-heartbeat"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
-          <quiz-service name="Orthopedics"
+                        description="Professionnels et managers"/>
+          <quiz-service name="Sous-test 3"
+                        link="subtest3"
                         icon="fa fa-wheelchair"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
+                        router="Quiz3"
+                        description="PME et Cadres supérieurs"/>
           <quiz-service name="Dental Surgery"
                         icon="fa fa-tooth"
                         description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
