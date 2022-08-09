@@ -37,15 +37,11 @@
                         icon="fa fa-wheelchair"
                         router="Quiz3"
                         description="PME et Cadres supérieurs"/>
-          <quiz-service name="Dental Surgery"
+          <quiz-service name="Sous-test 4"
+                        link="subtest4"
+                        router="Quiz4"
                         icon="fa fa-tooth"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
-          <quiz-service name="Pulmonary"
-                        icon="fa fa-x-ray"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
-          <quiz-service name="Laboratory"
-                        icon="fa fa-vials"
-                        description="Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet."/>
+                        description="Les executifs"/>
         </v-container>
       </v-container>
     </v-container>

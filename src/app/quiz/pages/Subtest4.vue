@@ -53,7 +53,7 @@ import Confirmation from "@/app/shared/components/Confirmation";
 import QuizImageColor from "@/app/quiz/components/QuizImageColor";
 
 export default {
-  name: "Subtest3",
+  name: "Subtest4",
   components: {
     QuizForSlider,
     Confirmation,
@@ -166,6 +166,123 @@ export default {
               {isActive: false, index: 8, sup: 85, inf: 15},
             ]
           },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 50},
+              {isActive: false, index: 1, sup: 96, inf: 56},
+              {isActive: false, index: 2, sup: 93, inf: 63},
+              {isActive: false, index: 3, sup: 89, inf: 69},
+              {isActive: false, index: 4, sup: 85, inf: 75},
+              {isActive: false, index: 5, sup: 81, inf: 81},
+              {isActive: false, index: 6, sup: 78, inf: 88},
+              {isActive: false, index: 7, sup: 74, inf: 94},
+              {isActive: false, index: 8, sup: 70, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 90, inf: 100},
+              {isActive: false, index: 1, sup: 91, inf: 99},
+              {isActive: false, index: 2, sup: 93, inf: 98},
+              {isActive: false, index: 3, sup: 94, inf: 96},
+              {isActive: false, index: 4, sup: 95, inf: 95},
+              {isActive: false, index: 5, sup: 96, inf: 94},
+              {isActive: false, index: 6, sup: 98, inf: 93},
+              {isActive: false, index: 7, sup: 99, inf: 91},
+              {isActive: false, index: 8, sup: 100, inf: 90},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 94, inf: 74},
+              {isActive: false, index: 2, sup: 88, inf: 78},
+              {isActive: false, index: 3, sup: 81, inf: 81},
+              {isActive: false, index: 4, sup: 75, inf: 85},
+              {isActive: false, index: 5, sup: 69, inf: 89},
+              {isActive: false, index: 6, sup: 63, inf: 93},
+              {isActive: false, index: 7, sup: 56, inf: 96},
+              {isActive: false, index: 8, sup: 50, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 99, inf: 74},
+              {isActive: false, index: 2, sup: 98, inf: 78},
+              {isActive: false, index: 3, sup: 96, inf: 81},
+              {isActive: false, index: 4, sup: 95, inf: 85},
+              {isActive: false, index: 5, sup: 94, inf: 89},
+              {isActive: false, index: 6, sup: 93, inf: 93},
+              {isActive: false, index: 7, sup: 91, inf: 96},
+              {isActive: false, index: 8, sup: 90, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 70, inf: 100},
+              {isActive: false, index: 1, sup: 74, inf: 96},
+              {isActive: false, index: 2, sup: 78, inf: 93},
+              {isActive: false, index: 3, sup: 81, inf: 89},
+              {isActive: false, index: 4, sup: 85, inf: 85},
+              {isActive: false, index: 5, sup: 89, inf: 81},
+              {isActive: false, index: 6, sup: 93, inf: 78},
+              {isActive: false, index: 7, sup: 96, inf: 74},
+              {isActive: false, index: 8, sup: 100, inf: 70},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 99, inf: 74},
+              {isActive: false, index: 2, sup: 98, inf: 78},
+              {isActive: false, index: 3, sup: 96, inf: 81},
+              {isActive: false, index: 4, sup: 95, inf: 85},
+              {isActive: false, index: 5, sup: 94, inf: 89},
+              {isActive: false, index: 6, sup: 93, inf: 93},
+              {isActive: false, index: 7, sup: 91, inf: 96},
+              {isActive: false, index: 8, sup: 90, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 70},
+              {isActive: false, index: 1, sup: 94, inf: 74},
+              {isActive: false, index: 2, sup: 88, inf: 78},
+              {isActive: false, index: 3, sup: 81, inf: 81},
+              {isActive: false, index: 4, sup: 75, inf: 85},
+              {isActive: false, index: 5, sup: 69, inf: 89},
+              {isActive: false, index: 6, sup: 63, inf: 93},
+              {isActive: false, index: 7, sup: 56, inf: 96},
+              {isActive: false, index: 8, sup: 50, inf: 100},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 90, inf: 100},
+              {isActive: false, index: 1, sup: 91, inf: 99},
+              {isActive: false, index: 2, sup: 93, inf: 98},
+              {isActive: false, index: 3, sup: 94, inf: 96},
+              {isActive: false, index: 4, sup: 95, inf: 95},
+              {isActive: false, index: 5, sup: 96, inf: 94},
+              {isActive: false, index: 6, sup: 98, inf: 93},
+              {isActive: false, index: 7, sup: 99, inf: 91},
+              {isActive: false, index: 8, sup: 100, inf: 90},
+            ]
+          },
+          {
+            data: [
+              {isActive: false, index: 0, sup: 100, inf: 50},
+              {isActive: false, index: 1, sup: 96, inf: 56},
+              {isActive: false, index: 2, sup: 93, inf: 63},
+              {isActive: false, index: 3, sup: 89, inf: 69},
+              {isActive: false, index: 4, sup: 85, inf: 75},
+              {isActive: false, index: 5, sup: 81, inf: 81},
+              {isActive: false, index: 6, sup: 78, inf: 88},
+              {isActive: false, index: 7, sup: 74, inf: 94},
+              {isActive: false, index: 8, sup: 70, inf: 100},
+            ]
+          },
 
         ]
       },
@@ -205,19 +322,18 @@ export default {
       },
       fourthQuiz: {
         text: "Est ce que les couleurs et le textes correspondent?",
-        values: [
-          {
-            response: [
-              {title: "VRAI", value: false},
-              {title: "FAUX", value: false},
-            ],
-            type: 'one',
-            index: null,
-            question: {
-              text: "JAUNE",
-              color: "green"
-            },
+        values: [{
+          response: [
+            {title: "VRAI", value: false},
+            {title: "FAUX", value: false},
+          ],
+          type: 'one',
+          index: null,
+          question: {
+            text: "JAUNE",
+            color: "green"
           },
+        },
           {
             response: [
               {title: "VRAI", value: false},

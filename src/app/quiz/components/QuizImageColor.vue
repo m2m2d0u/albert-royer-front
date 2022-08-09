@@ -22,12 +22,11 @@
               <v-card
                   class="pa-2 text-center d-flex justify-center align-center text-xl-h6 text-sm-caption font-weight-regular"
                   height="80">
-                <!--                <button class="flex" style="height: 100%;"
-                                        :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
-                                        @click="chooseResponse(n, indexQuiz)">
-                                  {{ quiz.response[n - 1].title }}
-                                </button>-->
-                Test
+                <button class="flex" style="height: 100%;"
+                        :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
+                        @click="chooseResponse(n, indexQuiz)">
+                  {{ quiz.response[n - 1].title }}
+                </button>
               </v-card>
             </v-col>
           </v-row>
@@ -46,12 +45,12 @@ export default {
   methods: {
     chooseResponse(n, index) {
       const originalIndex = n - 1;
-      if (this.data[index].type === 'one') {
-        this.data[index].response.forEach((quiz) => quiz.value = false)
-        this.data[index].response[originalIndex].value = true;
+      if (this.data.values[index].type === 'one') {
+        this.data.values[index].response.forEach((quiz) => quiz.value = false)
+        this.data.values[index].response[originalIndex].value = true;
       }
-      if (this.data[index].type === 'multiple') {
-        this.data[index].response[originalIndex].value = !this.data[index].response[originalIndex].value;
+      if (this.data.values[index].type === 'multiple') {
+        this.data.values[index].response[originalIndex].value = !this.data.values[index].response[originalIndex].value;
       }
     },
   }

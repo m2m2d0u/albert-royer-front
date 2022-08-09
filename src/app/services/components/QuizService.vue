@@ -1,5 +1,5 @@
 <template>
-  <v-container class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+  <v-container class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
     <v-container class="service-item bg-light rounded h-100 p-5">
       <v-container class="d-inline-flex align-items-center justify-content-center bg-white rounded-circle mb-4"
                    style="width: 65px; height: 65px;">
