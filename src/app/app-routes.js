@@ -2,10 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import IndexPage from './index/index'
 import ServicePage from './services/services'
-import Subtest1 from "@/app/quiz/pages/Subtest1";
+// import Subtest1 from "@/app/quiz/pages/Subtest1";
 import Subtest2 from "@/app/quiz/pages/Subtest2";
 import Subtest3 from "@/app/quiz/pages/Subtest3";
 import Subtest4 from "@/app/quiz/pages/Subtest4";
+import Subtest1 from "@/app/quiz/pages/Subtest1";
 
 Vue.use(VueRouter)
 
@@ -23,7 +24,7 @@ const routes = [
     {
         path: '/quiz/subtest1',
         name: 'Quiz1',
-        component: Subtest1
+        component: () => Subtest1
     },
     {
         path: '/quiz/subtest2',
@@ -50,7 +51,10 @@ const routes = [
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes,
+    scrollBehavior() {
+        return {x: 0, y: 0};
+    }
 })
 
 export default router;

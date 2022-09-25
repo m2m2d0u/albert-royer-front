@@ -56,7 +56,7 @@ export default {
   name: "ServicePage",
   components: {
     QuizService
-  }
+  },
 }
 </script>
 

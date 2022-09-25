@@ -14,13 +14,12 @@ import FooterIndex from "@/app/shared/components/Footer";
 
 export default {
   name: 'App',
-
   components: {
-    NavbarIndex,FooterIndex
+    NavbarIndex, FooterIndex
   },
-
-  data: () => ({
-    //
-  }),
+  mounted() {
+    this.$store.dispatch("quiz/fetchAllTest");
+  },
+  methods: {},
 };
 </script>

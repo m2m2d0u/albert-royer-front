@@ -49,13 +49,11 @@ export default {
   },
   methods: {
     handleDialog(value) {
-      console.log("Value:", value);
       this.$emit("handleDialog", value)
       return value;
     },
     // Close the dialog when user click to outside the dialog
     clickOutsideOfDialog(event) {
-      console.log("Event:", event);
       if (event.explicitOriginalTarget.className === "md-overlay md-fixed md-dialog-overlay") {
         this.handleDialog(false)
       }

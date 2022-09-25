@@ -9,7 +9,7 @@
       <p class="mb-4">{{ description }}</p>
       <a class="btn">
         <i class="fa fa-plus text-primary me-3"></i>
-        <router-link :to="{name:router, params:{id:link}}">Lire plus</router-link>
+        <router-link @click.native="scrollToTop" :to="{name:router, params:{id:link}}">Lire plus</router-link>
       </a>
     </v-container>
   </v-container>
@@ -24,7 +24,13 @@ export default {
     link: String,
     router: String,
     description: String
+  },
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    }
   }
+
 }
 </script>
 

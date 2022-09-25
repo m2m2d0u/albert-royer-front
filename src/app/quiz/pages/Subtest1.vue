@@ -4,7 +4,7 @@
       <h1>Test 1</h1>
     </div>
     <div>
-      <md-steppers :md-active-step.sync="active" md-vertical md-linear>
+      <md-steppers :md-active-step.sync="active" md-linear>
         <!--        First quiz concerning the question for slider-->
         <md-step id="first" md-label="Premier test" md-description="Obligatoire" :md-editable="true"
                  :md-done.sync="first">
@@ -153,6 +153,7 @@ export default {
   },
   methods: {
     setDone(id, index) {
+      this.scrollToTop();
       this[id] = true
       this.secondStepError = null
       if (index) {
@@ -170,6 +171,9 @@ export default {
     openDialogForConfirm(value) {
       if (value)
         this.openDialog = value;
+    },
+    scrollToTop() {
+      window.scrollTo(0,0);
     }
   }
 }

@@ -4,7 +4,7 @@
       <h1>Test 1</h1>
     </div>
     <div>
-      <md-steppers :md-active-step.sync="active" md-vertical md-linear>
+      <md-steppers :md-active-step.sync="active" md-linear>
         <!--        First quiz concerning the question for slider-->
         <md-step id="first" md-label="Premier test" md-description="Obligatoire" :md-editable="true"
                  :md-done.sync="first">
@@ -170,7 +170,7 @@ export default {
         ]
       },
       // eslint-disable-next-line no-unused-vars
-      secondQuiz: Array.apply(null, Array(2)).map(function (_, i) {
+      secondQuiz: Array.apply(null, Array(37)).map(function (_, i) {
         return {
           text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
               "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the  industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
@@ -428,6 +428,7 @@ export default {
   },
   methods: {
     setDone(id, index) {
+      this.scrollToTop();
       this[id] = true
       this.secondStepError = null
       if (index) {
@@ -445,6 +446,9 @@ export default {
     openDialogForConfirm(value) {
       if (value)
         this.openDialog = value;
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     }
   }
 }
