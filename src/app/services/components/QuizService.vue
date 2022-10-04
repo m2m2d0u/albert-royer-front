@@ -7,10 +7,10 @@
       </v-container>
       <h4 class="mb-3">{{ name }}</h4>
       <p class="mb-4">{{ description }}</p>
-      <a class="btn">
+      <router-link @click.native="scrollToTop" :to="{name:router, params:{id:link}}" class="btn">
         <i class="fa fa-plus text-primary me-3"></i>
-        <router-link @click.native="scrollToTop" :to="{name:router, params:{id:link}}">Lire plus</router-link>
-      </a>
+        <span>Lire plus</span>
+      </router-link>
     </v-container>
   </v-container>
 </template>

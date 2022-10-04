@@ -24,7 +24,7 @@ const routes = [
     {
         path: '/quiz/subtest1',
         name: 'Quiz1',
-        component: () => Subtest1
+        component: Subtest1
     },
     {
         path: '/quiz/subtest2',
