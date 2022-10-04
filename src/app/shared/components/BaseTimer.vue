@@ -4,7 +4,7 @@
       v-slot="{ days, hours, minutes, seconds }"
       class="timer" @end="countEnded">
     <!--    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.-->
-    <p :style="{color: changeColor(seconds)}">
+    <p :style="{color: changeColor(seconds)}" class="text-h6 text-md-body-2 text-sm-body-1 text-xs-body-1 text-xl-body-1">
       Temps restant：{{ minutes }} minutes, {{ seconds }} seconds.
     </p>
   </vue-countdown>
