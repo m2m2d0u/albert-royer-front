@@ -3,7 +3,7 @@
     <v-main>
       <NavbarIndex/>
       <router-view/>
-      <FooterIndex/>
+      <FooterIndex v-if="$route.path !== '/connexion'"/>
     </v-main>
   </v-app>
 </template>
@@ -18,6 +18,7 @@ export default {
     NavbarIndex, FooterIndex
   },
   mounted() {
+    console.log("Route:", this.$route.path)
     this.$store.dispatch("quiz/fetchAllTest");
   },
   methods: {},

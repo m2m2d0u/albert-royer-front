@@ -1,169 +1,124 @@
 <template>
-  <div>
-    <md-dialog :md-active="dialog" v-click-outside="clickOutsideOfDialog">
-      <div class="registration-form">
-        <form>
-          <div class="form-icon">
-            <span><i class="fa fa-user"></i></span>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control item" id="username" placeholder="Nom d'utilisateur">
-          </div>
-          <div class="form-group">
-            <input type="password" class="form-control item" id="password" placeholder="Mot de passe">
-          </div>
-          <div v-if="register">
-            <div class="form-group">
-              <input type="text" class="form-control item" id="birth-date" placeholder="Confirmer mot de passe">
+  <v-container>
+    <div class="container mt-5 mb-5">
+      <div class="row g-0 my-card">
+        <div class="col-md-6 mt-3">
+          <div class="card card1 p-3">
+            <div class="d-flex flex-column">
+              <!--              <img src="https://i.imgur.com/kFFNY1q.png" height="50" width="50"/>-->
+              <span class="login mt-3 text-h4 text-md-h4 text-xs-body-1 fw-bold">Page de connexion</span>
             </div>
-            <div class="form-group">
-              <input type="text" class="form-control item" id="email" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control item" id="phone-number" placeholder="Numéro de téléphone">
-            </div>
-          </div>
-          <div class="form-group bottom-form">
-            <button type="button" class="btn btn-block create-account">
-              {{ register ? "Soumettre" : "Se connecter" }}
-            </button>
-            <div class="mt-4">
-              <button class="tab-1" type="button" @click="register = !register">
-                {{ register ? "Vous avez déjà de compte?" : "Créez un compte" }}
+            <div class="input-field d-flex flex-column">
+              <span>Email:</span>
+              <input class="form-control" placeholder="Email">
+              <span class="mt-3">Mot de passe:</span>
+              <input class="form-control" placeholder="Mot de passe">
+              <button class="mt-4 btn btn-dark d-flex justify-content-center align-items-center">
+                Se connecter
               </button>
+              <!--              <div class="mt-3 text1">-->
+              <!--                <span class="mt-3 forget">Forget Password?</span>-->
+              <!--              </div>-->
+              <!--              <div class="text2 mt-4 d-flex flex-row align-items-center">-->
+              <!--                <span>Don't have an account?-->
+              <!--                  <span class="register">Register here</span>-->
+              <!--                </span>-->
+              <!--              </div>-->
             </div>
           </div>
-        </form>
+        </div>
+        <div class="col-md-6 mt-3">
+          <div class="card card2">
+            <img
+                class="image"
+                src="https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80">
+          </div>
+        </div>
       </div>
-    </md-dialog>
-  </div>
+    </div>
+  </v-container>
 </template>
 <script>
 export default {
   name: "ConnexionPage",
-  props: ['dialog'],
   data() {
     return {
       register: false
     }
   },
-  methods: {
-    handleDialog(value) {
-      this.$emit("handleDialog", value)
-      return value;
-    },
-    // Close the dialog when user click to outside the dialog
-    clickOutsideOfDialog(event) {
-      if (event.explicitOriginalTarget.className === "md-overlay md-fixed md-dialog-overlay") {
-        this.handleDialog(false)
-      }
-    }
-  }
+  methods: {}
 }
 </script>
 
-<style scoped>
+<style lang="css" scoped>
 
-.registration-form {
-  padding: 0 0;
-  width: 500px;
-}
-
-.registration-form form {
-  background-color: #FFFFFF;
-  margin: auto;
-  padding: 50px 70px;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
-}
-
-
-.registration-form .form-icon {
-  text-align: center;
-  background-color: #1E1450;
-  border-radius: 50%;
-  font-size: 40px;
-  color: white;
-  width: 100px;
-  height: 100px;
-  margin: auto auto 50px;
-  line-height: 100px;
-}
-
-.registration-form .item {
-  border-radius: 20px;
-  margin-bottom: 25px;
-  padding: 10px 20px;
-}
-
-.registration-form .create-account {
-  border-radius: 30px;
-  padding: 10px 20px;
-  font-size: 18px;
-  font-weight: bold;
-  background-color: #1E1450;
+.card1 {
+  height: 100%;
+  width: 100%;
   border: none;
-  color: white;
-  margin-top: 20px;
-}
-
-.registration-form {
-  max-width: 600px;
-  background-color: #fff;
-  margin: auto;
-  padding: 35px 0;
-  text-align: center;
-  border-bottom-left-radius: 30px;
-  border-bottom-right-radius: 30px;
-  color: #9fadca;
-  border-top: 1px solid #dee9ff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075);
-  overflow: auto;
-}
-
-.registration-form .social-icons {
-  margin-top: 30px;
-  margin-bottom: 16px;
-}
-
-.registration-form .social-icons a {
-  font-size: 23px;
-  margin: 0 3px;
-  color: #1E1450;
-  border: 1px solid;
-  border-radius: 50%;
-  width: 45px;
-  display: inline-block;
-  height: 45px;
-  text-align: center;
-  background-color: #fff;
-  line-height: 45px;
-}
-
-.registration-form .social-icons a:hover {
-  text-decoration: none;
-  opacity: 0.6;
-}
-
-.bottom-form {
+  border-radius: 8px;
+  cursor: pointer;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-@media (max-width: 576px) {
-  .registration-form form {
-    padding: 50px 20px;
-  }
+.card2 {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.5s;
+  display: flex;
+  justify-content: center;
+}
 
-  .registration-form .form-icon {
-    width: 70px;
-    height: 70px;
-    font-size: 30px;
-    line-height: 70px;
+.card2:hover {
+  transform: scale(1.1)
+}
+
+.input-field span {
+  font-size: 22px;
+  color: black;
+  margin-top: 20px;
+  display: flex;
+  align-content: flex-start;
+}
+
+.form-control {
+  font-size: 18px;
+  color: black;
+  height: 50px;
+  font-weight: 500;
+  padding-left: 10px;
+  border: 1px solid black;
+  margin: 20px 0;
+}
+
+.btn {
+  height: 55px;
+  width: 100%;
+  background-color: #000;
+  font-weight: 500;
+  color: white;
+  border: none;
+  font-size: 15px
+}
+
+@media only screen and (max-width: 768px) {
+  .card2 {
+    margin-left: 40px;
+    margin-top: 40px;
+  }
+}
+@media only screen and (max-width: 7575px) {
+  .card2 {
+    margin-left: 0;
+    margin-top: 40px;
+
   }
 }
 
+/*.image img{*/
+/*  height: 75vh;*/
+/*}*/
 </style>

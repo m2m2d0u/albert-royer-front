@@ -8,41 +8,34 @@
         <span class="navbar-toggler-icon"></span>
       </button>
     </v-container>
-    <div class="collapse navbar-collapse" id="navbarCollapse">
-      <div class="navbar-nav ms-auto p-4 p-lg-0 px-3 nav-style" style="min-width: 450px">
-        <router-link to="/" class="nav-item nav-link" exact-active-class="active">Acceuil</router-link>
-        <router-link to="/about" class="nav-item nav-link" exact-active-class="active">A propos</router-link>
-        <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
-        <button @click="dialog = true" class="nav-item nav-link">Connexion</button>
+    <v-container>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto p-4 p-lg-0 px-3" style="min-width: 450px">
+          <router-link to="/" class="nav-item nav-link" exact-active-class="active">Acceuil</router-link>
+          <router-link to="/about" class="nav-item nav-link" exact-active-class="active">A propos</router-link>
+          <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
+          <router-link to="/connexion" class="nav-item nav-link" active-class="active">Connexion</router-link>
+        </div>
       </div>
-    </div>
-    <ConnexionDialog :dialog="dialog" @handleDialog="handleDialog($event)"/>
+    </v-container>
   </nav>
 </template>
 <script>
-import ConnexionDialog from "@/app/shared/components/Connexion";
+// import ConnexionDialog from "@/app/shared/components/Connexion";
 
 export default {
   name: 'NavbarIndex',
   components: {
-    ConnexionDialog
+    // ConnexionDialog
   },
   data() {
     return {
       dialog: false
     }
   },
-  methods: {
-    handleDialog(value) {
-      this.dialog = value;
-    }
-  }
+  methods: {}
 }
 </script>
 
 <style>
-.nav-style {
-  display: flex;
-  align-items: start;
-}
 </style>

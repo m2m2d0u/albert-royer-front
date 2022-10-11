@@ -2,11 +2,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import IndexPage from './index/index'
 import ServicePage from './services/services'
-// import Subtest1 from "@/app/quiz/pages/Subtest1";
 import Subtest2 from "@/app/quiz/pages/Subtest2";
 import Subtest3 from "@/app/quiz/pages/Subtest3";
 import Subtest4 from "@/app/quiz/pages/Subtest4";
 import Subtest1 from "@/app/quiz/pages/Subtest1";
+import Connexion from "@/app/shared/components/Connexion";
 
 Vue.use(VueRouter)
 
@@ -40,6 +40,11 @@ const routes = [
         path: '/quiz/subtest4',
         name: 'Quiz4',
         component: Subtest4
+    },
+    {
+        path: '/connexion',
+        name: 'Connexion',
+        component: Connexion
     }
     /*  {
         path: '/about',
