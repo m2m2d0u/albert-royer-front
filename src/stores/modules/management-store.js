@@ -1,13 +1,15 @@
-import {fetchAllSubTest, fetchQuizByName, fetchSubTestByName} from "@/_helpers/fetch-wrapper";
+import {fetchAllSubTest, submitResponse} from "@/_helpers/fetch-wrapper";
 
 export const SET_ALL_TEST = 'SET_ALL_TEST'
 export const SET_ONE_TEST = 'SET_ONE_TEST'
 export const SET_LOADING = 'SET_ONE_TEST'
 export const SET_ONE_QUIZ = 'SET_ONE_QUIZ'
+export const SUBMIT_QUIZ = 'SUBMIT_QUIZ'
 
 const state = {
     tests: [],
     isLoading: false,
+    haveTest: false,
     quiz: null
 }
 
@@ -23,6 +25,11 @@ const getters = {
             return testFound?.quiz?.find(quiz => quiz.name === subTestName)
         }
     },
+    getSubTestById: (state) => {
+        return (id) => {
+            return state?.tests.find(quiz => quiz.id === id)
+        }
+    }
 }
 
 const mutations = {
@@ -35,6 +42,9 @@ const mutations = {
     [SET_ONE_QUIZ](state, value) {
         state.quiz = value
     },
+    [SUBMIT_QUIZ](state, value) {
+        state.haveTest = value
+    },
 }
 
 const actions = {
@@ -44,16 +54,10 @@ const actions = {
         commit(SET_ALL_TEST, await fetchAllSubTest());
         commit(SET_LOADING, false)
     },
-    async fetchTestByName({commit}, name) {
-        commit(SET_LOADING, true)
-        commit(SET_ONE_TEST, await fetchSubTestByName(name));
-        commit(SET_LOADING, false)
-    },
-    async fetchQuizByName({commit}, name) {
-        commit(SET_LOADING, true)
-        commit(SET_ONE_QUIZ, await fetchQuizByName(name));
-        commit(SET_LOADING, false)
-    },
+    async submitResponse({commit}, payload) {
+        await submitResponse(payload)
+        commit(SUBMIT_QUIZ, true)
+    }
 
 }
 export default {

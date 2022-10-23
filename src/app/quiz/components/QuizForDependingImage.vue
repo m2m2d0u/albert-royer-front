@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-row class="mb-6" no-gutters v-if="choice">
+    <Confirmation :active="openDialog" @resultOfConfirmation="resultOfConfirmation"/>
+    <v-row class="mb-6" no-gutters v-if="!isChoose">
       <h2>Choissisez une photo</h2>
       <v-row>
         <v-col v-for="(image, index) in values.images" :key="index">
@@ -12,7 +13,7 @@
       </v-row>
     </v-row>
     <v-row>
-      <ul v-if="!choice">
+      <ul v-if="isChoose">
         <v-container class="d-flex justify-center">
           <img :src="require('../../../assets/img/'+imageChoice)"
                style="width: 700px; height: 40vh; border: black 1px solid" alt="">
@@ -37,13 +38,13 @@
 
 <script>
 import ChooseResponseComponent from "@/app/quiz/components/shared/ChooseResponseComponent";
+import Confirmation from "@/app/shared/components/Confirmation";
 
 export default {
   name: "QuizForDependingImage",
-  components: {ChooseResponseComponent},
+  components: {Confirmation, ChooseResponseComponent},
   props: {
-    data: Object,
-    choice: Boolean
+    data: Array,
   },
   watch: {
     data: {
@@ -52,30 +53,45 @@ export default {
       handler(val) {
         this.values = val.data;
       }
-    }
+    },
   },
   data: function () {
     return {
       values: [],
+      isChoose: false,
+      openDialog: false,
+      dialogResponse: false,
       showQuestion: false,
       questions: [],
       imageChoice: null,
+      supposedChoice: null,
       indexChoice: null,
     }
   },
   methods: {
     choiceImage(image) {
-      image.choice = image.index;
-      // Get the right quiz to display when we choose some picture
-      for (const image of this.values.images) {
-        if (image.choice !== null) {
-          this.showQuestion = true;
-          this.questions = this.values[image.choice];
-          this.imageChoice = image.value;
-          this.indexChoice = image.choice;
+      this.openDialog = true
+      this.supposedChoice = image
+    },
+    resultOfConfirmation(value) {
+      if (value) {
+        this.isChoose = true
+        this.values.images.map(image => {
+          if (image.index === this.supposedChoice.index) {
+            image.choice = this.supposedChoice.index
+          }
+        })
+        // Get the right quiz to display when we choose some picture
+        for (const image of this.values.images) {
+          if (image.choice !== null) {
+            this.showQuestion = true;
+            this.questions = this.values[image.choice];
+            this.imageChoice = image.value;
+            this.indexChoice = image.choice;
+          }
         }
       }
-      this.$emit("openDialogForConfirm", true);
+      this.openDialog = false;
     },
     updateData(data, index) {
       this.values[this.indexChoice][index] = data

@@ -7,14 +7,17 @@
         </v-row>
         <v-row>
           <v-col v-for="n in 1" :key="n">
-            <div class="text-md-h6 text-xl-h6 text-sm-caption">
-              {{ quiz.name }}
-            </div>
+            <!--
+                        <div class="text-md-h6 text-xl-h6 text-sm-caption">
+                          {{ quiz.name }}
+                        </div>
+            -->
             <div class="image-content" v-show="quiz.image">
               <img
                   v-img
                   :src="require('../../../assets/img/emotional/'+quiz.image)"
                   class="image"
+                  alt=""
                   :style="{ backgroundImage: 'url(' + require('../../../assets/img/emotional/'+quiz.image) + ')', width: '700px', height: '40vh' }"/>
             </div>
           </v-col>

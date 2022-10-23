@@ -4,7 +4,6 @@
       <h1>Name</h1>
     </v-container>
     <v-container class="fixed-top timer d-flex justify-content-end">
-      <!--      <base-timer :time-left="2 * 24 * 60 * 60 * 1000"/>-->
       <base-timer :time-left=quizTime*1000 @countEnded="countEnded"/>
     </v-container>
     <div>
@@ -35,30 +34,29 @@
           <div class="next-button">
             <md-button
                 class="md-raised md-primary change-page"
-                @click="setDone('second', 'third')">
-              Suivant
+                @click="thirdQuiz?setDone('second', 'third'): setDone('finish')">
+              {{ thirdQuiz ? "Suivant" : "Terminer" }}
             </md-button>
           </div>
         </md-step>
         <!--        Third quiz, we give to the recipient two different pictures and the response depend for his choice-->
-        <md-step id="third"
+        <md-step v-if="thirdQuiz"
+                 id="third"
                  md-label="Troisième test"
                  md-description="Obligatoire"
                  :md-editable="true"
                  :md-done.sync="third.value">
           <quiz-for-depending-image
-              :data="thirdQuiz"
-              :choice="showChoice"
-              @openDialogForConfirm="openDialogForConfirm"/>
-          <Confirmation :active="openDialog" @resultOfConfirmation="resultOfConfirmation"/>
+              :data="thirdQuiz"/>
           <div class="next-button">
             <md-button class="md-raised md-primary change-page"
-                       @click="setDone('third', 'fourth')">
-              Suivant
+                       @click="fourthQuiz?setDone('third', 'fourth'):setDone('finish')">
+              {{ fourthQuiz ? "Suivant" : "Terminer" }}
             </md-button>
           </div>
         </md-step>
-        <md-step id="fourth"
+        <md-step v-if="fourthQuiz"
+                 id="fourth"
                  md-label="Quatrième test"
                  md-description="Obligatoire"
                  :md-editable="true"
@@ -66,14 +64,13 @@
           <quiz-image-color :data="fourthQuiz"/>
           <div class="next-button">
             <md-button class="md-raised md-primary change-page"
-                       @click="setDone('fourth')">
+                       @click="setDone('finish')">
               Terminer
             </md-button>
           </div>
         </md-step>
       </md-steppers>
     </div>
-
   </v-container>
 </template>
 
@@ -81,25 +78,23 @@
 import QuizForSlider from "@/app/quiz/components/QuizForSlider";
 import QuizSelectResponseForImage from "@/app/quiz/components/QuizSelectResponseForImage";
 import QuizForDependingImage from "@/app/quiz/components/QuizForDependingImage";
-import Confirmation from "@/app/shared/components/Confirmation";
 import QuizImageColor from "@/app/quiz/components/QuizImageColor";
 import BaseTimer from "@/app/shared/components/BaseTimer";
-
+import {useRoute} from "vue-router/composables";
+import {mapGetters} from "vuex";
 
 export default {
-  name: "Subtest4",
+  name: "Subtest",
   components: {
     QuizForSlider,
-    Confirmation,
     QuizSelectResponseForImage,
-    QuizForDependingImage,
     QuizImageColor,
-    BaseTimer
+    QuizForDependingImage,
+    BaseTimer,
   },
   data: function () {
     return {
       active: 'first',
-      showChoice: true,
       first: {
         value: false,
         time: 30
@@ -117,52 +112,49 @@ export default {
         time: 60
       },
       secondStepError: null,
-      openDialog: false,
       index: null,
       quizTime: 30,
       quizIndex: 'first',
-      // eslint-disable-next-line no-unused-vars
     };
   },
   computed: {
+    ...mapGetters({
+      getSubTestById: 'quiz/getSubTestById'
+    }),
     firstQuiz() {
-      return this.$store.getters["quiz/getSubTestOfTest"]('Les executifs', 'subtest 4-1')
+      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 1')
     },
     secondQuiz() {
-      return this.$store.getters["quiz/getSubTestOfTest"]('Les executifs', 'subtest 4-2')
+      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 2')
     },
     thirdQuiz() {
-      return this.$store.getters["quiz/getSubTestOfTest"]('Les executifs', 'subtest 4-3')
+      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 3')
     },
     fourthQuiz() {
-      return this.$store.getters["quiz/getSubTestOfTest"]('Les executifs', 'subtest 4-4')
-    },
+      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 4')
+    }
   },
   methods: {
     setDone(id, index) {
+      if (id === 'finish') {
+        this.$store.dispatch('quiz/submitResponse', {
+          firstQuiz: this.firstQuiz,
+          secondQuiz: this.secondQuiz,
+          thirdQuiz: this.thirdQuiz,
+          fourthQuiz: this.fourthQuiz
+        })
+      }
       this.scrollToTop();
       this[id].value = true
-      this.secondStepError = null
       if (index) {
         this.active = index
       }
       this.quizTime = this[index].time;
       this.quizIndex = index;
+
     },
     setError() {
       this.secondStepError = 'This is an error! '
-    },
-    resultOfConfirmation(value) {
-      if (value === true)
-        this.showChoice = false;
-      this.openDialog = false;
-    },
-    openDialogForConfirm(value) {
-      if (value)
-        this.openDialog = value;
-    },
-    scrollToTop() {
-      window.scrollTo(0, 0);
     },
     countEnded() {
       switch (this.quizIndex) {
@@ -180,6 +172,9 @@ export default {
         default:
           break;
       }
+    },
+    scrollToTop() {
+      window.scrollTo(0, 0);
     }
   }
 }

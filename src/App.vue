@@ -18,7 +18,7 @@ export default {
     NavbarIndex, FooterIndex
   },
   mounted() {
-    console.log("Route:", this.$route.path)
+    // console.log("Route:", this.$route.path)
     this.$store.dispatch("quiz/fetchAllTest");
   },
   methods: {},

@@ -9,9 +9,11 @@ import VueImg from 'v-img';
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
 import store from './stores'
+import * as VeeValidate from 'vee-validate'
 
 Vue.config.productionTip = false
 
+Vue.use(VeeValidate);
 
 Vue.use(VueMaterial);
 Vue.use(VueImg);

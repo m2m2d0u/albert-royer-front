@@ -1,7 +1,7 @@
 <template>
   <div>
     <md-dialog-confirm
-        :md-active.sync="active"
+        :md-active.sync="openDialog"
         md-title="Confirmation"
         md-content="Etes-vous sûr de confirmer votre choix?"
         md-confirm-text="Oui"
@@ -17,8 +17,17 @@ export default {
   props: {
     active: Boolean,
   },
-  data:function () {
-    return{
+  watch: {
+    active: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        this.openDialog = val
+      }
+    }
+  },
+  data: function () {
+    return {
       openDialog: false,
     }
   },

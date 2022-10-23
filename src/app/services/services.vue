@@ -21,27 +21,16 @@
           <p class="d-inline-block border rounded-pill py-1 px-4">Services</p>
           <h1>Health Care Solutions</h1>
         </v-container>
-        <v-container class="row g-4">
-          <quiz-service name="Sous-test 1"
-                        link="subtest1"
-                        router="Quiz1"
-                        icon="fa fa-brain"
-                        description="Les contributeurs et la ligne de front"/>
-          <quiz-service name="Sous-test 2"
-                        link="subtest2"
-                        router="Quiz2"
-                        icon="fa fa-heartbeat"
-                        description="Professionnels et managers"/>
-          <quiz-service name="Sous-test 3"
-                        link="subtest3"
-                        icon="fa fa-wheelchair"
-                        router="Quiz3"
-                        description="PME et Cadres supérieurs"/>
-          <quiz-service name="Sous-test 4"
-                        link="subtest4"
-                        router="Quiz4"
-                        icon="fa fa-tooth"
-                        description="Les executifs"/>
+        <v-container class="">
+          <v-row>
+            <v-col v-for="(test, index) in tests" :key="index" :lg="6" :md="6" :sm="12" :xs="12">
+              <quiz-service name="Sous-test 1"
+                            :link="test.id"
+                            router="Quiz"
+                            icon="fa fa-brain"
+                            :description="test.name"/>
+            </v-col>
+          </v-row>
         </v-container>
       </v-container>
     </v-container>
@@ -51,12 +40,18 @@
 
 <script>
 import QuizService from "@/app/services/components/QuizService";
+import {mapState} from "vuex";
 
 export default {
   name: "ServicePage",
   components: {
     QuizService
   },
+  computed: {
+    ...mapState({
+      tests: state => state.quiz.tests
+    })
+  }
 }
 </script>
 

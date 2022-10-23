@@ -2,24 +2,18 @@
   <v-container>
     <ul>
       <v-container class="text-h3 text-md-h4">
-        {{ data.text }}
+        {{ values.text }}
+      </v-container>
+      <v-container class="d-flex justify-content-center">
+        <v-card width="600">
+          <span class="text-h2 text-md-h2 text-h4 text-center" v-for="(sample, index) in values.data[0].sample" :key="index"
+                :style="{color: sample.value.color}">
+            {{ sample.value.text }}
+          </span>
+        </v-card>
       </v-container>
       <v-container>
-        <li v-for="(quiz, indexQuiz) in values" :key="indexQuiz" class="mt-10">
-          <v-row class="mb-6" no-gutters>
-            <h2>Question {{ indexQuiz + 1 }}</h2>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-container class="text-h2 text-md-h2 text-h4 text-center mt-3 mb-3"
-                           :style="{color: quiz.question.color}">
-                {{ quiz.question.text }}
-              </v-container>
-            </v-col>
-          </v-row>
-          <choose-response-component :questions="quiz.response" :index="indexQuiz" :type="quiz.type"
-                                     @updateData="updateData"/>
-        </li>
+        <choose-response-component :questions="values.data[0].question" :index="index" :type="values.data[0].type"/>
       </v-container>
     </ul>
   </v-container>
@@ -39,13 +33,13 @@ export default {
       immediate: true,
       deep: true,
       handler(val) {
-        this.values = val.data;
+        this.values = val;
       }
     }
   },
   data: () => {
     return {
-      values: []
+      values: {}
     }
   },
   methods: {

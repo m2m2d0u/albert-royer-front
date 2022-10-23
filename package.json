@@ -15,13 +15,15 @@
     "core-js": "^3.6.5",
     "node-sass": "^7.0.3",
     "v-img": "^0.2.0",
+    "vee-validate": "2.0.9",
     "vue": "^2.6.11",
     "vue-gallery": "^2.0.1",
     "vue-material": "^1.0.0-beta-15",
     "vue-router": "^3.2.0",
     "vue-slider-component": "^3.2.18",
     "vuetify": "^2.6.0",
-    "vuex": "3.6.2"
+    "vuex": "3.6.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
