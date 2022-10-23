@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <NavbarIndex/>
+      <NavbarIndex v-if="$route.path !== '/connexion'"/>
       <router-view/>
       <FooterIndex v-if="$route.path !== '/connexion'"/>
     </v-main>
