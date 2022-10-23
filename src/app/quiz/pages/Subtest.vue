@@ -1,75 +1,79 @@
 <template>
   <v-container class="mt-10">
-    <v-container class="text-center mb-10">
-      <h1>Name</h1>
-    </v-container>
-    <v-container class="fixed-top timer d-flex justify-content-end">
-      <base-timer :time-left=quizTime*1000 @countEnded="countEnded"/>
-    </v-container>
-    <div>
-      <md-steppers :md-active-step.sync="active" md-linear>
-        <!--        First quiz concerning the question for slider-->
-        <md-step id="first"
-                 md-label="Premier test"
-                 md-description="Obligatoire"
-                 :md-editable="true"
-                 :md-done.sync="first.value">
-          <quiz-for-slider :data="firstQuiz"/>
-          <div class="next-button">
-            <md-button
-                class="md-raised md-primary change-page"
-                @click="setDone('first', 'second')">
-              Suivant
-            </md-button>
-          </div>
-        </md-step>
-        <!--        Second quiz, when we purpose some picture and the recipient take some response by different choice-->
-        <md-step id="second"
-                 md-label="Deuxième test"
-                 md-description="Obligatoire"
-                 :md-error="secondStepError"
-                 :md-editable="true"
-                 :md-done.sync="second.value">
-          <quiz-select-response-for-image :data="secondQuiz"/>
-          <div class="next-button">
-            <md-button
-                class="md-raised md-primary change-page"
-                @click="thirdQuiz?setDone('second', 'third'): setDone('finish')">
-              {{ thirdQuiz ? "Suivant" : "Terminer" }}
-            </md-button>
-          </div>
-        </md-step>
-        <!--        Third quiz, we give to the recipient two different pictures and the response depend for his choice-->
-        <md-step v-if="thirdQuiz"
-                 id="third"
-                 md-label="Troisième test"
-                 md-description="Obligatoire"
-                 :md-editable="true"
-                 :md-done.sync="third.value">
-          <quiz-for-depending-image
-              :data="thirdQuiz"/>
-          <div class="next-button">
-            <md-button class="md-raised md-primary change-page"
-                       @click="fourthQuiz?setDone('third', 'fourth'):setDone('finish')">
-              {{ fourthQuiz ? "Suivant" : "Terminer" }}
-            </md-button>
-          </div>
-        </md-step>
-        <md-step v-if="fourthQuiz"
-                 id="fourth"
-                 md-label="Quatrième test"
-                 md-description="Obligatoire"
-                 :md-editable="true"
-                 :md-done.sync="fourth.value">
-          <quiz-image-color :data="fourthQuiz"/>
-          <div class="next-button">
-            <md-button class="md-raised md-primary change-page"
-                       @click="setDone('finish')">
-              Terminer
-            </md-button>
-          </div>
-        </md-step>
-      </md-steppers>
+    <div class="center-screen" v-if="isLoading">
+      <v-progress-circular
+          :size="50"
+          color="primary"
+          indeterminate
+      />
+    </div>
+    <div v-else>
+      <v-container class="text-center mb-12">
+        <h1>Name</h1>
+      </v-container>
+      <v-container class="fixed-top timer d-flex justify-content-end">
+        <base-timer :time-left="active.time" @countEnded="countEnded"/>
+      </v-container>
+      <div>
+        <md-steppers :md-active-step.sync="active.name" md-linear>
+          <!--        First quiz concerning the question for slider-->
+          <md-step id="first"
+                   md-label="Premier test"
+                   md-description="Obligatoire">
+            <quiz-for-slider :data="firstQuiz"/>
+            <div class="next-button">
+              <md-button
+                  class="md-raised md-primary change-page"
+                  @click="setDone('first', 'second')">
+                Suivant
+              </md-button>
+            </div>
+          </md-step>
+          <!--        Second quiz, when we purpose some picture and the recipient take some response by different choice-->
+          <md-step id="second"
+                   md-label="Deuxième test"
+                   md-description="Obligatoire"
+                   :md-error="secondStepError"
+                   :md-done.sync="second.value">
+            <quiz-select-response-for-image :data="secondQuiz"/>
+            <div class="next-button">
+              <md-button
+                  class="md-raised md-primary change-page"
+                  @click="thirdQuiz?setDone('second', 'third'): setDone('finish')">
+                {{ thirdQuiz ? "Suivant" : "Terminer" }}
+              </md-button>
+            </div>
+          </md-step>
+          <!--        Third quiz, we give to the recipient two different pictures and the response depend for his choice-->
+          <md-step v-if="thirdQuiz"
+                   id="third"
+                   md-label="Troisième test"
+                   md-description="Obligatoire"
+                   :md-done.sync="third.value">
+            <quiz-for-depending-image
+                :data="thirdQuiz"/>
+            <div class="next-button">
+              <md-button class="md-raised md-primary change-page"
+                         @click="fourthQuiz?setDone('third', 'fourth'):setDone('finish')">
+                {{ fourthQuiz ? "Suivant" : "Terminer" }}
+              </md-button>
+            </div>
+          </md-step>
+          <md-step v-if="fourthQuiz"
+                   id="fourth"
+                   md-label="Quatrième test"
+                   md-description="Obligatoire"
+                   :md-done.sync="fourth.value">
+            <quiz-image-color :data="fourthQuiz"/>
+            <div class="next-button">
+              <md-button class="md-raised md-primary change-page"
+                         @click="setDone('finish')">
+                Terminer
+              </md-button>
+            </div>
+          </md-step>
+        </md-steppers>
+      </div>
     </div>
   </v-container>
 </template>
@@ -94,45 +98,51 @@ export default {
   },
   data: function () {
     return {
-      active: 'first',
-      first: {
-        value: false,
+      active: {
+        name: 'first',
         time: 30
       },
+      firstQuiz: {},
+      secondQuiz: {},
+      thirdQuiz: {},
+      fourthQuiz: {},
+      secondStepError: null,
+      index: null,
       second: {
         value: false,
-        time: 40
+        time: null
       },
       third: {
         value: false,
-        time: 50
+        time: null
       },
       fourth: {
         value: false,
-        time: 60
-      },
-      secondStepError: null,
-      index: null,
-      quizTime: 30,
-      quizIndex: 'first',
+        time: null
+      }
     };
   },
   computed: {
     ...mapGetters({
       getSubTestById: 'quiz/getSubTestById'
     }),
-    firstQuiz() {
-      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 1')
+    isLoading() {
+      return this.$store.state.quiz.isLoading
     },
-    secondQuiz() {
-      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 2')
-    },
-    thirdQuiz() {
-      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 3')
-    },
-    fourthQuiz() {
-      return this.getSubTestById(useRoute().params.id)?.quiz.find((value) => value.name === 'subtest 4')
-    }
+  },
+  async mounted() {
+    await this.$store.dispatch('quiz/getTestById', useRoute().params.id);
+    const test = this.$store.state.quiz.oneTest;
+    this.firstQuiz = test.quiz.find((value) => value.name === 'subtest 1');
+    this.secondQuiz = test.quiz.find(value => value.name === 'subtest 2');
+    this.thirdQuiz = test.quiz.find(value => value.name === 'subtest 3');
+    this.fourthQuiz = test.quiz.find(value => value.name === 'subtest 4');
+    // Set all time
+    this.active.time = this.firstQuiz.time;
+    this.second.time = this.secondQuiz.time;
+    this.third.time = this.thirdQuiz.time;
+    this.fourth.time = this.fourthQuiz.time;
+
   },
   methods: {
     setDone(id, index) {
@@ -145,19 +155,16 @@ export default {
         })
       }
       this.scrollToTop();
-      this[id].value = true
       if (index) {
-        this.active = index
+        this.active.name = index;
+        this.active.time = this[index].time
       }
-      this.quizTime = this[index].time;
-      this.quizIndex = index;
-
     },
     setError() {
       this.secondStepError = 'This is an error! '
     },
     countEnded() {
-      switch (this.quizIndex) {
+      switch (this.active.name) {
         case 'first':
           this.setDone('first', 'second');
           break;
@@ -172,6 +179,7 @@ export default {
         default:
           break;
       }
+
     },
     scrollToTop() {
       window.scrollTo(0, 0);

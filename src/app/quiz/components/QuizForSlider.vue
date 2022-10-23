@@ -117,5 +117,4 @@ export default {
 .span-color {
   color: #448AFF;
 }
-
 </style>

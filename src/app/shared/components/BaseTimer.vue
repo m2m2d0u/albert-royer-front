@@ -1,13 +1,16 @@
 <template>
-  <vue-countdown
-      :time="timeLeft"
-      v-slot="{ days, hours, minutes, seconds }"
-      class="timer" @end="countEnded">
-    <!--    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.-->
-    <p :style="{color: changeColor(seconds)}" class="text-h6 text-md-body-2 text-sm-body-1 text-xs-body-1 text-xl-body-1">
-      Temps restant：{{ minutes }} minutes, {{ seconds }} seconds.
-    </p>
-  </vue-countdown>
+  <v-container class="position-static">
+    <vue-countdown
+        :time="time"
+        v-slot="{ days, hours, minutes, seconds }"
+        class="position-absolute top-0 end-0" @end="countEnded">
+      <!--    Time Remaining：{{ days }} days, {{ hours }} hours, {{ minutes }} minutes, {{ seconds }} seconds.-->
+      <p :style="{color: changeColor(seconds)}"
+         class="text-h6 text-md-body-2 text-sm-body-1 text-xs-body-1 text-xl-body-1">
+        Temps restant：{{ minutes }} minutes, {{ seconds }} seconds.
+      </p>
+    </vue-countdown>
+  </v-container>
 </template>
 <script>
 import VueCountdown from '@chenfengyuan/vue-countdown';
@@ -23,8 +26,19 @@ export default {
       required: true
     }
   },
+  watch: {
+    timeLeft: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        this.time = val*1000;
+      }
+    }
+  },
   data() {
-    return {};
+    return {
+      time: null
+    };
   },
   methods: {
     countEnded() {
