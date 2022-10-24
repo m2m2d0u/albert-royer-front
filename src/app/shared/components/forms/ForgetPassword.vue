@@ -4,7 +4,7 @@
       <span class="title">Mot de passe oublié</span>
       <form action="#">
         <div class="input-field">
-          <input type="text" placeholder="Donner votre email" required>
+          <input type="text" placeholder="Donner votre email ou numéro" required>
           <i class="uil uil-envelope icon"/>
         </div>
         <div class="input-field button">

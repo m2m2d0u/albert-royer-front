@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col cols="6">
+    <v-col cols="6" md="6" sm="12" xs="12">
       <div class="container-form">
         <div class="forms">
           <login v-if="level === 'login'" :level="level" @changeLevel="level = $event"/>
@@ -29,9 +29,20 @@ export default {
   data() {
     return {
       level: 'login',
-      login: true,
-      register: false,
-      forgetPassword: false,
+      login: {
+        email: '',
+        password: ''
+      },
+      register: {
+        name: '',
+        phone: '',
+        email: '',
+        password: '',
+        confirmedPassword: ''
+      },
+      forgetPassword: {
+        emailOrPhone: ''
+      },
     }
   },
   methods: {}

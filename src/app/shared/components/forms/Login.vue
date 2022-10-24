@@ -7,6 +7,7 @@
         <div class="input-field">
           <input type="text" placeholder="Donner votre email" required>
           <i class="uil uil-envelope icon"/>
+          <span class="error-validation">error</span>
         </div>
         <div class="input-field">
           <input type="password" class="password" placeholder="Mot de passe" required>

@@ -4,8 +4,12 @@
       <span class="title">Création de compte</span>
       <form action="#">
         <div class="input-field">
-          <input type="text" placeholder="Entrer votre nom" required>
-          <i class="uil uil-user"/>
+          <input type="text" placeholder="Entrer votre nom complet" required>
+          <i class="uil uil-user icon"/>
+        </div>
+        <div class="input-field">
+          <input type="text" placeholder="Entrer votre numéro de téléphone" required>
+          <i class="uil uil-phone icon"/>
         </div>
         <div class="input-field">
           <input type="text" placeholder="Entrer votre email" required>
