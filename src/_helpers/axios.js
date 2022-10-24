@@ -5,8 +5,8 @@ export const HTTP = axios.create({
 })
 
 HTTP.interceptors.response.use(
-    async res => await res.data.message,
+    async res => res.data.message,
     error => {
-        console.log(error)
+       return Promise.reject({response:error.response.data, statusCode: error.response.status})
     }
 )

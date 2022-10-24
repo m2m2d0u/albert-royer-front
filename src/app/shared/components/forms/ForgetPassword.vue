@@ -4,11 +4,15 @@
       <span class="title">Mot de passe oublié</span>
       <form action="#">
         <div class="input-field">
-          <input type="text" placeholder="Donner votre email ou numéro" required>
-          <i class="uil uil-envelope icon"/>
+          <v-text-field
+              prepend-icon="mdi-account"
+              type="text"
+              :rules="rules.username"
+              placeholder="Téléphone ou mail"
+              v-model="username"/>
         </div>
         <div class="input-field button">
-          <input type="button" value="Réinitialiser">
+          <v-btn class="button-confirm" large color="#4070f4">Soumettre</v-btn>
         </div>
       </form>
       <div class="login-signup">
@@ -28,7 +32,12 @@ export default {
   },
 
   data() {
-    return {}
+    return {
+      username: null,
+      rules: {
+        username: [v => !!v || "Le nom d'utilisateur est obligatoire."]
+      }
+    }
   },
   methods: {
     toLogin() {

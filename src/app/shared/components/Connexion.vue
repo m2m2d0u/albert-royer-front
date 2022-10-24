@@ -28,21 +28,7 @@ export default {
   },
   data() {
     return {
-      level: 'login',
-      login: {
-        email: '',
-        password: ''
-      },
-      register: {
-        name: '',
-        phone: '',
-        email: '',
-        password: '',
-        confirmedPassword: ''
-      },
-      forgetPassword: {
-        emailOrPhone: ''
-      },
+      level: 'register',
     }
   },
   methods: {}

@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <notifications/>
       <NavbarIndex v-if="$route.path !== '/connexion'"/>
       <router-view/>
       <FooterIndex v-if="$route.path !== '/connexion'"/>
@@ -15,7 +16,8 @@ import FooterIndex from "@/app/shared/components/Footer";
 export default {
   name: 'App',
   components: {
-    NavbarIndex, FooterIndex
+    NavbarIndex,
+    FooterIndex
   },
   mounted() {
     // console.log("Route:", this.$route.path)

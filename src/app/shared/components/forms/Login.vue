@@ -3,16 +3,24 @@
   <v-container>
     <div class="form login">
       <span class="title">Page de connexion</span>
-      <form action="#">
+      <v-form
+          ref="form"
+          lazy-validation>
         <div class="input-field">
-          <input type="text" placeholder="Donner votre email" required>
-          <i class="uil uil-envelope icon"/>
-          <span class="error-validation">error</span>
+          <v-text-field
+              prepend-icon="mdi-account"
+              type="text"
+              :rules="rules.username"
+              placeholder="Téléphone ou mail"
+              v-model="name"></v-text-field>
         </div>
         <div class="input-field">
-          <input type="password" class="password" placeholder="Mot de passe" required>
-          <i class="uil uil-lock icon"/>
-          <i class="uil uil-eye-slash showHidePw"/>
+          <v-text-field
+              prepend-icon="mdi-key-variant"
+              type="password"
+              :rules="rules.password"
+              placeholder="Mot de passe"
+              v-model="password"></v-text-field>
         </div>
 
         <div class="checkbox-text">
@@ -20,9 +28,9 @@
         </div>
 
         <div class="input-field button">
-          <input type="button" value="Se connecter">
+          <v-btn class="button-confirm" large color="#4070f4" @click.prevent="login">Se connecter</v-btn>
         </div>
-      </form>
+      </v-form>
       <div class="login-signup">
             <span class="text">Vous n'êtes pas membre?
                 <a href="#" class="text signup-link" @click.prevent="toRegister">Créer un compte</a>
@@ -35,12 +43,27 @@
 <script>
 export default {
   name: "Login",
+  data() {
+    return {
+      username: null,
+      password: null,
+      rules: {
+        username: [v => !!v || "Le nom d'utilisateur est obligatoire."],
+        password: [v => !!v || "Le mot de passe est obligatoire."]
+      }
+    }
+  },
   methods: {
-    toRegister(){
+    toRegister() {
       this.$emit('changeLevel', 'register')
     },
-    forgetPassword(){
+    forgetPassword() {
       this.$emit('changeLevel', 'forgetPassword')
+    },
+    login() {
+      if (this.$refs.form.validate()) {
+        console.log("Info")
+      }
     }
   }
 
