@@ -1,17 +1,17 @@
 <template>
   <v-container>
-    <v-container class="slider-text">
+    <v-container class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption ">
       {{ text }}
     </v-container>
     <v-container class="content-slider" v-for="(questions, i) in values" :key="i">
       <v-row class="mb-6" no-gutters>
-        <h2>Question {{ i + 1 }}</h2>
+        <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold">Question {{ i + 1 }}</span>
       </v-row>
       <v-row no-gutters>
         <v-col cols="10">
           <v-row class="mt-3 mb-3" no-gutters>
             <v-col v-for="(numb, i) of questions.question" :key="i">
-              <span class="text-h6 text-md-h6 text-sm-caption">{{ numb.sup }}</span>
+              <span class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption">{{ numb.sup }}</span>
             </v-col>
           </v-row>
           <v-row no-gutters>
@@ -22,21 +22,26 @@
           </v-row>
           <v-row class="mt-1" no-gutters>
             <v-col v-for="(numb, i) of questions.question" :key="i">
-              <span class="text-h6 text-md-h6 text-sm-caption">{{ numb.inf }}</span>
+              <span class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption">{{ numb.inf }}</span>
             </v-col>
           </v-row>
         </v-col>
         <v-col cols="2" class="d-flex justify-content-between flex-column">
           <v-row no-gutters>
             <v-col class="d-flex align-center pl-3">
-              <span class="text-h4 text-md-h5 text-xl-h4 text-sm-caption mr-4 span-color">Toi:</span>
-              <span class="text-h5 text-md-h6 text-sm-caption">{{ getTheSupBorne(questions.question) }}</span>
+              <span class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption mr-4 span-color">Toi:</span>
+              <span class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption">{{
+                  getTheSupBorne(questions.question)
+                }}</span>
             </v-col>
           </v-row>
           <v-row no-gutters>
             <v-col class="d-flex align-center pl-3">
-              <span class="text-h5 text-md-h5 text-xl-h4 text-sm-caption mr-4 span-color">Autre:</span>
-              <span class="text-h5 text-md-h6 text-sm-caption">{{ getTheInfBorne(questions.question) }}</span>
+              <span
+                  class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption mr-4 span-color">Autre:</span>
+              <span class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption">{{
+                  getTheInfBorne(questions.question)
+                }}</span>
             </v-col>
           </v-row>
         </v-col>

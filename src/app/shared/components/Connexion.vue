@@ -1,18 +1,18 @@
 <template>
-  <v-row>
-    <v-col cols="6" md="6" sm="12" xs="12">
-      <div class="container-form">
-        <div class="forms">
-          <login v-if="level === 'login'" :level="level" @changeLevel="level = $event"/>
-          <register v-if="level === 'register'" @changeLevel="level = $event"/>
-          <forget-password v-if="level === 'forgetPassword'" @changeLevel="level = $event"/>
+    <v-row>
+      <v-col cols="6" md="6" sm="12" xs="12">
+        <div class="container-form">
+          <div class="forms">
+            <login v-if="level === 'login'" :level="level" @changeLevel="level = $event"/>
+            <register v-if="level === 'register'" @changeLevel="level = $event"/>
+            <forget-password v-if="level === 'forgetPassword'" @changeLevel="level = $event"/>
+          </div>
         </div>
-      </div>
-    </v-col>
-    <v-col cols="6" class="no-gutters d-none d-md-flex">
-      <div class="bg-image"/>
-    </v-col>
-  </v-row>
+      </v-col>
+      <v-col cols="6" class="no-gutters d-none d-md-flex">
+        <div class="bg-image"/>
+      </v-col>
+    </v-row>
 </template>
 <script>
 import Login from "@/app/shared/components/forms/Login";
@@ -28,7 +28,7 @@ export default {
   },
   data() {
     return {
-      level: 'register',
+      level: 'login',
     }
   },
   methods: {}

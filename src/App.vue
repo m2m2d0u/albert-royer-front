@@ -3,8 +3,17 @@
     <v-main>
       <notifications/>
       <NavbarIndex v-if="$route.path !== '/connexion'"/>
-      <router-view/>
-      <FooterIndex v-if="$route.path !== '/connexion'"/>
+      <div class="center-screen" v-if="isLoading">
+        <v-progress-circular
+            :size="50"
+            color="primary"
+            indeterminate
+        />
+      </div>
+      <div v-else>
+        <router-view/>
+        <FooterIndex v-if="$route.path !== '/connexion'"/>
+      </div>
     </v-main>
   </v-app>
 </template>
@@ -20,8 +29,12 @@ export default {
     FooterIndex
   },
   mounted() {
-    // console.log("Route:", this.$route.path)
     this.$store.dispatch("quiz/fetchAllTest");
+  },
+  computed: {
+    isLoading() {
+      return this.$store.state.utilities.isLoading
+    }
   },
   methods: {},
 };

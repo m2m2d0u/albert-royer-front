@@ -3,7 +3,7 @@
     <ul>
       <li v-for="(quiz, indexQuiz) in values" :key="indexQuiz" class="mt-10">
         <v-row class="mb-6 text-md-h5 text-xl-h5 text-sm-caption" no-gutters>
-          <h2>Question {{ indexQuiz + 1 }}</h2>
+          <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold">Question {{ indexQuiz + 1 }}</span>
         </v-row>
         <v-row>
           <v-col v-for="n in 1" :key="n">

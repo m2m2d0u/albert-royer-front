@@ -21,7 +21,6 @@ const mutations = {
 
 const actions = {
     async createUser({commit, dispatch}, payload) {
-        dispatch('utilities/setError', false, {root: true})
         commit(SET_LOADING, true)
         await createdUser(payload).then(() => {
             commit(SET_IS_CREATED, true)

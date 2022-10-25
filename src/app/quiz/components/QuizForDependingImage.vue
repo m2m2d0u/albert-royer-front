@@ -2,7 +2,7 @@
   <div>
     <Confirmation :active="openDialog" @resultOfConfirmation="resultOfConfirmation"/>
     <v-row class="mb-6" no-gutters v-if="!isChoose">
-      <h2>Choissisez une photo</h2>
+      <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold">Choissisez une photo</span>
       <v-row>
         <v-col v-for="(image, index) in values.images" :key="index">
           <v-container @click="choiceImage(image)">

@@ -76,13 +76,13 @@ export default {
   name: "Register",
   data() {
     return {
-      name: "Mamadou",
-      email: "abass@gmail.com",
-      phone: "+221776667788",
-      password: "azerty",
-      subTestId: "633af04cee16ea6204516c43",
+      name: null,
+      email: null,
+      phone: null,
+      password: null,
+      subTestId: null,
       role: 'Basic',
-      confirmPassword: "azerty",
+      confirmPassword: null,
       rules: {
         name: [v => !!v || 'Le nom est obligatoire.'],
         email: [
@@ -112,21 +112,26 @@ export default {
       this.$emit('changeLevel', 'login');
     },
     async createAccount() {
+
       if (this.$refs.form.validate()) {
-        await this.$store.dispatch('user/createUser', {
+        const phoneWithCallingCode = this.phone[0] === '+' ? this.phone : '+221' + this.phone;
+        console.log(phoneWithCallingCode)
+        this.$store.dispatch('auth/createUser', {
           name: this.name,
           email: this.email,
-          phone: this.phone,
+          phone: phoneWithCallingCode,
           password: this.password,
           subTestId: this.subTestId,
           role: this.role,
+        }).then(async () => {
+          await this.$store.dispatch('utilities/setLoading', true)
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await this.$store.dispatch('utilities/setLoading', false)
+          this.$notifyInfo("L'utilisateur a été bien crée");
+          this.$emit('changeLevel', 'login');
+        }).catch((error) => {
+          this.$notifyError(error);
         })
-        if (this.$store.state.utilities.isError) {
-          this.$notifyError(this.$store.state.utilities.errorMessage);
-          return
-        }
-        this.$emit('changeLevel', 'login');
-        this.$notifyInfo("L'utilisateur a été bien crée");
       }
     }
   }

@@ -1,29 +1,21 @@
-export const SET_ERROR = 'SET_ERROR'
-export const SET_MESSAGE = 'SET_MESSAGE'
+export const SET_LOADING = 'SET_LOADING'
 
 const state = {
-    isError: false,
-    errorMessage: '',
+    isLoading: false,
 }
 
 const getters = {}
 
 const mutations = {
-    [SET_ERROR](state, value) {
-        state.isError = value
-    },
-    [SET_MESSAGE](state, value) {
-        state.errorMessage = value
+    [SET_LOADING](state, value) {
+        state.isLoading = value
     },
 }
 
 const actions = {
-    setError({commit}, payload) {
-        commit(SET_ERROR, payload)
+    setLoading({commit}, payload) {
+        commit(SET_LOADING, payload)
     },
-    setMessage({commit}, payload) {
-        commit(SET_MESSAGE, payload)
-    }
 }
 export default {
     namespaced: true,

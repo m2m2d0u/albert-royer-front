@@ -23,7 +23,7 @@
         </v-container>
         <v-container class="">
           <v-row>
-            <v-col v-for="(test, index) in tests" :key="index" :lg="6" :md="6" :sm="12" :xs="12">
+            <v-col v-for="(test, index) in tests" :key="index" :lg="6" :md="12" :sm="12" :xs="12">
               <quiz-service name="Sous-test 1"
                             :link="test.id"
                             router="Quiz"
@@ -49,7 +49,7 @@ export default {
   },
   computed: {
     ...mapState({
-      tests: state => state.quiz.tests
+      tests: state => state.quiz.tests,
     })
   }
 }

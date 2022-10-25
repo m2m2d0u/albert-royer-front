@@ -12,7 +12,7 @@
               type="text"
               :rules="rules.username"
               placeholder="Téléphone ou mail"
-              v-model="name"></v-text-field>
+              v-model="username"></v-text-field>
         </div>
         <div class="input-field">
           <v-text-field
@@ -62,7 +62,18 @@ export default {
     },
     login() {
       if (this.$refs.form.validate()) {
-        console.log("Info")
+        this.$store.dispatch('auth/login', {
+          username: this.username,
+          password: this.password,
+        }).then(async () => {
+          await this.$store.dispatch('utilities/setLoading', true)
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await this.$store.dispatch('utilities/setLoading', false)
+          this.$notifyInfo("Vous êtes maintenant connecté");
+          await this.$router.push('/')
+        }).catch(error => {
+          this.$notifyError(error);
+        })
       }
     }
   }
