@@ -12,6 +12,7 @@ import store from './stores'
 import * as VeeValidate from 'vee-validate'
 import NotifyPlugin from 'vue-easy-notify'
 import 'vue-easy-notify/dist/vue-easy-notify.css'
+import '@/plugins/apexcharts'
 
 Vue.config.productionTip = false
 

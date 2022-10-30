@@ -31,7 +31,7 @@ export default {
       immediate: true,
       deep: true,
       handler(val) {
-        this.time = val*1000;
+        this.time = val * 1000;
       }
     }
   },

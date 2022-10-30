@@ -12,7 +12,7 @@
         <h1>Name</h1>
       </v-container>
       <v-container class="fixed-top timer d-flex justify-content-end">
-        <base-timer :time-left="active.time" @countEnded="countEnded"/>
+        <base-timer :time-left="active.time" :key="active.name" @countEnded="countEnded"/>
       </v-container>
       <div>
         <md-steppers :md-active-step.sync="active.name" md-linear>
@@ -148,16 +148,20 @@ export default {
     setDone(id, index) {
       if (id === 'finish') {
         this.$store.dispatch('quiz/submitResponse', {
-          firstQuiz: this.firstQuiz,
-          secondQuiz: this.secondQuiz,
-          thirdQuiz: this.thirdQuiz,
-          fourthQuiz: this.fourthQuiz
+          data: {
+            firstQuiz: this.firstQuiz,
+            secondQuiz: this.secondQuiz,
+            thirdQuiz: this.thirdQuiz,
+            fourthQuiz: this.fourthQuiz,
+          },
+          recipient: this.$store.state.auth.info.id,
+          subtest: this.$store.state.auth.info.test
         })
       }
       this.scrollToTop();
       if (index) {
         this.active.name = index;
-        this.active.time = this[index].time
+        this.active.time = this[index].time;
       }
     },
     setError() {
@@ -169,12 +173,19 @@ export default {
           this.setDone('first', 'second');
           break;
         case 'second':
-          this.setDone('second', 'third');
+          if (this.thirdQuiz)
+            this.setDone('second', 'third');
+          else
+            this.setDone('finish')
           break;
         case 'third':
-          this.setDone('third', 'fourth');
+          if (this.fourthQuiz)
+            this.setDone('third', 'fourth');
+          else
+            this.setDone('finish')
           break;
         case 'fourth':
+          this.setDone('finish')
           break;
         default:
           break;

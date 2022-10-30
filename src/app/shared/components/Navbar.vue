@@ -10,10 +10,11 @@
     </v-container>
     <v-container>
       <div class="collapse navbar-collapse" id="navbarCollapse">
-        <div class="navbar-nav ms-auto p-4 p-lg-0 px-3" style="min-width: 450px">
+        <div class="navbar-nav ms-auto p-4 p-lg-0 px-3" style="min-width: 650px">
           <router-link to="/" class="nav-item nav-link" exact-active-class="active">Acceuil</router-link>
           <router-link to="/about" class="nav-item nav-link" exact-active-class="active">A propos</router-link>
           <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
+          <router-link v-if="info?.role === 'Admin'" to="/admin" class="nav-item nav-link" active-class="active">Administration</router-link>
           <router-link to="/connexion" class="nav-item nav-link" active-class="active" v-if="!loggedIn">
             Connexion
           </router-link>
@@ -32,6 +33,9 @@ export default {
   computed: {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn
+    },
+    info(){
+      return this.$store.state.auth.info
     }
   },
   data() {

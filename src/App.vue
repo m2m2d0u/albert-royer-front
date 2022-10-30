@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <notifications/>
-      <NavbarIndex v-if="$route.path !== '/connexion'"/>
+      <NavbarIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin'"/>
       <div class="center-screen" v-if="isLoading">
         <v-progress-circular
             :size="50"
@@ -12,7 +12,7 @@
       </div>
       <div v-else>
         <router-view/>
-        <FooterIndex v-if="$route.path !== '/connexion'"/>
+        <FooterIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin'"/>
       </div>
     </v-main>
   </v-app>

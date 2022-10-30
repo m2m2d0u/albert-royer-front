@@ -8,19 +8,11 @@ export const SUBMIT_QUIZ = 'SUBMIT_QUIZ'
 
 const state = {
     tests: [],
-    oneTest: "One test",
     isLoading: false,
-    haveTest: false,
     quiz: null
 }
 
 const getters = {
-    getSubTestOfTest: (state) => {
-        return (name, subTestName) => {
-            const testFound = state.tests.find((test) => test.name === name);
-            return testFound?.quiz?.find(quiz => quiz.name === subTestName)
-        }
-    },
     getSubTestById: (state) => {
         return (id) => {
             return state?.tests.find(quiz => quiz.id === id)
@@ -35,12 +27,6 @@ const mutations = {
     [SET_LOADING](state, value) {
         state.isLoading = value
     },
-    [SET_ONE_QUIZ](state, value) {
-        state.quiz = value
-    },
-    [SUBMIT_QUIZ](state, value) {
-        state.haveTest = value
-    },
     [SET_ONE_TEST](state, value) {
         state.oneTest = value
     },
@@ -52,9 +38,10 @@ const actions = {
         commit(SET_ALL_TEST, await fetchAllSubTest());
         commit(SET_LOADING, false)
     },
-    async submitResponse({commit}, payload) {
+    // eslint-disable-next-line no-unused-vars
+    async submitResponse({commit, rootState}, payload) {
         await submitResponse(payload)
-        commit(SUBMIT_QUIZ, true)
+        // console.log("Root state:", rootState.auth.info)
     },
     async getTestById({commit}, payload) {
         commit(SET_LOADING, true)
