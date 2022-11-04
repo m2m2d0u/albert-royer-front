@@ -1,31 +1,46 @@
 <template>
-  <v-container class="drawer">
-    <v-container>
-      <drawer/>
-    </v-container>
-    <v-container>
-      <dashboard v-if="dashboard"/>
-      <data-table v-if="dataTable"/>
-    </v-container>
-  </v-container>
+  <div class="drawer">
+    <div>
+      <drawer @togglePage="navigatePage($event)"/>
+    </div>
+    <div class="page">
+      <dashboard v-if="navigation.dashboard"/>
+      <data-table v-if="navigation.dataTable"/>
+      <list-users v-if="navigation.listUsers"/>
+    </div>
+  </div>
 </template>
 
 <script>
 import Drawer from "@/app/shared/components/Drawer";
 import Dashboard from "@/app/shared/components/Dashboard";
-import DataTable from "@/app/shared/components/DataTable";
+import DataTable from "@/app/shared/components/ListTests";
+import ListUsers from "@/app/shared/components/ListUsers";
 
 export default {
   name: "Administration",
   components: {
+    ListUsers,
     Drawer,
     Dashboard,
     DataTable
   },
   data() {
     return {
-      dashboard: false,
-      dataTable: true,
+      navigation: {
+        dashboard: true,
+        dataTable: false,
+        listUsers: false,
+      }
+    }
+  },
+  methods: {
+    navigatePage(name) {
+      Object.keys(this.navigation).map(nav => {
+        if (nav !== name)
+          this.navigation[nav] = false
+      })
+      this.navigation[name] = true;
     }
   }
 }
@@ -34,6 +49,5 @@ export default {
 <style scoped>
 .drawer {
   background-color: #FAFAFA;
-  height: 100vh;
 }
 </style>

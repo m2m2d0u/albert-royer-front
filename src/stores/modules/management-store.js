@@ -47,8 +47,7 @@ const actions = {
         commit(SET_LOADING, true)
         commit(SET_ONE_TEST, await fetchSubTestById(payload));
         commit(SET_LOADING, false)
-    }
-
+    },
 }
 export default {
     namespaced: true,

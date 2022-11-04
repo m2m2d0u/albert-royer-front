@@ -7,22 +7,34 @@
     >
 
       <v-card>
-        <v-card-title class="text-h5">
-          Détails du test de &nbsp;<span class="light-green--text">MAMADOU ABASS DIALLO</span>
-        </v-card-title>
+        <v-container class="text-h4 text-center">
+          <span class="light-green--text font-weight-bold">{{ data?.user?.name }}</span>
+        </v-container>
         <v-container>
           <v-list-item-content class="">
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Nom:</span>
+              <span class="font-weight-bold text-h6">Nom:</span>&nbsp;
+              <span>{{ firstname }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Prénom:</span>
+              <span class="font-weight-bold text-h6">Prénom:</span>&nbsp;
+              <span>{{ lastname }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Numéro de téléphone:</span>
+              <span class="font-weight-bold text-h6">Numéro de téléphone:</span>&nbsp;
+              <span>{{ data?.user?.phone }}</span>
             </v-list-item-title>
-            <v-list-item-title>
-              <span class="font-weight-bold text-body-1">Email:</span>
+            <v-list-item-title class="mb-5">
+              <span class="font-weight-bold text-h6">Email:</span>&nbsp;
+              <span>{{ data?.user?.email }}</span>
+            </v-list-item-title>
+            <v-list-item-title class="mb-5">
+              <span class="font-weight-bold text-h6">Test effectué:</span>&nbsp;
+              <span>
+                  {{
+                  tests.find(test => test.id === data?.user?.subTestId).name
+                }}
+              </span>
             </v-list-item-title>
           </v-list-item-content>
         </v-container>
@@ -30,16 +42,20 @@
         <v-container>
           <v-list-item-content class="">
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Nombre de bonnes réponses pour le premier test:</span>
+              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le premier test:</span>&nbsp;
+              <span>{{ data?.result?.firstQuiz?.score }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Nombre de bonnes réponses pour le deuxième test:</span>
+              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le deuxième test:</span>&nbsp;
+              <span>{{ data?.result?.secondQuiz?.score }}</span>
             </v-list-item-title>
-            <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-body-1">Nombre de bonnes réponses pour le troisième test:</span>
+            <v-list-item-title class="mb-5" v-if="data?.result?.thirdQuiz">
+              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le troisième test:</span>&nbsp;
+              <span>{{ data?.result?.thirdQuiz?.score }}</span>
             </v-list-item-title>
-            <v-list-item-title>
-              <span class="font-weight-bold text-body-1">Nombre de bonnes réponses pour le quatrième test:</span>
+            <v-list-item-title v-if="data?.result?.fourthQuiz">
+              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le quatrième test:</span>&nbsp;
+              <span>{{ data?.result?.fourthQuiz?.score }}</span>
             </v-list-item-title>
           </v-list-item-content>
         </v-container>
@@ -63,7 +79,33 @@
 export default {
   name: "DialogDetails",
   props: {
-    openDialog: Boolean
+    openDialog: Boolean,
+    info: Object
+  },
+  data() {
+    return {
+      data: null
+    }
+  },
+  watch: {
+    info: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        this.data = val;
+      }
+    }
+  },
+  computed: {
+    tests() {
+      return this.$store.state.quiz.tests;
+    },
+    firstname() {
+      return this.data?.user?.name?.split(' ').slice(0, -1)?.join(' ');
+    },
+    lastname() {
+      return this.data?.user?.name?.split(' ').slice(-1)?.join(' ');
+    }
   },
   methods: {
     closedDialog() {

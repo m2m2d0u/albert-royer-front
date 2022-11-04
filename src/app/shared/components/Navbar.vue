@@ -11,15 +11,17 @@
     <v-container>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 px-3" style="min-width: 650px">
-          <router-link to="/" class="nav-item nav-link" exact-active-class="active">Acceuil</router-link>
-          <router-link to="/about" class="nav-item nav-link" exact-active-class="active">A propos</router-link>
+          <router-link to="/" class="nav-item nav-link" exact-active-class="active">Home</router-link>
+          <router-link to="/about" class="nav-item nav-link" exact-active-class="active">About us</router-link>
           <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
-          <router-link v-if="info?.role === 'Admin'" to="/admin" class="nav-item nav-link" active-class="active">Administration</router-link>
+          <router-link v-if="info?.role === 'Admin'" to="/admin" class="nav-item nav-link" active-class="active">
+            Administration
+          </router-link>
           <router-link to="/connexion" class="nav-item nav-link" active-class="active" v-if="!loggedIn">
-            Connexion
+            Login
           </router-link>
           <router-link to="#" @click.native="logout" class="nav-item nav-link" active-class="active" v-else>
-            Déconnexion
+            Logout
           </router-link>
         </div>
       </div>
@@ -34,7 +36,7 @@ export default {
     loggedIn() {
       return this.$store.state.auth.status.loggedIn
     },
-    info(){
+    info() {
       return this.$store.state.auth.info
     }
   },
@@ -49,6 +51,7 @@ export default {
       await new Promise(resolve => setTimeout(resolve, 800));
       await this.$store.dispatch('utilities/setLoading', false)
       await this.$store.dispatch('auth/logout')
+      await this.$router.push('/')
       this.$notifyInfo("Vous êtes maintenant déconnecté");
     }
   }

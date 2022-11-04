@@ -5,6 +5,7 @@ import ServicePage from './services/services'
 import Connexion from "@/app/shared/pages/Connexion";
 import Subtest from "@/app/quiz/pages/Subtest";
 import Administration from "@/app/shared/pages/Administration";
+import Report from "@/app/quiz/pages/Report";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
         path: '/admin',
         name: 'Administration',
         component: Administration
+    },
+    {
+        path: '/report',
+        name: 'Report',
+        component: Report
     }
 
 ]

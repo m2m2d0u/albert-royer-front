@@ -2,7 +2,7 @@
   <v-app>
     <v-main>
       <notifications/>
-      <NavbarIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin'"/>
+      <NavbarIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin' && $route.path !== '/report'"/>
       <div class="center-screen" v-if="isLoading">
         <v-progress-circular
             :size="50"
@@ -12,7 +12,7 @@
       </div>
       <div v-else>
         <router-view/>
-        <FooterIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin'"/>
+        <FooterIndex v-if="$route.path !== '/connexion' && $route.path !== '/admin' && $route.path !== '/report'"/>
       </div>
     </v-main>
   </v-app>
@@ -30,6 +30,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("quiz/fetchAllTest");
+    this.$store.dispatch("user/getRoles");
   },
   computed: {
     isLoading() {

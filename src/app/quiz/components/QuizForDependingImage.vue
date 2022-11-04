@@ -94,7 +94,7 @@ export default {
       this.openDialog = false;
     },
     updateData(data, index) {
-      this.values[this.indexChoice][index] = data
+      this.values[this.indexChoice][index]['question'] = data
     }
   }
 }

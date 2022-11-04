@@ -115,7 +115,6 @@ export default {
 
       if (this.$refs.form.validate()) {
         const phoneWithCallingCode = this.phone[0] === '+' ? this.phone : '+221' + this.phone;
-        console.log(phoneWithCallingCode)
         this.$store.dispatch('auth/createUser', {
           name: this.name,
           email: this.email,

@@ -19,12 +19,12 @@
       <v-container class="container">
         <v-container class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
           <p class="d-inline-block border rounded-pill py-1 px-4">Services</p>
-          <h1>Health Care Solutions</h1>
+          <h1>Our Tests</h1>
         </v-container>
         <v-container class="">
           <v-row>
             <v-col v-for="(test, index) in tests" :key="index" :lg="6" :md="12" :sm="12" :xs="12">
-              <quiz-service name="Sous-test 1"
+              <quiz-service :name="'Subtest '+(index+1)"
                             :link="test.id"
                             router="Quiz"
                             icon="fa fa-brain"
@@ -40,7 +40,6 @@
 
 <script>
 import QuizService from "@/app/services/components/QuizService";
-import {mapState} from "vuex";
 
 export default {
   name: "ServicePage",
@@ -48,9 +47,9 @@ export default {
     QuizService
   },
   computed: {
-    ...mapState({
-      tests: state => state.quiz.tests,
-    })
+    tests() {
+      return this.$store.state.quiz.tests;
+    }
   }
 }
 </script>

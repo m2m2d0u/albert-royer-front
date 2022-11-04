@@ -48,8 +48,6 @@ const actions = {
             commit(SET_REGISTER_SUCCESS)
             return Promise.resolve(response.data)
         }).catch((error => {
-            // dispatch('utilities/setError', true, {root: true})
-            // dispatch('utilities/setMessage', error.response.message, {root: true})
             return Promise.reject(error.response.message)
         }))
     },

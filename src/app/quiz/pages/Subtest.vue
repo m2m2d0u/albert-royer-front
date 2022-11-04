@@ -154,7 +154,7 @@ export default {
             thirdQuiz: this.thirdQuiz,
             fourthQuiz: this.fourthQuiz,
           },
-          recipient: this.$store.state.auth.info.id,
+          user: this.$store.state.auth.info.id,
           subtest: this.$store.state.auth.info.test
         })
       }
