@@ -1,5 +1,6 @@
 import {createdUser, login} from "@/_helpers/fetch-wrapper";
 import VueJwtDecode from 'vue-jwt-decode';
+import {getInfoUser} from "@/_helpers/user-service";
 
 export const SET_LOGIN_SUCCESS = 'SET_LOGIN_SUCCESS'
 export const SET_LOGIN_FAILURE = 'SET_LOGIN_FAILURE'
@@ -8,7 +9,8 @@ export const SET_REGISTER_SUCCESS = 'SET_REGISTER_SUCCESS'
 export const SET_REGISTER_FAILURE = 'SET_REGISTER_FAILURE'
 
 const user = JSON.parse(localStorage.getItem('user'));
-const info = user ? VueJwtDecode.decode(user.access_token) : null
+const decodeUser = user ? VueJwtDecode.decode(user.access_token) : null
+const info = getInfoUser(decodeUser)
 
 const state = {
     status: {
@@ -30,7 +32,7 @@ const mutations = {
     [SET_LOGIN_SUCCESS](state, data) {
         state.status.loggedIn = true
         state.user = data
-        state.info = VueJwtDecode.decode(data.access_token)
+        state.info = getInfoUser(VueJwtDecode.decode(data.access_token))
     },
     [SET_LOGIN_FAILURE](state) {
         state.status.loggedIn = false

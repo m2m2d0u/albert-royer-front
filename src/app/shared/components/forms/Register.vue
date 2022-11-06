@@ -89,7 +89,9 @@ export default {
           v => !!v || "L'email est obligatoire.",
           v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "L'email n'est pas valide."
         ],
-        phone: [v => !!v || 'Le numéro de téléphone est obligatoire.'],
+        phone: [v => !!v || 'Le numéro de téléphone est obligatoire.',
+          v => Number.isInteger(Number(v)) || 'Le numéro doit être un nombre'
+        ],
         password: [
           (v) => !!v || 'Le mot de passe est obligatoire.',
           (v) => (v && v.length >= 6) || 'Minimum 6 charactères',
@@ -114,11 +116,10 @@ export default {
     async createAccount() {
 
       if (this.$refs.form.validate()) {
-        const phoneWithCallingCode = this.phone[0] === '+' ? this.phone : '+221' + this.phone;
         this.$store.dispatch('auth/createUser', {
           name: this.name,
           email: this.email,
-          phone: phoneWithCallingCode,
+          phone: this.phone,
           password: this.password,
           subTestId: this.subTestId,
           role: this.role,

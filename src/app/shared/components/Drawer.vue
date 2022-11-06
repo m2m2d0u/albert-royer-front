@@ -41,7 +41,7 @@ export default {
       drawer: true,
       items: [
         {title: 'Tableau de bord', icon: 'mdi-view-dashboard', name: 'dashboard'},
-        {title: 'Liste des tests', icon: 'mdi-test-tube', name: 'dataTable'},
+        {title: 'Liste des tests', icon: 'mdi-test-tube', name: 'listTests'},
         {title: 'Liste des utilisateurs', icon: 'mdi-account-box-outline', name: 'listUsers'},
       ]
     }

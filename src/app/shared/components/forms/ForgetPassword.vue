@@ -12,7 +12,8 @@
               v-model="username"/>
         </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4">Soumettre</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click="resetPassword" :disabled="isActive">Soumettre
+          </v-btn>
         </div>
       </form>
       <div class="login-signup">
@@ -34,6 +35,7 @@ export default {
   data() {
     return {
       username: null,
+      isActive: false,
       rules: {
         username: [v => !!v || "Le nom d'utilisateur est obligatoire."]
       }
@@ -42,6 +44,19 @@ export default {
   methods: {
     toLogin() {
       this.$emit('changeLevel', 'login');
+    },
+    resetPassword() {
+      this.isActive = true
+      this.$store.dispatch('user/resetPassword', {email: this.username})
+          .then(() => {
+            this.$notifyInfo("Your password is sent to your inbox");
+            this.$emit('changeLevel', 'login');
+            this.isActive = false
+          })
+          .catch(error => {
+            this.$notifyError(error);
+            this.isActive = false
+          })
     }
   }
 }

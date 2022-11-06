@@ -1,4 +1,12 @@
-import {createdUser, getRoles, getUserById, getUsers, updateUser} from "@/_helpers/fetch-wrapper";
+import {
+    createdUser,
+    getRoles,
+    getUserById,
+    getUsers,
+    resetPassword,
+    updateUser,
+    validateEmail
+} from "@/_helpers/fetch-wrapper";
 
 export const SET_IS_CREATED = 'SET_IS_CREATED'
 export const SET_IS_MODIFIED = 'SET_IS_MODIFIED'
@@ -85,6 +93,20 @@ const actions = {
             return Promise.reject(error.response.message)
         })
         commit(SET_LOADING, false)
+    },
+    // eslint-disable-next-line no-unused-vars
+    async validateEmail({commit}, payload) {
+        await validateEmail(payload).then(() => {
+        }).catch(error => {
+            return Promise.reject(error.response.message)
+        })
+    },
+    // eslint-disable-next-line no-unused-vars
+    async resetPassword({commit}, payload) {
+        await resetPassword(payload).then(() => {
+        }).catch(error => {
+            return Promise.reject(error.response.message)
+        })
     }
 
 }

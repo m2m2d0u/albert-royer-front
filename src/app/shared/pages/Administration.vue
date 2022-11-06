@@ -5,7 +5,7 @@
     </div>
     <div class="page">
       <dashboard v-if="navigation.dashboard"/>
-      <data-table v-if="navigation.dataTable"/>
+      <list-tests v-if="navigation.listTests"/>
       <list-users v-if="navigation.listUsers"/>
     </div>
   </div>
@@ -14,7 +14,7 @@
 <script>
 import Drawer from "@/app/shared/components/Drawer";
 import Dashboard from "@/app/shared/components/Dashboard";
-import DataTable from "@/app/shared/components/ListTests";
+import ListTests from "@/app/shared/components/ListTests";
 import ListUsers from "@/app/shared/components/ListUsers";
 
 export default {
@@ -23,13 +23,13 @@ export default {
     ListUsers,
     Drawer,
     Dashboard,
-    DataTable
+    ListTests
   },
   data() {
     return {
       navigation: {
-        dashboard: true,
-        dataTable: false,
+        dashboard: false,
+        listTests: true,
         listUsers: false,
       }
     }

@@ -13,15 +13,15 @@
         <v-container>
           <v-list-item-content class="">
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Nom:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Firstname:</span>&nbsp;
               <span>{{ firstname }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Prénom:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Lastname:</span>&nbsp;
               <span>{{ lastname }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Numéro de téléphone:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Phone number:</span>&nbsp;
               <span>{{ data?.user?.phone }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
@@ -29,10 +29,10 @@
               <span>{{ data?.user?.email }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Test effectué:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Test done:</span>&nbsp;
               <span>
                   {{
-                  tests.find(test => test.id === data?.user?.subTestId).name
+                  tests.find(test => test.id === data?.user?.subTestId)?.name
                 }}
               </span>
             </v-list-item-title>
@@ -42,19 +42,19 @@
         <v-container>
           <v-list-item-content class="">
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le premier test:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Number of correct answers for the SVO test:</span>&nbsp;
               <span>{{ data?.result?.firstQuiz?.score }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5">
-              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le deuxième test:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Number of correct answers for the RME test:</span>&nbsp;
               <span>{{ data?.result?.secondQuiz?.score }}</span>
             </v-list-item-title>
             <v-list-item-title class="mb-5" v-if="data?.result?.thirdQuiz">
-              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le troisième test:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Number of correct answers for the Raven Dies test:</span>&nbsp;
               <span>{{ data?.result?.thirdQuiz?.score }}</span>
             </v-list-item-title>
             <v-list-item-title v-if="data?.result?.fourthQuiz">
-              <span class="font-weight-bold text-h6">Nombre de bonnes réponses pour le quatrième test:</span>&nbsp;
+              <span class="font-weight-bold text-h6">Number of correct answers for the Stroop test:</span>&nbsp;
               <span>{{ data?.result?.fourthQuiz?.score }}</span>
             </v-list-item-title>
           </v-list-item-content>

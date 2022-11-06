@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <add-decision :openDecisionDialog="openDecisionDialog" @closeDialog="openDecisionDialog.value = $event"
+                  v-if="openDecisionDialog.value"/>
     <dialog-details :open-dialog="openDialog" :info="data" @eventDialog="openDialog = $event"/>
     <div class="center-screen" v-if="isLoading">
       <v-progress-circular
@@ -11,7 +13,7 @@
       <v-card elevation="4">
         <v-container>
           <v-container class="text-center mb-3 mt-3">
-            <span class="text-h4">Recherche</span>
+            <span class="text-h4">Search</span>
           </v-container>
           <v-row>
             <v-col cols="3">
@@ -19,13 +21,15 @@
                   v-model="search.name"
                   outlined
                   dense
-                  placeholder="Nom et/ou Prénom"/>
+                  placeholder="Firstname and/or Lastname"/>
             </v-col>
             <v-col cols="3">
               <v-select
-                  :items="['Accepté','Rejeté']"
-                  label="Filtrer par décision"
+                  :items="decisionList"
+                  label="Filter by decision"
                   v-model="search.decision"
+                  item-text="name"
+                  item-value="value"
                   outlined
                   class="shrink"
                   dense
@@ -34,7 +38,7 @@
             <v-col cols="3">
               <v-select
                   :items="tests"
-                  label="Filtrer par sous-tests"
+                  label="Filter by test"
                   outlined
                   v-model="search.subtest"
                   class="shrink"
@@ -78,20 +82,20 @@
             <v-col cols="3">
               <v-text-field
                   v-model="search.infScore"
-                  placeholder="Score minimum"
+                  placeholder="Minimum score"
                   dense outlined/>
             </v-col>
             <v-col cols="3">
               <v-text-field
                   v-model="search.supScore"
-                  placeholder="Score maximum"
+                  placeholder="Maximum score"
                   dense
                   outlined/>
             </v-col>
           </v-row>
           <v-container class="d-flex justify-content-end">
             <v-btn color="primary" x-large @click.prevent="searchTest">
-              Rechercher
+              Search
             </v-btn>
           </v-container>
         </v-container>
@@ -104,6 +108,9 @@
                 shaped>
               <v-container class="text-center text-h6">
                 {{ data?.user?.name }}
+                <v-icon color="green" v-if="data.decision === 'approved'">mdi-check-decagram</v-icon>
+                <v-icon color="yellow" v-if="data.decision === 'waiting'">mdi-timer-sand</v-icon>
+                <v-icon color="red" v-if="data.decision === 'rejected'">mdi-close-circle</v-icon>
               </v-container>
               <v-card-text>
                 <v-row>
@@ -150,15 +157,15 @@
                 <v-btn
                     color="green"
                     text
-                >
-                  Décision
+                    @click="addDecision(data?.id)">
+                  Decision
                 </v-btn>
                 <v-btn
                     color="red"
                     text
                     @click="moreInfo(data)"
                 >
-                  Plus de détails
+                  More details
                 </v-btn>
               </v-card-actions>
             </v-card>
@@ -181,11 +188,13 @@
 
 <script>
 import DialogDetails from "@/app/shared/components/DialogDetails";
+import AddDecision from "@/app/shared/components/forms/AddDecision";
 
 export default {
   name: "DataTable",
   components: {
-    DialogDetails
+    DialogDetails,
+    AddDecision
   },
   watch: {
     date() {
@@ -244,8 +253,17 @@ export default {
       },
       itemsPerPage: 6,
       openDialog: false,
-      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
-      dateFormatted: this.formatDate((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)),
+      openDecisionDialog: {
+        value: false,
+        id: '',
+      },
+      decisionList: [
+        {name: 'Waiting', value: 'waiting'},
+        {name: 'Rejected', value: 'rejected'},
+        {name: 'Approved', value: 'approved'},
+      ],
+      date: null,
+      dateFormatted: null,
       menu1: false,
       data: null,
     }
@@ -255,7 +273,7 @@ export default {
       this.data = data;
       this.openDialog = true;
     },
-    searchTest(){
+    searchTest() {
       this.$store.dispatch('recipient/fetchOrSearchRecipient', {
         page: this.page,
         size: this.itemsPerPage,
@@ -263,9 +281,12 @@ export default {
       })
 
     },
+    addDecision(id) {
+      this.openDecisionDialog.value = true
+      this.openDecisionDialog.id = id
+    },
     formatDate(date) {
       if (!date) return null
-
       const [year, month, day] = date.split('-')
       return `${day}/${month}/${year}`
     },

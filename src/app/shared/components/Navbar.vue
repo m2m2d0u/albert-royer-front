@@ -14,10 +14,10 @@
           <router-link to="/" class="nav-item nav-link" exact-active-class="active">Home</router-link>
           <router-link to="/about" class="nav-item nav-link" exact-active-class="active">About us</router-link>
           <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
-          <router-link v-if="info?.role === 'Admin'" to="/admin" class="nav-item nav-link" active-class="active">
+          <router-link v-if="info?.role === 'Admin'" to="/pages/admin" class="nav-item nav-link" active-class="active">
             Administration
           </router-link>
-          <router-link to="/connexion" class="nav-item nav-link" active-class="active" v-if="!loggedIn">
+          <router-link to="/pages/connexion" class="nav-item nav-link" active-class="active" v-if="!loggedIn">
             Login
           </router-link>
           <router-link to="#" @click.native="logout" class="nav-item nav-link" active-class="active" v-else>
