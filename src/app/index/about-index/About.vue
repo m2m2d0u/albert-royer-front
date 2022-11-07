@@ -4,22 +4,26 @@
       <div class="row g-5">
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
           <div class="d-flex flex-column">
-            <img class="img-fluid rounded w-75 align-self-end" src="../../../assets/img/about-1.jpg" alt="">
-            <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" src="../../../assets/img/about-2.jpg" alt=""
+            <img class="img-fluid rounded w-100 align-self-end" :src="require('../../../assets/img/dp1.jpg')" alt="">
+            <img class="img-fluid rounded w-50 bg-white pt-3 pe-3" :src="require('../../../assets/img/dp2.jpg')" alt=""
                  style="margin-top: -25%;">
           </div>
         </div>
         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
           <p class="d-inline-block border rounded-pill py-1 px-4">About Us</p>
-          <h1 class="mb-4">Why You Should Trust Us? Get Know About Us!</h1>
-          <p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum
-            et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-          <p class="mb-4">Stet no et lorem dolor et diam, amet duo ut dolore vero eos. No stet est diam rebum amet diam
-            ipsum. Clita clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor eos.</p>
-          <p><i class="far fa-check-circle text-primary me-3"></i>Quality health care</p>
-          <p><i class="far fa-check-circle text-primary me-3"></i>Only Qualified Doctors</p>
-          <p><i class="far fa-check-circle text-primary me-3"></i>Medical Research Professionals</p>
-          <a class="btn dp-color rounded-pill py-3 px-5 mt-3" href="">Read More</a>
+          <h1 class="mb-4">Who are we? Get Know About Us!</h1>
+          <p>DP World is a major player in global trade and an integral part of the supply chain. It operates in the
+            areas of marine terminals, maritime services, logistics and ancillary services to technology-driven trade
+            solutions. It has a portfolio of 78 operational marine and inland terminals supported by more than 50
+            related companies in over 40 countries worldwide.</p>
+          <p><em class="far fa-check-circle text-primary me-3"/>Marine terminals</p>
+          <p><em class="far fa-check-circle text-primary me-3"/>Maritime services</p>
+          <p><em class="far fa-check-circle text-primary me-3"/>Logistics </p>
+          <p>
+            <em class="far fa-check-circle text-primary me-3"/>
+            Ancillary services to technology-driven trade solutions
+          </p>
+          <a class="btn dp-color rounded-pill py-3 px-5 mt-3" href="https://www.dpworld.com/">Read more</a>
         </div>
       </div>
     </div>

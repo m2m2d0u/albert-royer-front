@@ -2,57 +2,50 @@
   <v-container>
     <ul>
       <v-container class="text-h3 text-md-h4">
-        {{ data.text }}
+        {{ values.text }}
+      </v-container>
+      <v-container class="d-flex justify-content-center">
+        <v-card width="600">
+          <span class="text-h2 text-md-h2 text-h4 text-center" v-for="(sample, index) in values.data[0].sample" :key="index"
+                :style="{color: sample.value.color}">
+            {{ sample.value.text }}
+          </span>
+        </v-card>
       </v-container>
       <v-container>
-        <li v-for="(quiz, indexQuiz) in data.values" :key="indexQuiz" class="mt-10">
-          <v-row class="mb-6" no-gutters>
-            <h2>Question {{ indexQuiz + 1 }}</h2>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-container class="text-h2 text-md-h2 text-h4 text-center mt-3 mb-3"
-                           :style="{color: quiz.question.color}">
-                {{ quiz.question.text }}
-              </v-container>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col v-for="n in data.values[0].response.length" :key="n">
-              <v-card
-                  class="pa-2 text-center d-flex justify-center align-center text-xl-h6 text-sm-caption font-weight-regular"
-                  height="80">
-                <button class="flex" style="height: 100%;"
-                        :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
-                        @click="chooseResponse(n, indexQuiz)">
-                  {{ quiz.response[n - 1].title }}
-                </button>
-              </v-card>
-            </v-col>
-          </v-row>
-        </li>
+        <choose-response-component :questions="values.data[0].question" :index="index" :type="values.data[0].type"/>
       </v-container>
     </ul>
   </v-container>
 </template>
 
 <script>
+import ChooseResponseComponent from "@/app/quiz/components/shared/ChooseResponseComponent";
+
 export default {
   name: "QuizImageColor",
+  components: {ChooseResponseComponent},
   props: {
     data: Object
   },
+  watch: {
+    data: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        this.values = val;
+      }
+    }
+  },
+  data: () => {
+    return {
+      values: {}
+    }
+  },
   methods: {
-    chooseResponse(n, index) {
-      const originalIndex = n - 1;
-      if (this.data.values[index].type === 'one') {
-        this.data.values[index].response.forEach((quiz) => quiz.value = false)
-        this.data.values[index].response[originalIndex].value = true;
-      }
-      if (this.data.values[index].type === 'multiple') {
-        this.data.values[index].response[originalIndex].value = !this.data.values[index].response[originalIndex].value;
-      }
-    },
+    updateData(data, index) {
+      this.values[index].response = data
+    }
   }
 }
 </script>

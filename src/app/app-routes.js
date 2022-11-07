@@ -2,55 +2,78 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import IndexPage from './index/index'
 import ServicePage from './services/services'
-import Subtest1 from "@/app/quiz/pages/Subtest1";
-import Subtest2 from "@/app/quiz/pages/Subtest2";
-import Subtest3 from "@/app/quiz/pages/Subtest3";
-import Subtest4 from "@/app/quiz/pages/Subtest4";
+import Connexion from "@/app/shared/pages/Connexion";
+import Subtest from "@/app/quiz/pages/Subtest";
+import Administration from "@/app/shared/pages/Administration";
+import ConfirmEmail from "@/app/shared/pages/ConfirmEmail";
+import Report from "@/app/quiz/pages/Report";
+import Contact from "@/app/shared/pages/Contact";
 
 Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/pages',
+        component: () => import("@/views/Index"),
+        children: [
+            {
+                path: 'connexion',
+                name: 'Connexion',
+                component: Connexion
+            },
+            {
+                path: 'admin',
+                name: 'Administration',
+                component: Administration
+            },
+            {
+                path: 'report/:search',
+                name: 'Report',
+                component: Report
+            },
+            {
+                path: 'confirm-email/:email/:token',
+                name: 'ConfirmEmail',
+                component: ConfirmEmail
+            }
+        ]
+    },
+    {
         path: '/',
-        name: 'Home',
-        component: IndexPage
-    },
-    {
-        path: '/services',
-        name: 'Services',
-        component: ServicePage
-    },
-    {
-        path: '/quiz/subtest1',
-        name: 'Quiz1',
-        component: Subtest1
-    },
-    {
-        path: '/quiz/subtest2',
-        name: 'Quiz2',
-        component: Subtest2
-    },
-    {
-        path: '/quiz/subtest3',
-        name: 'Quiz3',
-        component: Subtest3
-    },
-    {
-        path: '/quiz/subtest4',
-        name: 'Quiz4',
-        component: Subtest4
+        component: () => import("@/views/Page"),
+        children: [
+            {
+                path: '',
+                name: 'Home',
+                component: IndexPage
+            },
+            {
+                path: 'services',
+                name: 'Services',
+                component: ServicePage
+            },
+            {
+                path: 'contact',
+                name: 'contact',
+                component: Contact
+            },
+            {
+                path: 'quiz/:id',
+                name: 'Quiz',
+                component: Subtest
+            },
+        ]
     }
-    /*  {
-        path: '/about',
-        name: 'About',
-        component: () => import(/!* webpackChunkName: "about" *!/ '../views/About.vue')
-    }*/
+
 ]
 
 const router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
-    routes
+    routes,
+    scrollBehavior() {
+        return {x: 0, y: 0};
+    }
 })
 
 export default router;

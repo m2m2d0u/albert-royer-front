@@ -3,20 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve:dev": "vue-cli-service serve --mode dev",
+    "build:prod": "vue-cli-service build --mode prod",
+    "build:dev": "vue-cli-service build --mode dev",
+    "build:stag": "vue-cli-service build --mode stag",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@mdi/font": "^6.7.96",
+    "@chenfengyuan/vue-countdown": "1.1.5",
+    "@mdi/font": "^7.0.96",
+    "@vue/composition-api": "^1.7.1",
+    "apexcharts": "^3.36.0",
+    "axios": "^0.27.2",
     "core-js": "^3.6.5",
+    "node-sass": "^7.0.3",
+    "timers": "^0.1.1",
     "v-img": "^0.2.0",
+    "vee-validate": "2.0.9",
     "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.2",
+    "vue-easy-notify": "^1.1.3",
     "vue-gallery": "^2.0.1",
+    "vue-jwt-decode": "^0.1.0",
     "vue-material": "^1.0.0-beta-15",
     "vue-router": "^3.2.0",
     "vue-slider-component": "^3.2.18",
-    "vuetify": "^2.6.0"
+    "vuetify": "^2.6.0",
+    "vuex": "3.6.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.15",
@@ -27,7 +41,7 @@
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "~1.32.0",
-    "sass-loader": "^10.0.0",
+    "sass-loader": "^10",
     "vue-cli-plugin-vuetify": "~2.5.0",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"

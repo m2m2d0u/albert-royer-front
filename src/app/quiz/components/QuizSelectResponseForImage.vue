@@ -1,58 +1,60 @@
 <template>
   <div>
     <ul>
-      <li v-for="(quiz, indexQuiz) in data" :key="indexQuiz" class="mt-10">
+      <li v-for="(quiz, indexQuiz) in values" :key="indexQuiz" class="mt-10">
         <v-row class="mb-6 text-md-h5 text-xl-h5 text-sm-caption" no-gutters>
-          <h2>Question {{ indexQuiz + 1 }}</h2>
+          <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold">Question {{ indexQuiz + 1 }}</span>
         </v-row>
         <v-row>
           <v-col v-for="n in 1" :key="n">
-            <div class="text-md-h6 text-xl-h6 text-sm-caption">
-              {{ quiz.text }}
-            </div>
-            <div class="image-content" v-show="quiz.images">
+            <!--
+                        <div class="text-md-h6 text-xl-h6 text-sm-caption">
+                          {{ quiz.name }}
+                        </div>
+            -->
+            <div class="image-content" v-show="quiz.image">
               <img
                   v-img
-                  :src="quiz.images"
+                  :src="require('../../../assets/img/emotional/'+quiz.image)"
                   class="image"
-                  :style="{ backgroundImage: 'url(' + quiz.images + ')', width: '700px', height: '40vh' }"/>
+                  alt=""
+                  :style="{ backgroundImage: 'url(' + require('../../../assets/img/emotional/'+quiz.image) + ')', width: '700px', height: '40vh' }"/>
             </div>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col v-for="n in data[0].response.length" :key="n" cols="3" md="3" sm="6">
-            <v-card
-                class="pa-2 text-center d-flex justify-center align-center text-xl-h6 text-sm-caption font-weight-regular"
-                height="80">
-              <button class="flex" style="height: 100%;"
-                      :style="quiz.response[n-1].value? {'background-color': '#78deaf'}:''"
-                      @click="chooseResponse(n, indexQuiz)">
-                {{ quiz.response[n - 1].title }}
-              </button>
-            </v-card>
-          </v-col>
-        </v-row>
+        <choose-response-component :questions="quiz.question" :index="indexQuiz" :type="quiz.type"
+                                   @updateData="updateData"/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import ChooseResponseComponent from "@/app/quiz/components/shared/ChooseResponseComponent";
+
 export default {
   name: "QuizSelectResponseForImage",
+  components: {ChooseResponseComponent},
   props: {
     data: Array,
   },
+  watch: {
+    data: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        this.values = val.data
+      }
+    }
+  },
+  data: () => {
+    return {
+      values: []
+    }
+  },
   methods: {
-    chooseResponse(n, index) {
-      const originalIndex = n - 1;
-      if (this.data[index].type === 'one') {
-        this.data[index].response.forEach((quiz) => quiz.value = false)
-        this.data[index].response[originalIndex].value = true;
-      }
-      if (this.data[index].type === 'multiple') {
-        this.data[index].response[originalIndex].value = !this.data[index].response[originalIndex].value;
-      }
+    updateData(data, index) {
+      this.values[index].question = data
     },
   }
 }
