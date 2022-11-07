@@ -10,7 +10,7 @@
           indeterminate/>
     </div>
     <v-container v-else>
-      <v-card elevation="4">
+      <v-card elevation="4" style="margin-top: 50px">
         <v-container>
           <v-container class="text-center mb-3 mt-3">
             <span class="text-h4">Search</span>
@@ -36,17 +36,18 @@
               ></v-select>
             </v-col>
             <v-col cols="3">
-              <v-select
-                  :items="tests"
-                  label="Filter by test"
-                  outlined
-                  v-model="search.subtest"
-                  class="shrink"
-                  item-text="name"
-                  item-value="id"
-                  dense
-              ></v-select>
+              <v-text-field
+                  v-model="search.infScore"
+                  placeholder="Minimum score"
+                  dense outlined/>
             </v-col>
+            <v-col cols="3">
+              <v-text-field
+                  v-model="search.supScore"
+                  placeholder="Maximum score"
+                  dense
+                  outlined/>
+            </v-col><!--
             <v-col cols="3">
               <v-menu
                   ref="menu1"
@@ -77,20 +78,20 @@
                 ></v-date-picker>
               </v-menu>
             </v-col>
+-->
           </v-row>
           <v-row>
             <v-col cols="3">
-              <v-text-field
-                  v-model="search.infScore"
-                  placeholder="Minimum score"
-                  dense outlined/>
-            </v-col>
-            <v-col cols="3">
-              <v-text-field
-                  v-model="search.supScore"
-                  placeholder="Maximum score"
+              <v-select
+                  :items="tests"
+                  label="Filter by test"
+                  outlined
+                  v-model="search.subtest"
+                  class="shrink"
+                  item-text="name"
+                  item-value="id"
                   dense
-                  outlined/>
+              />
             </v-col>
           </v-row>
           <v-container class="d-flex justify-content-end">
@@ -102,7 +103,7 @@
       </v-card>
       <v-container class="mt-10">
         <v-row>
-          <v-col cols="12" sm="12" md="6" lg="4" xl="3" v-for="(data, index) in recipients?.data" :key="index">
+          <v-col cols="12" sm="12" md="6" lg="4" xl="4" v-for="(data, index) in recipients?.data" :key="index">
             <v-card
                 elevation="6"
                 shaped>
@@ -116,17 +117,21 @@
                 <v-row>
                   <v-col cols="6">
                     <v-card elevation="2" rounded>
-                      <v-container class="d-flex gap-3">
-                        <v-icon color="green">mdi-checkbox-marked-circle-outline</v-icon>
-                        <span class="text-caption text-md-body-2 font-weight-light">TBIEN</span>
+                      <v-container class="d-flex align-items-center justify-content-center gap-3">
+                        <span class="text-caption text-md-h6 font-weight-bold font-weight-light">SVO</span>
+                        <span class="text-caption text-md-body-2 font-weight-light">
+                          ({{ data.result?.firstQuiz?.decision }})
+                        </span>
                       </v-container>
                     </v-card>
                   </v-col>
                   <v-col cols="6">
                     <v-card elevation="2">
-                      <v-container class="d-flex gap-3">
-                        <v-icon color="yellow">mdi-alert-circle-outline</v-icon>
-                        <span class="text-caption font-weight-light">ABIEN</span>
+                      <v-container class="d-flex align-items-center justify-content-center gap-3">
+                        <span class="text-caption text-md-h6 font-weight-bold font-weight-light">RME</span>
+                        <span class="text-caption text-md-body-2 font-weight-light">
+                          ({{ data.result?.secondQuiz?.decision }})
+                        </span>
                       </v-container>
                     </v-card>
                   </v-col>
@@ -134,24 +139,30 @@
                 <v-row>
                   <v-col cols="6">
                     <v-card elevation="2">
-                      <v-container class="d-flex gap-3">
-                        <v-icon color="green">mdi-checkbox-marked-circle-outline</v-icon>
-                        <span class="text-caption font-weight-light">TBIEN</span>
+                      <v-container class="d-flex align-items-center justify-content-center gap-3">
+                        <span class="text-caption text-md-h6 font-weight-bold font-weight-light">Raven Dies</span>
+                        <span v-if="data.result?.fourthQuiz" class="text-caption text-md-body-2 font-weight-light">
+                          ({{ data.result?.thirdQuiz?.decision }})
+                        </span>
+                        <span class="text-caption text-md-body-2 font-weight-light" v-else>(Not)</span>
                       </v-container>
                     </v-card>
                   </v-col>
                   <v-col cols="6">
                     <v-card elevation="2">
-                      <v-container class="d-flex gap-3">
-                        <v-icon color="red">mdi-close-outline</v-icon>
-                        <span class="text-caption font-weight-light">PASSABLE</span>
+                      <v-container class="d-flex align-items-center justify-content-center gap-3">
+                        <span class="text-caption text-md-h6 font-weight-bold font-weight-light">Stroop</span>
+                        <span v-if="data.result?.fourthQuiz" class="text-caption text-md-body-2 font-weight-light">
+                          ({{ data.result?.fourthQuiz?.decision }})
+                        </span>
+                        <span class="text-caption text-md-body-2 font-weight-light" v-else>(Not)</span>
                       </v-container>
                     </v-card>
                   </v-col>
                 </v-row>
               </v-card-text>
-              <v-card-subtitle class="pb-0">
-                <span class="font-weight-light text-sm-body-1">Conseil:</span>
+              <v-card-subtitle class="mt-1 mb-1">
+                <v-btn x-small color="primary" @click="downloadReport(data)">Download report</v-btn>
               </v-card-subtitle>
               <v-card-actions class="d-flex justify-content-between">
                 <v-btn
@@ -189,6 +200,7 @@
 <script>
 import DialogDetails from "@/app/shared/components/DialogDetails";
 import AddDecision from "@/app/shared/components/forms/AddDecision";
+import {mapGetters} from "vuex";
 
 export default {
   name: "DataTable",
@@ -213,6 +225,9 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      getTestById: "quiz/getSubTestById"
+    }),
     recipients() {
       return this.$store.state.recipient.recipients
     },
@@ -279,6 +294,61 @@ export default {
         size: this.itemsPerPage,
         search: this.search
       })
+
+    },
+    downloadReport(data) {
+      const nameUser = data?.user?.name;
+      const phoneUser = data?.user?.phone;
+      const emailUser = data?.user?.email;
+      // console.log(data)
+      const test = this.getTestById(data?.subtest?._id);
+      // console.log(test)
+      const nameTest = test.name;
+      const subtest1 = test.quiz.find(v => v.name === 'subtest 1');
+      const subtest2 = test.quiz.find(v => v.name === 'subtest 2');
+      // const subtest3 = test.quiz.find(v => v.name === 'subtest 3');
+      // const subtest4 = test.quiz.find(v => v.name === 'subtest 4');
+
+      const numberQuestionForSubtest1 = subtest1.numberOfQuestions
+      const numberQuestionForSubtest2 = subtest2.numberOfQuestions
+      const numberQuestionForSubtest3 = 3
+      const numberQuestionForSubtest4 = 1
+
+      const resultFirstQuiz = {
+        score: data?.result?.firstQuiz?.score,
+        decision: data?.result?.firstQuiz?.decision
+      }
+      const resultSecondQuiz = {
+        score: data?.result?.secondQuiz?.score,
+        decision: data?.result?.secondQuiz?.decision
+      }
+      const resultThirdQuiz = {
+        score: data?.result?.thirdQuiz?.score,
+        decision: data?.result?.thirdQuiz?.decision
+      }
+      const resultFourthQuiz = {
+        score: data?.result?.fourthQuiz?.score,
+        decision: data?.result?.fourthQuiz?.decision
+      }
+
+      const jsonToSend = {
+        nameUser,
+        phoneUser,
+        emailUser,
+        nameTest,
+        numberQuestionForSubtest1,
+        numberQuestionForSubtest2,
+        numberQuestionForSubtest3,
+        numberQuestionForSubtest4,
+        resultFirstQuiz,
+        resultSecondQuiz,
+        resultThirdQuiz,
+        resultFourthQuiz,
+      }
+
+      this.$store.dispatch('quiz/downloadPdf', jsonToSend);
+
+      // console.log(jsonToSend)
 
     },
     addDecision(id) {

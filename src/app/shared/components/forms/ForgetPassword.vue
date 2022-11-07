@@ -1,24 +1,25 @@
 <template>
   <v-container>
     <div class="form signup">
-      <span class="title">Mot de passe oublié</span>
+      <span class="title">Reset your password</span>
       <form action="#">
         <div class="input-field">
           <v-text-field
               prepend-icon="mdi-account"
               type="text"
               :rules="rules.username"
-              placeholder="Téléphone ou mail"
+              placeholder="Phone number or email"
               v-model="username"/>
         </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click="resetPassword" :disabled="isActive">Soumettre
+          <v-btn class="button-confirm" large color="#4070f4" @click="resetPassword" :disabled="isActive">
+            Submit
           </v-btn>
         </div>
       </form>
       <div class="login-signup">
-          <span class="text">Vous êtes déjà membre?
-              <a href="#" class="text login-link" @click.prevent="toLogin">Se connecter</a>
+          <span class="text">Your have an account?
+              <a href="#" class="text login-link" @click.prevent="toLogin">Sign In</a>
           </span>
       </div>
     </div>
@@ -54,7 +55,13 @@ export default {
             this.isActive = false
           })
           .catch(error => {
-            this.$notifyError(error);
+            if (error instanceof Array) {
+              error.map(v => {
+                this.$notifyError(v);
+              })
+            } else {
+              this.$notifyError(error);
+            }
             this.isActive = false
           })
     }

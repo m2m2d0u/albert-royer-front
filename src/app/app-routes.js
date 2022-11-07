@@ -7,6 +7,7 @@ import Subtest from "@/app/quiz/pages/Subtest";
 import Administration from "@/app/shared/pages/Administration";
 import ConfirmEmail from "@/app/shared/pages/ConfirmEmail";
 import Report from "@/app/quiz/pages/Report";
+import Contact from "@/app/shared/pages/Contact";
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,7 @@ const routes = [
                 component: Administration
             },
             {
-                path: 'report',
+                path: 'report/:search',
                 name: 'Report',
                 component: Report
             },
@@ -50,6 +51,11 @@ const routes = [
                 path: 'services',
                 name: 'Services',
                 component: ServicePage
+            },
+            {
+                path: 'contact',
+                name: 'contact',
+                component: Contact
             },
             {
                 path: 'quiz/:id',

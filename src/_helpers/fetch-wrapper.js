@@ -20,6 +20,8 @@ export const submitResponse = async (data) => HTTP.post('/recipient/test', data)
 
 export const fetchSubTestById = async (id) => HTTP.get(`/subtest/${id}/by-id`)
 
+export const downloadPdf = async (data) => HTTP.get(`/subtest/pdf/download/${data}`)
+
 export const login = async (data) => HTTP.post(`/auth/login`, data)
 
 export const fetchOrSearchRecipient = async (data) => HTTP.get(`recipient/test?${data}`)

@@ -2,7 +2,7 @@
 <template>
   <v-container>
     <div class="form login">
-      <span class="title">Page de connexion</span>
+      <span class="title">Sign In</span>
       <v-form
           ref="form"
           lazy-validation>
@@ -11,7 +11,7 @@
               prepend-icon="mdi-account"
               type="text"
               :rules="rules.username"
-              placeholder="Téléphone ou mail"
+              placeholder="Phone number or email"
               v-model="username"></v-text-field>
         </div>
         <div class="input-field">
@@ -19,21 +19,21 @@
               prepend-icon="mdi-key-variant"
               type="password"
               :rules="rules.password"
-              placeholder="Mot de passe"
+              placeholder="Password"
               v-model="password"></v-text-field>
         </div>
 
         <div class="checkbox-text">
-          <a href="#" class="text" @click.prevent="forgetPassword">Mot de passe oublié?</a>
+          <a href="#" class="text" @click.prevent="forgetPassword">Forgot your password?</a>
         </div>
 
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click.prevent="login">Se connecter</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click.prevent="login">Sign in</v-btn>
         </div>
       </v-form>
       <div class="login-signup">
-            <span class="text">Vous n'êtes pas membre?
-                <a href="#" class="text signup-link" @click.prevent="toRegister">Créer un compte</a>
+            <span class="text">You are not a member?
+                <a href="#" class="text signup-link" @click.prevent="toRegister">Create an account</a>
             </span>
       </div>
     </div>
@@ -72,7 +72,13 @@ export default {
           this.$notifyInfo("Vous êtes maintenant connecté");
           await this.$router.push('/')
         }).catch(error => {
-          this.$notifyError(error);
+          if (error instanceof Array) {
+            error.map(v => {
+              this.$notifyError(v);
+            })
+          } else {
+            this.$notifyError(error);
+          }
         })
       }
     }

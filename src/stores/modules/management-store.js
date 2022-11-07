@@ -1,4 +1,4 @@
-import {fetchAllSubTest, fetchSubTestById, submitResponse} from "@/_helpers/fetch-wrapper";
+import {downloadPdf, fetchAllSubTest, fetchSubTestById, submitResponse} from "@/_helpers/fetch-wrapper";
 
 export const SET_ALL_TEST = 'SET_ALL_TEST'
 export const SET_ONE_TEST = 'SET_ONE_TEST'
@@ -47,6 +47,17 @@ const actions = {
         commit(SET_LOADING, true)
         commit(SET_ONE_TEST, await fetchSubTestById(payload));
         commit(SET_LOADING, false)
+    },
+    // eslint-disable-next-line no-unused-vars
+    async downloadPdf({commit}, payload) {
+        await downloadPdf(JSON.stringify(payload)).then((data) => {
+            const linkSource = `data:application/pdf;base64,${data}`;
+            const downloadLink = document.createElement("a");
+            const fileName = "report.pdf";
+            downloadLink.href = linkSource;
+            downloadLink.download = fileName;
+            downloadLink.click();
+        })
     },
 }
 export default {

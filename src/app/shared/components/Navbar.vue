@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0 px-3" style="min-width: 650px">
           <router-link to="/" class="nav-item nav-link" exact-active-class="active">Home</router-link>
-          <router-link to="/about" class="nav-item nav-link" exact-active-class="active">About us</router-link>
+          <router-link to="/contact" class="nav-item nav-link" exact-active-class="active">Contact</router-link>
           <router-link to="/services" class="nav-item nav-link" active-class="active">Services</router-link>
           <router-link v-if="info?.role === 'Admin'" to="/pages/admin" class="nav-item nav-link" active-class="active">
             Administration

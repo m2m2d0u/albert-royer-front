@@ -40,9 +40,9 @@ export default {
       mini: false,
       drawer: true,
       items: [
-        {title: 'Tableau de bord', icon: 'mdi-view-dashboard', name: 'dashboard'},
-        {title: 'Liste des tests', icon: 'mdi-test-tube', name: 'listTests'},
-        {title: 'Liste des utilisateurs', icon: 'mdi-account-box-outline', name: 'listUsers'},
+        // {title: 'Dashboard', icon: 'mdi-view-dashboard', name: 'dashboard'},
+        {title: 'List of tests', icon: 'mdi-test-tube', name: 'listTests'},
+        {title: 'List of users', icon: 'mdi-account-box-outline', name: 'listUsers'},
       ]
     }
   },

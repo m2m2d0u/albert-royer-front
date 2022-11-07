@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div class="form signup">
-      <span class="title">Création de compte</span>
+      <span class="title">Create account</span>
       <v-form
           ref="form"
           lazy-validation>
@@ -10,7 +10,7 @@
               prepend-icon="mdi-account"
               type="text"
               :rules="rules.name"
-              placeholder="Entrer votre nom complet"
+              placeholder="Firstname and Lastname"
               v-model="name"></v-text-field>
         </div>
         <div class="input-field">
@@ -18,7 +18,7 @@
               prepend-icon="mdi-phone"
               type="text"
               :rules="rules.phone"
-              placeholder="Entrer votre numéro de téléphone"
+              placeholder="Phone number"
               v-model="phone"></v-text-field>
         </div>
         <div class="input-field">
@@ -26,7 +26,7 @@
               prepend-icon="mdi-email"
               type="text"
               :rules="rules.email"
-              placeholder="Entrer votre email"
+              placeholder="Email"
               v-model="email"></v-text-field>
         </div>
         <div class="input-field">
@@ -34,7 +34,7 @@
               prepend-icon="mdi-key-variant"
               type="password"
               :rules="rules.password"
-              placeholder="Mot de passe"
+              placeholder="Password"
               v-model="password"></v-text-field>
         </div>
         <div class="input-field">
@@ -42,7 +42,7 @@
               prepend-icon="mdi-key-variant"
               :rules="rules.confirmPassword"
               type="password"
-              placeholder="Confirmer votre mot de passe"
+              placeholder="Confirm your password"
               v-model="confirmPassword"></v-text-field>
         </div>
         <div class="input-field mt-12">
@@ -51,19 +51,19 @@
               prepend-icon="mdi-test-tube"
               :items="tests"
               :rules="rules.subTestId"
-              label="Choisir un test"
+              label="Choice a test"
               item-text="name"
               item-value="id"
               dense
           ></v-select>
         </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount">Créer un compte</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount">Sign up</v-btn>
         </div>
       </v-form>
       <div class="login-signup">
-          <span class="text">Vous êtes déjà membre?
-              <a href="#" class="text login-link" @click.prevent="toLogin">Se connecter</a>
+          <span class="text">You have an account?
+              <a href="#" class="text login-link" @click.prevent="toLogin">Sign in</a>
           </span>
       </div>
     </div>
@@ -84,23 +84,23 @@ export default {
       role: 'Basic',
       confirmPassword: null,
       rules: {
-        name: [v => !!v || 'Le nom est obligatoire.'],
+        name: [v => !!v || 'The name id required.'],
         email: [
-          v => !!v || "L'email est obligatoire.",
-          v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "L'email n'est pas valide."
+          v => !!v || "The email is required.",
+          v => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || "The email is not valid."
         ],
-        phone: [v => !!v || 'Le numéro de téléphone est obligatoire.',
-          v => Number.isInteger(Number(v)) || 'Le numéro doit être un nombre'
+        phone: [v => !!v || 'The phone number is required.',
+          v => Number.isInteger(Number(v)) || 'The number must be a number'
         ],
         password: [
-          (v) => !!v || 'Le mot de passe est obligatoire.',
-          (v) => (v && v.length >= 6) || 'Minimum 6 charactères',
+          (v) => !!v || 'The password is required.',
+          (v) => (v && v.length >= 6) || 'Minimum 6 characters',
         ],
         confirmPassword: [
-          (v) => !!v || 'La confirmation du mot de passe est obligatoire',
-          (v) => v === this.password || 'Les mots de passes ne correspondent pas.',
+          (v) => !!v || 'The password confirm is required',
+          (v) => v === this.password || 'Passwords does not match.',
         ],
-        subTestId: [v => !!v || "Le choix d'un test est obligatoire."],
+        subTestId: [v => !!v || "The test is required."],
       }
     }
   },
@@ -127,10 +127,16 @@ export default {
           await this.$store.dispatch('utilities/setLoading', true)
           await new Promise(resolve => setTimeout(resolve, 1000));
           await this.$store.dispatch('utilities/setLoading', false)
-          this.$notifyInfo("L'utilisateur a été bien crée");
+          this.$notifyInfo("The user is successfully create and a mail is sent to your email.");
           this.$emit('changeLevel', 'login');
         }).catch((error) => {
-          this.$notifyError(error);
+          if (error instanceof Array) {
+            error.map(v => {
+              this.$notifyError(v);
+            })
+          } else {
+            this.$notifyError(error);
+          }
         })
       }
     }

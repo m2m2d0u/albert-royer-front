@@ -7,7 +7,7 @@
     >
       <v-card>
         <v-card-title class="d-flex justify-content-center">
-          <h3>Modification de l'utilisateur</h3>
+          <h3>Update user</h3>
         </v-card-title>
         <v-card-text>
           <v-container>
@@ -113,7 +113,13 @@ export default {
         this.$notifySuccess("User modified.");
       }).catch((error) => {
         this.$store.state.user.isLoading = false
-        this.$notifyError(error);
+        if (error instanceof Array) {
+          error.map(v => {
+            this.$notifyError(v);
+          })
+        } else {
+          this.$notifyError(error);
+        }
       })
     }
   }
