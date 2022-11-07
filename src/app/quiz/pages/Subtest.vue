@@ -157,6 +157,7 @@ export default {
           user: this.$store.state.auth.info.id,
           subtest: this.$store.state.auth.info.test
         })
+        this.$router.push('/')
       }
       this.scrollToTop();
       if (index) {
