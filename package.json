@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "serve:dev": "vue-cli-service serve --mode dev",
+    "serve:stag": "vue-cli-service serve --mode stag",
     "build:prod": "vue-cli-service build --mode prod",
     "build:dev": "vue-cli-service build --mode dev",
     "build:stag": "vue-cli-service build --mode stag",

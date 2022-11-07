@@ -38,7 +38,7 @@ export default {
       username: null,
       isActive: false,
       rules: {
-        username: [v => !!v || "Le nom d'utilisateur est obligatoire."]
+        username: [v => !!v || "The username is required."]
       }
     }
   },

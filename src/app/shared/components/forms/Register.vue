@@ -58,7 +58,7 @@
           ></v-select>
         </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount">Sign up</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount" :disabled="isClicked">Sign up</v-btn>
         </div>
       </v-form>
       <div class="login-signup">
@@ -82,6 +82,7 @@ export default {
       password: null,
       subTestId: null,
       role: 'Basic',
+      isClicked: false,
       confirmPassword: null,
       rules: {
         name: [v => !!v || 'The name id required.'],
@@ -116,6 +117,7 @@ export default {
     async createAccount() {
 
       if (this.$refs.form.validate()) {
+        this.isClicked = true;
         this.$store.dispatch('auth/createUser', {
           name: this.name,
           email: this.email,
@@ -124,12 +126,14 @@ export default {
           subTestId: this.subTestId,
           role: this.role,
         }).then(async () => {
+          this.isClicked = false;
           await this.$store.dispatch('utilities/setLoading', true)
           await new Promise(resolve => setTimeout(resolve, 1000));
           await this.$store.dispatch('utilities/setLoading', false)
           this.$notifyInfo("The user is successfully create and a mail is sent to your email.");
           this.$emit('changeLevel', 'login');
         }).catch((error) => {
+          this.isClicked = false;
           if (error instanceof Array) {
             error.map(v => {
               this.$notifyError(v);

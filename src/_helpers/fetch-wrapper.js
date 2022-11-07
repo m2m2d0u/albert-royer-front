@@ -2,6 +2,8 @@ import {HTTP} from "@/_helpers/axios";
 
 export const fetchAllSubTest = async () => HTTP.get('/subtest')
 
+export const checkIfRecipientHasTest = async (id) => HTTP.get(`/recipient/test/${id}/haveTest`)
+
 export const createdUser = async (data) => HTTP.post('/user', data)
 
 export const getUsers = async (data) => HTTP.get(`/user?${data}`)

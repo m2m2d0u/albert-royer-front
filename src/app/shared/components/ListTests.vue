@@ -162,7 +162,7 @@
                 </v-row>
               </v-card-text>
               <v-card-subtitle class="mt-1 mb-1">
-                <v-btn x-small color="primary" @click="downloadReport(data)">Download report</v-btn>
+                <v-btn x-small color="primary" @click="downloadReport(data)" :disabled="isClicked">Download report</v-btn>
               </v-card-subtitle>
               <v-card-actions class="d-flex justify-content-between">
                 <v-btn
@@ -259,6 +259,7 @@ export default {
   data() {
     return {
       page: 1,
+      isClicked: false,
       search: {
         name: '',
         infScore: '',
@@ -297,6 +298,7 @@ export default {
 
     },
     downloadReport(data) {
+      this.isClicked = true;
       const nameUser = data?.user?.name;
       const phoneUser = data?.user?.phone;
       const emailUser = data?.user?.email;
@@ -346,7 +348,13 @@ export default {
         resultFourthQuiz,
       }
 
-      this.$store.dispatch('quiz/downloadPdf', jsonToSend);
+      this.$store.dispatch('quiz/downloadPdf', jsonToSend)
+          .then(()=>{
+            this.isClicked = false
+          })
+          .catch(error=>{
+            this.$notifyError(error)
+          });
 
       // console.log(jsonToSend)
 

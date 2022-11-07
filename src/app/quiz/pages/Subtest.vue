@@ -156,8 +156,15 @@ export default {
           },
           user: this.$store.state.auth.info.id,
           subtest: this.$store.state.auth.info.test
+        }).then(async () => {
+          await this.$store.dispatch('quiz/setLoading', true)
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await this.$store.dispatch('quiz/setLoading', false)
+          await this.$router.push('/')
+          this.$notifyInfo("Your test has been well recorded");
+        }).catch(error=>{
+          this.$notifyError(error);
         })
-        this.$router.push('/')
       }
       this.scrollToTop();
       if (index) {

@@ -4,12 +4,11 @@ export const SET_ALL_TEST = 'SET_ALL_TEST'
 export const SET_ONE_TEST = 'SET_ONE_TEST'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_ONE_QUIZ = 'SET_ONE_QUIZ'
-export const SUBMIT_QUIZ = 'SUBMIT_QUIZ'
 
 const state = {
     tests: [],
     isLoading: false,
-    quiz: null
+    quiz: null,
 }
 
 const getters = {
@@ -47,6 +46,9 @@ const actions = {
         commit(SET_LOADING, true)
         commit(SET_ONE_TEST, await fetchSubTestById(payload));
         commit(SET_LOADING, false)
+    },
+    async setLoading({commit}, payload) {
+        commit(SET_LOADING, payload)
     },
     // eslint-disable-next-line no-unused-vars
     async downloadPdf({commit}, payload) {

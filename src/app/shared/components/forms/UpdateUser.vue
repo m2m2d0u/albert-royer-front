@@ -40,6 +40,18 @@
                 />
               </v-col>
             </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-select
+                    v-model="isVerified"
+                    :items="[false, true]"
+                    label="Is verified"
+                    outlined
+                    class="shrink"
+                    dense
+                />
+              </v-col>
+            </v-row>
           </v-container>
         </v-card-text>
         <v-card-actions>
@@ -86,6 +98,7 @@ export default {
       phone: null,
       email: null,
       role: null,
+      isVerified: null,
     }
   },
   computed: {
@@ -99,6 +112,7 @@ export default {
     this.phone = this.$store.state.user.user.phone;
     this.email = this.$store.state.user.user.email;
     this.role = this.$store.state.user.user.role;
+    this.isVerified = this.$store.state.user.user.isVerified;
   },
   methods: {
     updateUser() {

@@ -9,5 +9,5 @@ export const authHeader = () => {
     }
 }
 export const getInfoUser = (data) => {
-    return data ? {email: data.email, role: data.role.name, test: data.test._id} : null
+    return data ? {email: data.email, role: data.role.name, test: data.test._id, id: data?.id} : null
 }

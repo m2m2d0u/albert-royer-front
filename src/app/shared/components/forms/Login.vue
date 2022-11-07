@@ -28,7 +28,7 @@
         </div>
 
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click.prevent="login">Sign in</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click.prevent="login" :disabled="isClicked">Sign in</v-btn>
         </div>
       </v-form>
       <div class="login-signup">
@@ -47,6 +47,7 @@ export default {
     return {
       username: null,
       password: null,
+      isClicked: false,
       rules: {
         username: [v => !!v || "Le nom d'utilisateur est obligatoire."],
         password: [v => !!v || "Le mot de passe est obligatoire."]
@@ -62,6 +63,7 @@ export default {
     },
     login() {
       if (this.$refs.form.validate()) {
+        this.isClicked = true;
         this.$store.dispatch('auth/login', {
           username: this.username,
           password: this.password,
@@ -69,9 +71,11 @@ export default {
           await this.$store.dispatch('utilities/setLoading', true)
           await new Promise(resolve => setTimeout(resolve, 1000));
           await this.$store.dispatch('utilities/setLoading', false)
-          this.$notifyInfo("Vous êtes maintenant connecté");
+          this.$notifyInfo("You are logged in");
           await this.$router.push('/')
+          this.isClicked = false;
         }).catch(error => {
+          this.isClicked = false;
           if (error instanceof Array) {
             error.map(v => {
               this.$notifyError(v);
