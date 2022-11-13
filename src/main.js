@@ -13,6 +13,9 @@ import * as VeeValidate from 'vee-validate'
 import NotifyPlugin from 'vue-easy-notify'
 import 'vue-easy-notify/dist/vue-easy-notify.css'
 import '@/plugins/apexcharts'
+import VueAudio from 'vue-audio-better'
+
+Vue.use(VueAudio)
 
 Vue.config.productionTip = false
 

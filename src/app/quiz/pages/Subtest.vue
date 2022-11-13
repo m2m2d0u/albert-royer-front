@@ -20,9 +20,10 @@
           <md-step id="first"
                    md-label="Premier test"
                    md-description="Obligatoire">
-            <quiz-for-slider :data="firstQuiz"/>
+            <quiz-for-slider :data="firstQuiz" @ended="firstTestEnded = $event"/>
             <div class="next-button">
               <md-button
+                  :disabled="!firstTestEnded"
                   class="md-raised md-primary change-page"
                   @click="setDone('first', 'second')">
                 Suivant
@@ -35,9 +36,10 @@
                    md-description="Obligatoire"
                    :md-error="secondStepError"
                    :md-done.sync="second.value">
-            <quiz-select-response-for-image :data="secondQuiz"/>
+            <quiz-select-response-for-image :data="secondQuiz" @ended="secondTestEnded = $event"/>
             <div class="next-button">
               <md-button
+                  :disabled="!secondTestEnded"
                   class="md-raised md-primary change-page"
                   @click="thirdQuiz?setDone('second', 'third'): setDone('finish')">
                 {{ thirdQuiz ? "Suivant" : "Terminer" }}
@@ -106,6 +108,8 @@ export default {
       secondQuiz: {},
       thirdQuiz: {},
       fourthQuiz: {},
+      firstTestEnded: false,
+      secondTestEnded: false,
       secondStepError: null,
       index: null,
       second: {
@@ -162,7 +166,7 @@ export default {
           await this.$store.dispatch('quiz/setLoading', false)
           await this.$router.push('/')
           this.$notifyInfo("Your test has been well recorded");
-        }).catch(error=>{
+        }).catch(error => {
           this.$notifyError(error);
         })
       }

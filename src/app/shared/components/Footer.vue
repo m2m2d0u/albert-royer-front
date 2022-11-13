@@ -5,9 +5,9 @@
       <v-container class="row g-5">
         <v-container class="col-lg-4 col-md-6">
           <h5 class="text-light mb-4">Address</h5>
-          <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-          <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-          <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+          <p class="mb-2"><em class="fa fa-map-marker-alt me-3"></em>123 Street, New York, USA</p>
+          <p class="mb-2"><em class="fa fa-phone-alt me-3"></em>+012 345 67890</p>
+          <p class="mb-2"><em class="fa fa-envelope me-3"></em>info@example.com</p>
           <v-container class="d-flex pt-2">
             <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
             <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
