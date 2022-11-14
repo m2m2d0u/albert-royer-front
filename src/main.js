@@ -8,7 +8,7 @@ import 'vue-material/dist/theme/default.css';
 import VueImg from 'v-img';
 import VueSlider from 'vue-slider-component';
 import 'vue-slider-component/theme/default.css';
-import store from './stores'
+import store from './stores/store'
 import * as VeeValidate from 'vee-validate'
 import NotifyPlugin from 'vue-easy-notify'
 import 'vue-easy-notify/dist/vue-easy-notify.css'

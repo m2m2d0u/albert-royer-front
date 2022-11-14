@@ -7,7 +7,7 @@ import Vuex from 'vuex'
 import Vue from "vue";
 
 Vue.use(Vuex)
-export default new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
         quiz,
         user,
@@ -17,3 +17,4 @@ export default new Vuex.Store({
     },
     plugins: []
 })
+export default store;

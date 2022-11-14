@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {refreshToken} from "@/_helpers/fetch-wrapper";
 import {getRefreshToken} from "@/_helpers/user-service";
+import store from '@/stores/store'
 
 export const HTTP = axios.create({
     baseURL: process.env.VUE_APP_URL
@@ -18,14 +19,16 @@ HTTP.interceptors.response.use((response) => {
     return response
 }, async function (error) {
     const originalRequest = error.data.config;
-    if (error.data.response.status === 401 && error.data.response.statusText === 'Unauthorized' && !originalRequest._retry) {
+    if (error.data.response && error.data.response.data && error.data.response.data.message === 'Your token is expired.' && !originalRequest._retry) {
         console.log(originalRequest)
-        // console.log(getRefreshToken())
         originalRequest._retry = true;
         const {access_token, refresh_token} = await refreshToken(getRefreshToken().refresh_token);
         localStorage.setItem("user", JSON.stringify({access_token, refresh_token}))
         originalRequest.headers.Authorization = 'Bearer ' + access_token;
         return HTTP(originalRequest);
+    }
+    if (error.data.response && error.data.response.data && error.data.response.data.message === "Your refresh token is expired." && error.data.response.status === 401) {
+        await store.dispatch("auth/logout");
     }
     return Promise.reject(error);
 });
