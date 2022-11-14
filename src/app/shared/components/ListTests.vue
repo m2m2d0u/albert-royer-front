@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <add-decision :openDecisionDialog="openDecisionDialog" @closeDialog="openDecisionDialog.value = $event"
-                  v-if="openDecisionDialog.value"/>
+                  v-if="openDecisionDialog.value" @successUpdate="successUpdate"/>
     <dialog-details :open-dialog="openDialog" :info="data" @eventDialog="openDialog = $event"/>
     <div class="center-screen" v-if="isLoading">
       <v-progress-circular
@@ -162,7 +162,8 @@
                 </v-row>
               </v-card-text>
               <v-card-subtitle class="mt-1 mb-1">
-                <v-btn x-small color="primary" @click="downloadReport(data)" :disabled="isClicked">Download report</v-btn>
+                <v-btn x-small color="primary" @click="downloadReport(data)" :disabled="isClicked">Download report
+                </v-btn>
               </v-card-subtitle>
               <v-card-actions class="d-flex justify-content-between">
                 <v-btn
@@ -295,7 +296,6 @@ export default {
         size: this.itemsPerPage,
         search: this.search
       })
-
     },
     downloadReport(data) {
       this.isClicked = true;
@@ -349,11 +349,12 @@ export default {
       }
 
       this.$store.dispatch('quiz/downloadPdf', jsonToSend)
-          .then(()=>{
+          .then(() => {
             this.isClicked = false
           })
-          .catch(error=>{
+          .catch(error => {
             this.$notifyError(error)
+            this.isClicked = false
           });
 
       // console.log(jsonToSend)
@@ -373,6 +374,14 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
+    successUpdate() {
+      this.$store.dispatch('recipient/fetchOrSearchRecipient', {
+        page: this.page,
+        size: this.itemsPerPage,
+        search: this.search
+      })
+    }
+
   }
 }
 </script>

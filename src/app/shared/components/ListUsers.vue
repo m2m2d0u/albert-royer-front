@@ -1,6 +1,7 @@
 <template>
   <v-container>
-    <update-user :dialogUpdate="dialogUpdate" @closeDialog="closeDialog" v-if="dialogUpdate.value"/>
+    <update-user :dialogUpdate="dialogUpdate" @successUpdate="successUpdate" @closeDialog="closeDialog"
+                 v-if="dialogUpdate.value"/>
     <v-container>
       <v-card>
         <v-card-title class="d-flex justify-content-center">
@@ -101,6 +102,7 @@ export default {
       },
       page: 1,
       itemsPerPage: 10,
+      updated: false,
       headers: [
         {text: 'Firstname and Lastname', value: 'name'},
         {text: 'Email', value: 'email'},
@@ -119,6 +121,7 @@ export default {
       }
     }
   },
+
   computed: {
     users() {
       return this.$store.state.user.data?.data;
@@ -152,8 +155,8 @@ export default {
     onSearch() {
       this.$store.dispatch('user/getUsers', {page: this.page, size: this.itemsPerPage, search: this.search})
     },
-    deleteUser() {
-      // console.log("Update id:", id)
+    successUpdate() {
+      this.$store.dispatch('user/getUsers', {page: this.page, size: this.itemsPerPage, search: this.search})
     }
   }
 }

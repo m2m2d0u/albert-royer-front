@@ -2,6 +2,7 @@ import axios from 'axios';
 import {refreshToken} from "@/_helpers/fetch-wrapper";
 import {getRefreshToken} from "@/_helpers/user-service";
 import store from '@/stores/store'
+import router from '@/app/app-routes';
 
 export const HTTP = axios.create({
     baseURL: process.env.VUE_APP_URL
@@ -20,7 +21,7 @@ HTTP.interceptors.response.use((response) => {
 }, async function (error) {
     const originalRequest = error.data.config;
     if (error.data.response && error.data.response.data && error.data.response.data.message === 'Your token is expired.' && !originalRequest._retry) {
-        console.log(originalRequest)
+        // console.log(originalRequest)
         originalRequest._retry = true;
         const {access_token, refresh_token} = await refreshToken(getRefreshToken().refresh_token);
         localStorage.setItem("user", JSON.stringify({access_token, refresh_token}))
@@ -29,6 +30,7 @@ HTTP.interceptors.response.use((response) => {
     }
     if (error.data.response && error.data.response.data && error.data.response.data.message === "Your refresh token is expired." && error.data.response.status === 401) {
         await store.dispatch("auth/logout");
+        await router.push("/")
     }
     return Promise.reject(error);
 });

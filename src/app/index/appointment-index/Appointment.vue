@@ -24,7 +24,7 @@
             </div>
             <div class="ms-4">
               <p class="mb-2">Mail Us Now</p>
-              <h5 class="mb-0">info@example.com</h5>
+              <h5 class="mb-0">dakar@dpworld.com</h5>
             </div>
           </div>
         </div>

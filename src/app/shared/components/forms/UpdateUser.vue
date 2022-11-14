@@ -123,6 +123,7 @@ export default {
         email: this.email,
         role: this.role
       }).then(() => {
+        this.$emit("successUpdate", true)
         this.$emit('closeDialog', false)
         this.$notifySuccess("User modified.");
       }).catch((error) => {

@@ -5,31 +5,29 @@
       <v-container class="row g-5">
         <v-container class="col-lg-4 col-md-6">
           <h5 class="text-light mb-4">Address</h5>
-          <p class="mb-2"><em class="fa fa-map-marker-alt me-3"></em>123 Street, New York, USA</p>
-          <p class="mb-2"><em class="fa fa-phone-alt me-3"></em>+012 345 67890</p>
-          <p class="mb-2"><em class="fa fa-envelope me-3"></em>info@example.com</p>
+          <p class="mb-2"><em class="fa fa-map-marker-alt me-3"></em>18 Boulevard de la Republique Dakar</p>
+          <p class="mb-2"><em class="fa fa-phone-alt me-3"></em>33 889 08 21</p>
+          <p class="mb-2"><em class="fa fa-envelope me-3"></em>dakar@dpworld.com</p>
           <v-container class="d-flex pt-2">
-            <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-twitter"></i></a>
-            <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-facebook-f"></i></a>
-            <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-youtube"></i></a>
-            <a class="btn btn-outline-light btn-social rounded-circle" href=""><i class="fab fa-linkedin-in"></i></a>
+            <a class="btn btn-outline-light btn-social rounded-circle" href="https://twitter.com/DP_World"><em class="fab fa-twitter"></em></a>
+            <a class="btn btn-outline-light btn-social rounded-circle" href="https://facebook.com/DPWorld"><em class="fab fa-facebook-f"></em></a>
+            <a class="btn btn-outline-light btn-social rounded-circle" href="https://www.youtube.com/user/DPWorldinfo"><em class="fab fa-youtube"></em></a>
+            <a class="btn btn-outline-light btn-social rounded-circle" href="https://www.linkedin.com/company/dp-world/"><em class="fab fa-linkedin-in"></em></a>
           </v-container>
         </v-container>
         <v-container class="col-lg-4 col-md-6">
           <h5 class="text-light mb-4">Services</h5>
-          <a class="btn btn-link" href="">Cardiology</a>
-          <a class="btn btn-link" href="">Pulmonary</a>
-          <a class="btn btn-link" href="">Neurology</a>
-          <a class="btn btn-link" href="">Orthopedics</a>
-          <a class="btn btn-link" href="">Laboratory</a>
+          <router-link to="/services" class="btn btn-link">Professionals and managers</router-link>
+          <router-link to="/services" class="btn btn-link">Contributors and frontline</router-link>
+          <router-link to="/services" class="btn btn-link">SMES and Senior managers</router-link>
+          <router-link to="/services" class="btn btn-link">Executives</router-link>
         </v-container>
         <v-container class="col-lg-4 col-md-6">
           <h5 class="text-light mb-4">Quick Links</h5>
-          <a class="btn btn-link" href="">About Us</a>
-          <a class="btn btn-link" href="">Contact Us</a>
-          <a class="btn btn-link" href="">Our Services</a>
-          <a class="btn btn-link" href="">Terms & Condition</a>
-          <a class="btn btn-link" href="">Support</a>
+          <router-link to="/" class="btn btn-link" href="">Home</router-link>
+          <router-link to="/contact" class="btn btn-link" href="">Contact Us</router-link>
+          <router-link to="/services" class="btn btn-link" href="">Services</router-link>
+          <router-link to="/pages/connexion" class="btn btn-link" href="">Login & Register</router-link>
         </v-container>
       </v-container>
     </v-container>
@@ -37,10 +35,10 @@
       <v-container class="copyright">
         <v-container class="row">
           <v-container class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-            <a class="border-bottom" href="#">Your Site Name</a>, Tous droits réservés
+            <a class="border-bottom" href="#">Your Site Name</a>, All rights reserved
           </v-container>
           <v-container class="col-md-6 text-center text-md-end">
-            Distributed By m2m2d0u
+            Distributed By <a href="mailto: m.abassdiallo@gmail.com">Me</a>
           </v-container>
         </v-container>
       </v-container>
