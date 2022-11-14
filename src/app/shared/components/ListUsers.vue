@@ -152,8 +152,8 @@ export default {
     onSearch() {
       this.$store.dispatch('user/getUsers', {page: this.page, size: this.itemsPerPage, search: this.search})
     },
-    deleteUser(id) {
-      console.log("Update id:", id)
+    deleteUser() {
+      // console.log("Update id:", id)
     }
   }
 }

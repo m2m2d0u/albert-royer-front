@@ -22,13 +22,18 @@ export default {
   name: 'App',
   components: {},
   mounted() {
-    this.$store.dispatch("recipient/checkIfRecipientHasTest");
+    if (this.info) {
+      this.$store.dispatch("recipient/checkIfRecipientHasTest");
+    }
     this.$store.dispatch("quiz/fetchAllTest");
     this.$store.dispatch("user/getRoles");
   },
   computed: {
     isLoading() {
       return this.$store.state.utilities.isLoading
+    },
+    info() {
+      return this.$store.state.auth.info
     }
   },
   methods: {},
