@@ -6,14 +6,11 @@
       </v-container>
       <v-container class="d-flex justify-content-center">
         <v-card width="600">
-          <span class="text-h2 text-md-h2 text-h4 text-center" v-for="(sample, index) in values.data[0].sample" :key="index"
-                :style="{color: sample.value.color}">
-            {{ sample.value.text }}
-          </span>
+          <v-img :src="require('@/assets/img/cloche-figure.png')" width="600"/>
         </v-card>
       </v-container>
       <v-container>
-        <choose-response-component :questions="values.data[0].question" :index="index" :type="values.data[0].type"/>
+        <choose-response-component :questions="values.data[0].question" :type="values.data[0].type"/>
       </v-container>
     </ul>
   </v-container>
