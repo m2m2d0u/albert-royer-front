@@ -57,8 +57,21 @@
               dense
           ></v-select>
         </div>
+        <div class="input-field mt-12">
+          <v-select
+              v-model="jobId"
+              prepend-icon="mdi-wrench-cog"
+              :items="jobs"
+              :rules="rules.job"
+              label="Choice a position"
+              item-text="name"
+              item-value="id"
+              dense
+          ></v-select>
+        </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount" :disabled="isClicked">Sign up</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount" :disabled="isClicked">Sign up
+          </v-btn>
         </div>
       </v-form>
       <div class="login-signup">
@@ -74,6 +87,16 @@
 
 export default {
   name: "Register",
+  watch: {
+    subTestId: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        if (val)
+          this.$store.dispatch('jobs/fetchByTest', val)
+      }
+    }
+  },
   data() {
     return {
       name: null,
@@ -81,6 +104,7 @@ export default {
       phone: null,
       password: null,
       subTestId: null,
+      jobId: null,
       role: 'Basic',
       isClicked: false,
       confirmPassword: null,
@@ -102,12 +126,16 @@ export default {
           (v) => v === this.password || 'Passwords does not match.',
         ],
         subTestId: [v => !!v || "The test is required."],
+        job: [v => !!v || "The job is required."],
       }
     }
   },
   computed: {
     tests() {
       return this.$store.state.quiz.tests;
+    },
+    jobs() {
+      return this.$store.state.jobs.jobs;
     }
   },
   methods: {
@@ -124,6 +152,7 @@ export default {
           phone: this.phone,
           password: this.password,
           subTestId: this.subTestId,
+          jobId: this.jobId,
           role: this.role,
         }).then(async () => {
           this.isClicked = false;

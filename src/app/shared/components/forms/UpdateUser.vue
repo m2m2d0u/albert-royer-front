@@ -61,14 +61,14 @@
               text
               @click="$emit('closeDialog', false)"
           >
-            Annuler
+            Cancel
           </v-btn>
           <v-btn
               color="blue darken-1"
               text
               @click="updateUser"
           >
-            Modifier
+            Update
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -121,7 +121,8 @@ export default {
         name: this.name,
         phone: this.phone,
         email: this.email,
-        role: this.role
+        role: this.role,
+        isVerified: this.isVerified,
       }).then(() => {
         this.$emit("successUpdate", true)
         this.$emit('closeDialog', false)

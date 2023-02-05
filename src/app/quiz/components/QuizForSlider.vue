@@ -9,7 +9,15 @@
     </v-row>
     <v-row>
       <v-col cols="12" class="d-flex justify-content-center">
-        <mini-audio width=200 :audio-source="require('@/assets/audio/text-1.mp3')"/>
+        <vue-plyr controls="play">
+          <audio>
+            <source
+                :src="require('@/assets/audio/text-1.mp3')"
+                type="audio/mp3"
+            />
+          </audio>
+        </vue-plyr>
+<!--        <mini-audio width=200 :audio-source="require('@/assets/audio/text-1.mp3')"/>-->
       </v-col>
     </v-row>
     <v-container>

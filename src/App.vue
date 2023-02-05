@@ -27,6 +27,7 @@ export default {
     }
     this.$store.dispatch("quiz/fetchAllTest");
     this.$store.dispatch("user/getRoles");
+    // this.$store.dispatch("jobs/fetchOrSearchJobs");
   },
   computed: {
     isLoading() {

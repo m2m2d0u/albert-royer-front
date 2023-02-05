@@ -3,6 +3,7 @@ import user from './modules/user-store'
 import auth from './modules/auth-store'
 import recipient from './modules/recipient-store'
 import utilities from './modules/utilities-store'
+import jobs from './modules/jobs-store'
 import Vuex from 'vuex'
 import Vue from "vue";
 
@@ -13,7 +14,8 @@ const store = new Vuex.Store({
         user,
         auth,
         recipient,
-        utilities
+        utilities,
+        jobs
     },
     plugins: []
 })

@@ -15,12 +15,14 @@
 </template>
 
 <script>
+
 export default {
   name: "ChooseResponseComponent",
   props: {
     questions: Array,
     type: String,
-    index: Number
+    index: Number,
+    isPlay: Boolean,
   },
   watch: {
     questions: {
@@ -34,11 +36,25 @@ export default {
   data: () => {
     return {
       data: [],
+      audio: null,
+      playAudio: false
     }
   },
   methods: {
     chooseResponse(n) {
       const originalIndex = n - 1;
+      if (this.isPlay) {
+        if (this.audio) {
+          this.audio.pause()
+        }
+        try {
+          const audioSound = require(`@/assets/audio/response/${this.data[originalIndex].title}.mp3`)
+          this.audio = new Audio(audioSound)
+          this.audio.play()
+        } catch (e) {
+          console.log("File not found")
+        }
+      }
       if (this.type === 'one') {
         this.data.forEach((quiz) => quiz.value = false)
         this.data[originalIndex].value = true;
@@ -47,7 +63,7 @@ export default {
         this.data[originalIndex].value = !this.data[originalIndex].value;
       }
       this.$emit('updateData', this.data, this.index);
-    },
+    }
   }
 }
 </script>

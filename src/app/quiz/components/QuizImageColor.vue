@@ -1,12 +1,18 @@
 <template>
   <v-container>
     <ul>
-      <v-container class="text-h3 text-md-h4">
+      <v-container class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption ">
         {{ values.text }}
       </v-container>
       <v-container class="d-flex justify-content-center">
         <v-card width="600">
-          <v-img :src="require('@/assets/img/cloche-figure.png')" width="600"/>
+          <img
+              v-img
+              :src="require('@/assets/img/cloche-figure.png')"
+              class="image"
+              alt=""
+              :style="{ backgroundImage: 'url(' + require('@/assets/img/cloche-figure.png') + ')' }"/>
+
         </v-card>
       </v-container>
       <v-container>

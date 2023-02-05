@@ -7,6 +7,7 @@
       <dashboard v-if="navigation.dashboard"/>
       <list-tests v-if="navigation.listTests"/>
       <list-users v-if="navigation.listUsers"/>
+      <list-jobs v-if="navigation.listJobs"/>
     </div>
   </div>
 </template>
@@ -16,6 +17,7 @@ import Drawer from "@/app/shared/components/Drawer";
 import Dashboard from "@/app/shared/components/Dashboard";
 import ListTests from "@/app/shared/components/ListTests";
 import ListUsers from "@/app/shared/components/ListUsers";
+import ListJobs from "@/app/shared/components/ListJobs.vue";
 
 export default {
   name: "Administration",
@@ -23,7 +25,8 @@ export default {
     ListUsers,
     Drawer,
     Dashboard,
-    ListTests
+    ListTests,
+    ListJobs,
   },
   data() {
     return {
@@ -31,6 +34,7 @@ export default {
         dashboard: false,
         listTests: true,
         listUsers: false,
+        listJobs: false,
       }
     }
   },

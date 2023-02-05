@@ -9,7 +9,14 @@
     </v-row>
     <v-row>
       <v-col cols="12" class="d-flex justify-content-center">
-        <mini-audio width=200 :audio-source="require('@/assets/audio/text-2.mp3')"/>
+        <vue-plyr>
+          <audio controls crossorigin>
+            <source
+                :src="require('@/assets/audio/text-2.mp3')"
+                type="audio/mp3"
+            />
+          </audio>
+        </vue-plyr>
       </v-col>
     </v-row>
     <v-row>
@@ -20,9 +27,16 @@
       </v-col>
       <v-col cols="10">
         <v-row class="mb-6 text-md-h5 text-xl-h5 text-sm-caption" no-gutters>
-          <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold">
-            Question {{ indexQuiz + 1 }} sur {{ sizeData }}
-          </span>
+          <v-col>
+            <span class="text-body-2 text-sm-body-2 text-md-h6 text-xl-h5 text-sm-caption font-weight-bold mr-5">
+              Question {{ indexQuiz + 1 }} sur {{ sizeData }}
+            </span>
+            <span>
+            <v-icon :color="isPlay ? 'blue' : 'red'" size="x-large" @click="isPlay = !isPlay">
+              {{ isPlay ? 'mdi-volume-high' : 'mdi-volume-off' }}
+            </v-icon>
+            </span>
+          </v-col>
         </v-row>
         <v-row>
           <v-col v-for="n in 1" :key="n">
@@ -32,13 +46,13 @@
                   :src="require('../../../assets/img/emotional/'+getTheQuestionWithIndex(indexQuiz).image)"
                   class="image"
                   alt=""
-                  :style="{ backgroundImage: 'url(' + require('../../../assets/img/emotional/'+getTheQuestionWithIndex(indexQuiz).image) + ')', width: '700px', height: '40vh' }"/>
+                  :style="{ backgroundImage: 'url(' + require('../../../assets/img/emotional/'+getTheQuestionWithIndex(indexQuiz).image) + ')' }"/>
             </div>
           </v-col>
         </v-row>
         <choose-response-component :questions="getTheQuestionWithIndex(indexQuiz).question" :index="indexQuiz"
                                    :type="getTheQuestionWithIndex(indexQuiz).type"
-                                   @updateData="updateData"/>
+                                   @updateData="updateData" :isPlay="isPlay"/>
       </v-col>
       <v-col cols="1" class="d-flex justify-content-center">
         <v-icon color="blue" x-large @click.prevent="nextQuestion" :disabled="indexQuiz >= (sizeData - 1)">
@@ -87,7 +101,8 @@ export default {
       values: [],
       indexQuiz: 0,
       text: "",
-      sizeData: 0
+      sizeData: 0,
+      isPlay: false
     }
   },
   methods: {

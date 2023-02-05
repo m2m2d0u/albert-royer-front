@@ -14,8 +14,8 @@ import NotifyPlugin from 'vue-easy-notify'
 import 'vue-easy-notify/dist/vue-easy-notify.css'
 import '@/plugins/apexcharts'
 import VueAudio from 'vue-audio-better'
-
-Vue.use(VueAudio)
+import VuePlyr from 'vue-plyr'
+import 'vue-plyr/dist/vue-plyr.css'
 
 Vue.config.productionTip = false
 
@@ -23,6 +23,11 @@ Vue.use(NotifyPlugin)
 Vue.use(VeeValidate);
 Vue.use(VueMaterial);
 Vue.use(VueImg);
+Vue.use(VueAudio)
+Vue.use(VuePlyr, {
+    plyr: {}
+})
+
 Vue.component('VueSlider', VueSlider)
 
 

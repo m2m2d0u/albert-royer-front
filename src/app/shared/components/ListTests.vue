@@ -93,6 +93,18 @@
                   dense
               />
             </v-col>
+            <v-col cols="3">
+              <v-select
+                  :items="jobs"
+                  label="Filter by job"
+                  outlined
+                  v-model="search.job"
+                  class="shrink"
+                  item-text="name"
+                  item-value="id"
+                  dense
+              />
+            </v-col>
           </v-row>
           <v-container class="d-flex justify-content-end">
             <v-btn color="primary" x-large @click.prevent="searchTest">
@@ -232,6 +244,9 @@ export default {
     recipients() {
       return this.$store.state.recipient.recipients
     },
+    jobs() {
+      return this.$store.state.jobs.jobs?.data;
+    },
     tests() {
       return this.$store.state.quiz.tests
     },
@@ -255,7 +270,8 @@ export default {
       page: this.page,
       size: this.itemsPerPage,
       search: this.search
-    })
+    });
+    this.$store.dispatch("jobs/fetchOrSearchJobs");
   },
   data() {
     return {

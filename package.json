@@ -29,6 +29,7 @@
     "vue-gallery": "^2.0.1",
     "vue-jwt-decode": "^0.1.0",
     "vue-material": "^1.0.0-beta-15",
+    "vue-plyr": "^7.0.0",
     "vue-router": "^3.2.0",
     "vue-slider-component": "^3.2.18",
     "vuetify": "^2.6.0",

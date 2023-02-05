@@ -15,7 +15,7 @@
         <v-icon color="green darken-2" v-if="link === info?.test">mdi-plus</v-icon>
         <v-icon color="red darken-2" v-else>mdi-clock-time-six-outline</v-icon>
         <span v-if="link === info?.test && !hasTest">Performed</span>
-        <span v-if="link === info?.test && hasTest">Already done</span>
+        <span v-else-if="link === info?.test && hasTest">Already done</span>
         <span v-else>Innéligible</span>
       </router-link>
     </v-container>

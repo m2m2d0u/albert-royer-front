@@ -9,7 +9,7 @@
     </div>
     <div v-else>
       <v-container class="text-center mb-12">
-        <h1>Name</h1>
+        <h1>Épreuve de test.</h1>
       </v-container>
       <v-container class="fixed-top timer d-flex justify-content-end">
         <base-timer :time-left="active.time" :key="active.name" @countEnded="countEnded"/>

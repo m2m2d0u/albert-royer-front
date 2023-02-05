@@ -43,6 +43,7 @@ export default {
         // {title: 'Dashboard', icon: 'mdi-view-dashboard', name: 'dashboard'},
         {title: 'List of tests', icon: 'mdi-test-tube', name: 'listTests'},
         {title: 'List of users', icon: 'mdi-account-box-outline', name: 'listUsers'},
+        {title: 'List of position held', icon: 'mdi-wrench-cog-outline', name: 'listJobs'},
       ]
     }
   },
