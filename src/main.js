@@ -16,6 +16,7 @@ import '@/plugins/apexcharts'
 import VueAudio from 'vue-audio-better'
 import VuePlyr from 'vue-plyr'
 import 'vue-plyr/dist/vue-plyr.css'
+import VueApexCharts from 'vue-apexcharts'
 
 Vue.config.productionTip = false
 
@@ -27,7 +28,9 @@ Vue.use(VueAudio)
 Vue.use(VuePlyr, {
     plyr: {}
 })
+Vue.use(VueApexCharts)
 
+Vue.component('apexchart', VueApexCharts)
 Vue.component('VueSlider', VueSlider)
 
 

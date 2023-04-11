@@ -349,6 +349,16 @@ export default {
         decision: data?.result?.fourthQuiz?.decision
       }
 
+
+      const svo = resultFirstQuiz?.score || 0;
+      const rme = resultSecondQuiz?.score || 0;
+
+      const prioritise_customers = Math.round(((svo / rme + 40) * 2) * 50 / 100)
+      const collaborate_to_win = Math.round(((svo / rme + 80) * 4) * 15 / 100)
+      const deliver_growth = Math.round(((svo / rme + 100) * 5) * 10 / 100)
+      const build_better_future = Math.round(((svo / rme + 200) * 2) * 5 / 100)
+      const adapt_and_evolve = Math.round(((svo / rme + 60) * 3) * 20 / 100)
+
       const jsonToSend = {
         nameUser,
         phoneUser,
@@ -362,6 +372,11 @@ export default {
         resultSecondQuiz,
         resultThirdQuiz,
         resultFourthQuiz,
+        prioritise_customers,
+        collaborate_to_win,
+        deliver_growth,
+        build_better_future,
+        adapt_and_evolve
       }
 
       this.$store.dispatch('quiz/downloadPdf', jsonToSend)
