@@ -18,7 +18,7 @@
             </v-row>
             <v-row>
               <v-col cols="12">
-                <v-text-field dense outlined placeholder="Email" v-model="description"/>
+                <v-text-field dense outlined placeholder="Description" v-model="description"/>
               </v-col>
             </v-row>
             <v-row>
