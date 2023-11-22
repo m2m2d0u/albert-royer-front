@@ -9,12 +9,13 @@
       <p class="mb-4">{{ description }}</p>
       <router-link @click.native="scrollToTop"
                    tag="button"
-                   :disabled="link!==info?.test"
+                   :disabled="link!==info?.test || hasTest"
                    :to="{name:router, params:{id:link}}"
                    class="btn">
         <v-icon color="green darken-2" v-if="link === info?.test">mdi-plus</v-icon>
         <v-icon color="red darken-2" v-else>mdi-clock-time-six-outline</v-icon>
-        <span v-if="link === info?.test">Faire le test</span>
+        <span v-if="link === info?.test && !hasTest">Performed</span>
+        <span v-else-if="link === info?.test && hasTest">Already done</span>
         <span v-else>Innéligible</span>
       </router-link>
     </v-container>
@@ -36,6 +37,7 @@ export default {
   computed: {
     ...mapState({
       info: state => state.auth.info,
+      hasTest: state => state.recipient.hasTest
     })
   },
   methods: {

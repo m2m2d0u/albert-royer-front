@@ -1,19 +1,22 @@
 <template>
   <v-container>
     <ul>
-      <v-container class="text-h3 text-md-h4">
+      <v-container class="text-body-2 text-sm-body-2 text-md-body-1 text-xl-h6 text-sm-caption ">
         {{ values.text }}
       </v-container>
       <v-container class="d-flex justify-content-center">
         <v-card width="600">
-          <span class="text-h2 text-md-h2 text-h4 text-center" v-for="(sample, index) in values.data[0].sample" :key="index"
-                :style="{color: sample.value.color}">
-            {{ sample.value.text }}
-          </span>
+          <img
+              v-img
+              :src="require('@/assets/img/cloche-figure.png')"
+              class="image"
+              alt=""
+              :style="{ backgroundImage: 'url(' + require('@/assets/img/cloche-figure.png') + ')' }"/>
+
         </v-card>
       </v-container>
       <v-container>
-        <choose-response-component :questions="values.data[0].question" :index="index" :type="values.data[0].type"/>
+        <choose-response-component :questions="values.data[0].question" :type="values.data[0].type"/>
       </v-container>
     </ul>
   </v-container>

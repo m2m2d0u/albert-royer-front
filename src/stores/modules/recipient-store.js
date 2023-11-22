@@ -1,13 +1,20 @@
-import {addDecision, fetchOrSearchRecipient, findRecipientTestById} from "@/_helpers/fetch-wrapper";
+import {
+    addDecision,
+    checkIfRecipientHasTest,
+    fetchOrSearchRecipient,
+    findRecipientTestById
+} from "@/_helpers/fetch-wrapper";
 
 export const SET_RECIPIENTS = 'SET_RECIPIENTS'
 export const SET_LOADING = 'SET_LOADING'
 export const SET_RECIPIENT = 'SET_RECIPIENT'
+export const SET_CHECK_RECIPIENT_TEST = 'SET_CHECK_RECIPIENT_TEST'
 
 const state = {
     recipients: [],
     isLoading: false,
     recipient: null,
+    hasTest: false
 }
 
 const getters = {}
@@ -21,6 +28,9 @@ const mutations = {
     },
     [SET_RECIPIENT](state, value) {
         state.recipient = value
+    },
+    [SET_CHECK_RECIPIENT_TEST](state, value) {
+        state.hasTest = value
     },
 }
 
@@ -39,8 +49,10 @@ const actions = {
         await addDecision(id, result);
         commit(SET_LOADING, false)
     },
+    async checkIfRecipientHasTest({commit, rootState}) {
+        commit(SET_CHECK_RECIPIENT_TEST, await checkIfRecipientHasTest(rootState.auth.info?.id));
+    },
     async findRecipientTestById({commit}, id) {
-        console.log("Id:", id)
         commit(SET_LOADING, true)
         commit(SET_RECIPIENT, await findRecipientTestById(id))
         commit(SET_LOADING, false)

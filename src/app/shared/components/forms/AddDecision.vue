@@ -90,13 +90,14 @@ export default {
         decisionComment: this.decisionComment
       }).then(() => {
         this.$emit('closeDialog', false)
+        this.$emit('successUpdate', true)
         this.$notifySuccess("Add decision is added.");
       }).catch(error => {
         this.$store.state.user.isLoading = false
         this.$notifyError(error);
       })
       this.$router
-    }
+    },
   }
 }
 </script>

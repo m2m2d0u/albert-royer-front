@@ -1,5 +1,6 @@
 import {
     createdUser,
+    deleteUser,
     getRoles,
     getUserById,
     getUsers,
@@ -104,6 +105,13 @@ const actions = {
     // eslint-disable-next-line no-unused-vars
     async resetPassword({commit}, payload) {
         await resetPassword(payload).then(() => {
+        }).catch(error => {
+            return Promise.reject(error.response.message)
+        })
+    },
+    // eslint-disable-next-line no-unused-vars
+    async deleteUser({commit}, payload) {
+        await deleteUser(payload.id).then(() => {
         }).catch(error => {
             return Promise.reject(error.response.message)
         })

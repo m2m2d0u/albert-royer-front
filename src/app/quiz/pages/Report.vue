@@ -2,7 +2,7 @@
   <v-container class="report-page">
     <v-container class="cover-page">
       <v-row>
-<!--        <v-col cols="3" class="sidebar"/>-->
+        <!--        <v-col cols="3" class="sidebar"/>-->
         <v-col cols="12">
           <div>
             <img :src="require('@/assets/svg/logo.svg')" alt="" width="150"/>
@@ -134,7 +134,9 @@
             </span>
               <span>
               <span class="font-weight-bold text-body-2">Global Score: {{ resultThirdQuiz?.score }}</span>
-              that corresponds to a capacity of fluid and quantitative reasoning ({{ resultThirdQuiz?.decision.toUpperCase() }})
+              that corresponds to a capacity of fluid and quantitative reasoning ({{
+                  resultThirdQuiz?.decision.toUpperCase()
+                }})
             </span>
             </v-col>
           </v-row>
@@ -152,12 +154,30 @@
         </v-container>
       </v-container>
     </v-container>
+    <v-container v-if="build_better_future">
+      <BarChart
+          :build_better_future=build_better_future
+          :adapt_and_evolve=adapt_and_evolve
+          :deliver_growth=deliver_growth
+          :collaborate_to_win=collaborate_to_win
+          :prioritise_customers=prioritise_customers
+      />
+    </v-container>
   </v-container>
 </template>
 
 <script>
+import BarChart from "@/app/quiz/components/BarChart.vue";
+
+// Prioritise Customers : ((SVO/RME + 40) x 2 )x50/100
+// Collaborate to Win : ((SVO/RME + 80) x 4 )x15/100
+// Deliver Growth : ((SVO/RME + 100) x 5 )x10/100
+// Adapt & Evolve : ((SVO/RME + 60) x 3 )x20/100
+// Build for a Better Future : ((SVO/RME + 200) x 2 )x5/100
+
 export default {
   name: "Report",
+  components: {BarChart},
   data() {
     return {
       sizeCard: 6,
@@ -173,6 +193,11 @@ export default {
       resultSecondQuiz: null,
       resultThirdQuiz: null,
       resultFourthQuiz: null,
+      build_better_future: null,
+      adapt_and_evolve: null,
+      deliver_growth: null,
+      collaborate_to_win: null,
+      prioritise_customers: null,
     }
 
   },
@@ -191,6 +216,17 @@ export default {
     this.resultSecondQuiz = search?.resultSecondQuiz;
     this.resultThirdQuiz = search?.resultThirdQuiz;
     this.resultFourthQuiz = search.resultFourthQuiz;
+    this.prioritise_customers = search?.prioritise_customers;
+    this.collaborate_to_win = search?.collaborate_to_win;
+    this.deliver_growth = search?.deliver_growth;
+    this.build_better_future = search?.build_better_future;
+    this.adapt_and_evolve = search?.adapt_and_evolve;
+
+    console.log(this.prioritise_customers)
+    console.log(this.collaborate_to_win)
+    console.log(this.deliver_growth)
+    console.log(this.build_better_future)
+    console.log(this.adapt_and_evolve)
 
     if (Object.keys(search.resultThirdQuiz).length) {
       this.sizeCard = 4

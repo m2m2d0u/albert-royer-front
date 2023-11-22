@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <add-decision :openDecisionDialog="openDecisionDialog" @closeDialog="openDecisionDialog.value = $event"
-                  v-if="openDecisionDialog.value"/>
+                  v-if="openDecisionDialog.value" @successUpdate="successUpdate"/>
     <dialog-details :open-dialog="openDialog" :info="data" @eventDialog="openDialog = $event"/>
     <div class="center-screen" v-if="isLoading">
       <v-progress-circular
@@ -93,6 +93,18 @@
                   dense
               />
             </v-col>
+            <v-col cols="3">
+              <v-select
+                  :items="jobs"
+                  label="Filter by job"
+                  outlined
+                  v-model="search.job"
+                  class="shrink"
+                  item-text="name"
+                  item-value="id"
+                  dense
+              />
+            </v-col>
           </v-row>
           <v-container class="d-flex justify-content-end">
             <v-btn color="primary" x-large @click.prevent="searchTest">
@@ -162,7 +174,8 @@
                 </v-row>
               </v-card-text>
               <v-card-subtitle class="mt-1 mb-1">
-                <v-btn x-small color="primary" @click="downloadReport(data)">Download report</v-btn>
+                <v-btn x-small color="primary" @click="downloadReport(data)" :disabled="isClicked">Download report
+                </v-btn>
               </v-card-subtitle>
               <v-card-actions class="d-flex justify-content-between">
                 <v-btn
@@ -231,6 +244,9 @@ export default {
     recipients() {
       return this.$store.state.recipient.recipients
     },
+    jobs() {
+      return this.$store.state.jobs.jobs?.data;
+    },
     tests() {
       return this.$store.state.quiz.tests
     },
@@ -254,11 +270,13 @@ export default {
       page: this.page,
       size: this.itemsPerPage,
       search: this.search
-    })
+    });
+    this.$store.dispatch("jobs/fetchOrSearchJobs");
   },
   data() {
     return {
       page: 1,
+      isClicked: false,
       search: {
         name: '',
         infScore: '',
@@ -294,9 +312,9 @@ export default {
         size: this.itemsPerPage,
         search: this.search
       })
-
     },
     downloadReport(data) {
+      this.isClicked = true;
       const nameUser = data?.user?.name;
       const phoneUser = data?.user?.phone;
       const emailUser = data?.user?.email;
@@ -331,6 +349,16 @@ export default {
         decision: data?.result?.fourthQuiz?.decision
       }
 
+
+      const svo = resultFirstQuiz?.score || 0;
+      const rme = resultSecondQuiz?.score || 0;
+
+      const prioritise_customers = Math.round(((svo / rme + 40) * 2) * 50 / 100)
+      const collaborate_to_win = Math.round(((svo / rme + 80) * 4) * 15 / 100)
+      const deliver_growth = Math.round(((svo / rme + 100) * 5) * 10 / 100)
+      const build_better_future = Math.round(((svo / rme + 200) * 2) * 5 / 100)
+      const adapt_and_evolve = Math.round(((svo / rme + 60) * 3) * 20 / 100)
+
       const jsonToSend = {
         nameUser,
         phoneUser,
@@ -344,9 +372,21 @@ export default {
         resultSecondQuiz,
         resultThirdQuiz,
         resultFourthQuiz,
+        prioritise_customers,
+        collaborate_to_win,
+        deliver_growth,
+        build_better_future,
+        adapt_and_evolve
       }
 
-      this.$store.dispatch('quiz/downloadPdf', jsonToSend);
+      this.$store.dispatch('quiz/downloadPdf', jsonToSend)
+          .then(() => {
+            this.isClicked = false
+          })
+          .catch(error => {
+            this.$notifyError(error)
+            this.isClicked = false
+          });
 
       // console.log(jsonToSend)
 
@@ -365,6 +405,14 @@ export default {
       const [month, day, year] = date.split('/')
       return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`
     },
+    successUpdate() {
+      this.$store.dispatch('recipient/fetchOrSearchRecipient', {
+        page: this.page,
+        size: this.itemsPerPage,
+        search: this.search
+      })
+    }
+
   }
 }
 </script>

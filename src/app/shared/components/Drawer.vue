@@ -8,7 +8,7 @@
       <v-list-item-content>
         <v-list-item-title>
           <v-container class="d-flex justify-content-between align-items-center">
-            <span class="text-body-1">Page d'administration</span>
+            <span class="text-body-1">Administration page</span>
             <v-btn icon @click.stop="mini = !mini">
               <v-icon>mdi-chevron-left</v-icon>
             </v-btn>
@@ -43,6 +43,7 @@ export default {
         // {title: 'Dashboard', icon: 'mdi-view-dashboard', name: 'dashboard'},
         {title: 'List of tests', icon: 'mdi-test-tube', name: 'listTests'},
         {title: 'List of users', icon: 'mdi-account-box-outline', name: 'listUsers'},
+        {title: 'List of position held', icon: 'mdi-wrench-cog-outline', name: 'listJobs'},
       ]
     }
   },

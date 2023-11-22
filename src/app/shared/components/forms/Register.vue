@@ -57,8 +57,21 @@
               dense
           ></v-select>
         </div>
+        <div class="input-field mt-12">
+          <v-select
+              v-model="jobId"
+              prepend-icon="mdi-wrench-cog"
+              :items="jobs"
+              :rules="rules.job"
+              label="Choice a position"
+              item-text="name"
+              item-value="id"
+              dense
+          ></v-select>
+        </div>
         <div class="input-field button">
-          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount">Sign up</v-btn>
+          <v-btn class="button-confirm" large color="#4070f4" @click="createAccount" :disabled="isClicked">Sign up
+          </v-btn>
         </div>
       </v-form>
       <div class="login-signup">
@@ -74,6 +87,16 @@
 
 export default {
   name: "Register",
+  watch: {
+    subTestId: {
+      immediate: true,
+      deep: true,
+      handler(val) {
+        if (val)
+          this.$store.dispatch('jobs/fetchByTest', val)
+      }
+    }
+  },
   data() {
     return {
       name: null,
@@ -81,7 +104,9 @@ export default {
       phone: null,
       password: null,
       subTestId: null,
+      jobId: null,
       role: 'Basic',
+      isClicked: false,
       confirmPassword: null,
       rules: {
         name: [v => !!v || 'The name id required.'],
@@ -101,12 +126,16 @@ export default {
           (v) => v === this.password || 'Passwords does not match.',
         ],
         subTestId: [v => !!v || "The test is required."],
+        job: [v => !!v || "The job is required."],
       }
     }
   },
   computed: {
     tests() {
       return this.$store.state.quiz.tests;
+    },
+    jobs() {
+      return this.$store.state.jobs.jobs;
     }
   },
   methods: {
@@ -116,20 +145,24 @@ export default {
     async createAccount() {
 
       if (this.$refs.form.validate()) {
+        this.isClicked = true;
         this.$store.dispatch('auth/createUser', {
           name: this.name,
           email: this.email,
           phone: this.phone,
           password: this.password,
           subTestId: this.subTestId,
+          jobId: this.jobId,
           role: this.role,
         }).then(async () => {
+          this.isClicked = false;
           await this.$store.dispatch('utilities/setLoading', true)
           await new Promise(resolve => setTimeout(resolve, 1000));
           await this.$store.dispatch('utilities/setLoading', false)
           this.$notifyInfo("The user is successfully create and a mail is sent to your email.");
           this.$emit('changeLevel', 'login');
         }).catch((error) => {
+          this.isClicked = false;
           if (error instanceof Array) {
             error.map(v => {
               this.$notifyError(v);
