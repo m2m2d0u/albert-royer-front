@@ -3,10 +3,10 @@ FROM node:14-alpine as build
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
-RUN npm install --silent
-RUN npm install @vue/cli@3.7.0 -g
+RUN yarn install
+RUN yarn add @vue/cli@3.7.0 -g
 COPY . /app
-RUN npm run build:prod
+RUN yarn run build:prod
 
 # production environment
 FROM nginx:1.16.0-alpine
