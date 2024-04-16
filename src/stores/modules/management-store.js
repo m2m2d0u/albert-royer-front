@@ -1,4 +1,5 @@
 import {downloadPdf, fetchAllSubTest, fetchSubTestById, submitResponse} from "@/_helpers/fetch-wrapper";
+import { v4 as uuidv4 } from "uuid";
 
 export const SET_ALL_TEST = 'SET_ALL_TEST'
 export const SET_ONE_TEST = 'SET_ONE_TEST'
@@ -53,9 +54,11 @@ const actions = {
     // eslint-disable-next-line no-unused-vars
     async downloadPdf({commit}, payload) {
         await downloadPdf(JSON.stringify(payload)).then((data) => {
+            let myuuid = uuidv4();
+
             const linkSource = `data:application/pdf;base64,${data}`;
             const downloadLink = document.createElement("a");
-            const fileName = "report.pdf";
+            const fileName = myuuid+".pdf";
             downloadLink.href = linkSource;
             downloadLink.download = fileName;
             downloadLink.click();
